@@ -1,8 +1,11 @@
 
+
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb+srv://linkedin:A123456@cluster0.heitxrs.mongodb.net/?retryWrites=true&w=majority`)
+const url=process.env.DB_URL
+
+mongoose.connect(url)
 
 const mongo = mongoose.connection;
 mongo.on('error', (error) => console.error(error));
