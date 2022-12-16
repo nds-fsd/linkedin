@@ -12,4 +12,4 @@ routerUser.post("/user", registerUser);
   routerUser.patch/("/user/:id", editUser);
   routerUser.delete/("/user/:id", deleteUser);
 
-  module.export = routerUser
+  module.exports = routerUser
