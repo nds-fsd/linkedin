@@ -1,3 +1,4 @@
+
 const CompanyModel = require("../database/schemas/company");
 
 const getCompanyList = async(req,res) =>{
