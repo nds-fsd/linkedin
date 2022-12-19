@@ -31,12 +31,12 @@ const updateCompany = async(req,res) =>{
     res.json(company)
 }
 const deleteCompany = (req, res)=>{
-    CompanyModel.findByIdAndDelete(req.params.id),(err,company) => {
+    CompanyModel.findByIdAndDelete(req.params.id,(err,company) => {
         if(!company){
             return res.status(404).send('company not found')
         }
         res.status(200).json(company)
-    }
+    })
 }
 const findCompanyList = async (req, res) => {
     const {id} = req.params
