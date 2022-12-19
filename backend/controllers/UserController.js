@@ -36,7 +36,7 @@ const getUserList = async (req, res) => {
   const deleteUser = (req, res) => {
     UserModel.findByIdAndDelete(req.params.id, (err, user ) =>{
         if(!user){
-            return res.status(500).json(err)
+            return res.status(500).send("user not found")
         }
         res.status(200).json(user)
     })
