@@ -38,9 +38,15 @@ const deleteCompany = (req, res)=>{
         res.status(200).json(company)
     }
 }
+const findCompanyList = async (req, res) => {
+    const {id} = req.params
+    const company = await CompanyModel.find(id);
+    res.json(company);
+}
 module.exports = {
     deleteCompany,
     updateCompany,
     createCompany,
+    findCompanyList,
     getCompanyList
 }
