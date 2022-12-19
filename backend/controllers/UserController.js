@@ -8,7 +8,7 @@ const getUserList = async (req, res) => {
   
   
   const registerUser = async (req, res)=>{
-  
+  try{ 
     const body = req.body
       const {username,password}  = body
      
@@ -19,7 +19,8 @@ const getUserList = async (req, res) => {
       }
       const newUser = new UserModel(data)
       await newUser.save()
-      res.json(newUser);
+      res.json(newUser);}
+      catch(err){res.status(404).send("something occurred, try again")}
   }
   
   const editUser = async (req, res) =>{
