@@ -38,7 +38,7 @@ const getUserList = async (req, res) => {
         if(!user){
             return res.status(500).json(err)
         }
-        res.status(200).json(todo)
+        res.status(200).json(user)
     })
 }
 
