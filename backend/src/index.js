@@ -1,18 +1,16 @@
-// const elem= require('module')
-// module.exports={}
-
+require('dotenv').config();
 const express = require("express");
 const mongo = require("../database")
 
 const cors = require("cors");
-
-require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT;
 
+const generalRouter = require("../routes")
+
 app.use(express.json())
 app.use(cors())
+app.use(generalRouter)
 
 app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
