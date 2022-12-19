@@ -7,9 +7,9 @@ const app = express();
 const port = process.env.PORT;
 
 const generalRouter = require("../routes")
-
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
+
 app.use(generalRouter)
 
 app.listen(port, () => {

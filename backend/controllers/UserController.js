@@ -1,14 +1,17 @@
 //necesitaremos un middleware  const {validateTodo, addDateMiddleware} = require('../middleware');
-//const UserModel = require("../mongo/schema/user/user");
+const UserModel = require("../database/schemas/user");
 
 const getUserList = async (req, res) => {
+    console.log("aquiestamos")
     const user = await UserModel.find();
+    console.log("aquiestamos")
     res.json(user);
   }
   
   
   const registerUser = async (req, res)=>{
   try{ 
+    console.log("aquiestamos")
     const body = req.body
       const {username,password}  = body
      

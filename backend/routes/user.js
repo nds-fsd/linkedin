@@ -6,10 +6,10 @@ const { Router } = require("express");
  const router = Router();
 
 
-router.post("/user", registerUser);
-  router.get("/user", getUserList);
-  router.patch/("/user/:id", editUser);
-  router.delete/("/user/:id", deleteUser);
-  router.get/("user/:id", findUser);
+router.post("/", registerUser);
+  router.get("/", getUserList);
+  router.patch("/:id", editUser);
+  router.delete("/:id", deleteUser);
+  router.get("/:id", findUser);
 
   module.exports = router
