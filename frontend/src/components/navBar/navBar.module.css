@@ -1,0 +1,11 @@
+.navBar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /*height: 60px;*/
+  padding: 1.4rem;
+  background-color: lightyellow;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  /*margin-bottom: 50px;*/
+}
