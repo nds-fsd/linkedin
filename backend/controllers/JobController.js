@@ -1,5 +1,5 @@
 //necesitaremos un middleware  const {validateTodo, addDateMiddleware} = require('../middleware');
-const UserModel = require("../database/schemas/user");
+const JobModel = require("../database/schemas/jobs");
 
 const getJobList = async (req, res) => {
   const job = await JobModel.find();
