@@ -13,12 +13,15 @@ const getPostList = async (req, res) => {
   try{ 
     console.log("aquiestamos")
     const body = req.body
-      const {username,password}  = body
+      const {content, postedBy,comment,likes,createdAt,updatedAt}  = body
      
       const data = {
-          username : username,
-          password : password
-         
+          content : content,
+          postedBy : postedBy,
+          comment : comment,
+          likes : likes,
+          createdAt : createdAt,
+          updatedAt : updatedAt,
       }
       const newPost = new PostModel(data)
       await newPost.save()

@@ -1,5 +1,6 @@
 //necesitaremos un middleware  const {validateTodo, addDateMiddleware} = require('../middleware');
-const UserModel = require("../database/schemas/user");
+const UserModel = require("../database/schemas/jobs");
+const { job } = require("../routes");
 
 const getJobList = async (req, res) => {
   const job = await JobModel.find();
@@ -9,15 +10,6 @@ const getJobList = async (req, res) => {
 const registerJob = async (req, res) => {
   try {
     const body = req.body;
-    //TODO falta el Schema de JOB
-    /*
-    const { username, password } = body;
-
-    const data = {
-      username: username,
-      password: password,
-    };
-    */
     const newJob = new JobModel(data);
     await newJob.save();
     res.json(newJob);
