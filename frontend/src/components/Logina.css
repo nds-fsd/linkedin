@@ -1,6 +1,9 @@
 body{
+  margin-top: 50px;
+  margin-left:30px;
+  margin-right: 30px;
     font-family: 'Raleway', 'Cabin' sans-serif, ;
-    background-image: linear-gradient(69deg, #6b9d6f, #b0e2b8 48%);
+    /* background-image: linear-gradient(69deg, #6b9d6f, #b0e2b8 48%); */
     /* box-sizing: border-box; */
 }
 
@@ -9,9 +12,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-   
-
+    align-items: left;
 }
 
 label {
@@ -24,15 +25,19 @@ label {
     padding: 1rem;
     border: none;
     border-radius: 10px;
+    color:  #767676;;
+    background-color: #D9D9D9;
   }
   
   button {
+    margin-top: 20px;
     border: none;
-    background-color: white;
+    background-color:#6B9D6F;
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
-    color: #7439db;
+    font-weight: bold;
+    color:  white;
   }
   
   .link-btn {
@@ -49,3 +54,86 @@ label {
       margin: 0.5rem;
     }
   }
+
+  .logoIntro {
+    width: 600px; margin:0 auto; border: solid 3px #ccc; padding:20px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .big_container{
+display: flex;
+
+  }
+
+  .logoIntro >img {
+    width: 100%;
+  }
+
+  .login_form >h1 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  .login_form >h3 {
+    
+    font-weight: 400;
+  }
+
+  .navbar{
+    width: 100%; margin:0 auto; border: solid 3px #ccc; padding:20px; 
+    display: flex;
+    justify-content:space-between
+
+  }
+
+  .navbar_button {
+    width: 70%;
+    border: solid 3px #ccc; padding:20px;
+    display: flex;
+    justify-content: flex-end;
+   
+    
+  }
+
+  .navbar_logo {
+    border: solid 3px #ccc; padding:20px;
+width: 30%;
+  }
+
+  .navbtn{
+    margin-top: 20px;
+    border: none;
+    background-color:#6B9D6F;
+    padding: 20px;
+    border-radius: 70px;
+    cursor: pointer;
+    margin-left: 50px;
+    margin-right: 10px;
+    color:  black;
+  }
+
+  .navbtn_unirse {
+    margin-top: 20px;
+    border: none;
+    background-color:white;
+    padding: 20px;
+    border-radius: 70px;
+    cursor: pointer;
+    
+    color:  black;
+  }
+
+.auth-form-container .reg-img {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.auth-form-container >h2 {
+  text-align: center;
+} 

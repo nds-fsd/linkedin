@@ -1,11 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import Log_or_Reg from './components/Log_or_Reg';
+
+
+
 
 function App() {
+  
   return (
-    <div>
-      Your app here
-    </div>
+    <div className="App">
+    <Log_or_Reg />
+  </div>
   );
 }
 
