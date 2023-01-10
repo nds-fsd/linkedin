@@ -1,11 +1,11 @@
 import React from "react";
-import {Log_or_Reg} from "../../src/components/Log_or_Reg"
+import LogOrReg from "../components/LogOrReg"
 
 const LoginPage = (props) => {
   return (
     <>
       {/* <p>Login Page ...</p> */}
-    <Log_or_Reg/>
+    <LogOrReg/>
     </>
   );
 };

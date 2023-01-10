@@ -4,7 +4,7 @@ import Register from './Register';
 import { useState } from 'react';
 
 
-const Log_or_Reg = () => {
+const LogOrReg = () => {
     const [currentForm, setCurrentForm] = useState('login');
 
 const toggleForm = (formName) => {
@@ -19,4 +19,4 @@ return (
   )
 }
 
-export default Log_or_Reg
+export default LogOrReg
