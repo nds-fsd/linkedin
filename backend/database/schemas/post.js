@@ -1,6 +1,6 @@
 const { Schema, model }  = require('mongoose');
 
-const postSchema = new Schema({
+const postSchema = new Schema ({
 
     content: { type: String },
     postedBy: { type: Schema.Types.ObjectId, ref:'User' },
@@ -9,8 +9,8 @@ const postSchema = new Schema({
     dislikes: { type: Schema.Types.ObjectId, ref:'User' },
     likesCount: { type: Number, default: 0 },
     dislikesCount: { type: Number, default: 0 },
-    uploadphotos: { type: Image, ref:'User'},
-    uploadvideos: { type: Image.uploadvideos, ref:'User'},
+    //uploadphotos: { type: Image, ref:'User'},
+    //uploadvideos: { type: Image.uploadvideos, ref:'User'},
     createdevents: { type: Event, ref:'User'},
     createdAt: { type: Date, default: Date.now},
     updatedAt: { type: Date, default: Date.now},
