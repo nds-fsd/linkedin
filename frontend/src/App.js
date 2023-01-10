@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import LoginPage from  "./pages/login";
+import LoginPage from  "./pages/LoginPage";
 import ErrorPage from  "./pages/error";
 import AdminPage from  "./pages/admin";
 import HomePage from  "./pages/home";
