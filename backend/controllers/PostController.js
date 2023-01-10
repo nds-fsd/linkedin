@@ -13,7 +13,7 @@ const getPostList = async (req, res) => {
   try{ 
     console.log("aquiestamos")
     const body = req.body
-      const {content, postedBy,comment,likes,createdAt,updatedAt}  = body
+      const {content, postedBy,comment,likes,dislikes,likesCount,dislikesCount,uploadphots,uploadvideos,createdevents, createdAt,updatedAt}  = body
      
       const data = {
           content : content,
