@@ -1,6 +1,6 @@
 //necesitaremos un middleware  const {validateTodo, addDateMiddleware} = require('../middleware');
-const UserModel = require("../database/schemas/jobs");
-const { job } = require("../routes");
+const JobModel = require("../database/schemas/jobs");
+//const { job } = require("../routes");
 
 const getJobList = async (req, res) => {
   const job = await JobModel.find();
@@ -26,7 +26,7 @@ const editJob = async (req, res) => {
 };
 
 const deleteJob = (req, res) => {
-  JobModel.findByIdAndDelete(req.params.id, (err, user) => {
+  JobModel.findByIdAndDelete(req.params.id, (err, job) => {
     if (!job) {
       return res.status(500).json("Job not found");
     }
