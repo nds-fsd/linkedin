@@ -41,7 +41,6 @@ const Login = (props) => {
         </div>
         <div className='logoIntro'>
         <img src="./img/isometric-home 1.png" alt='imagen' />
-<p>ciao, tesst</p>
         </div>
         </div>
         </>
