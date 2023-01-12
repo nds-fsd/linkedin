@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import  "./Logina.css";
+import  "./logina.css";
+import Logo from "./logo"
 
 const Register= (props) => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,8 @@ const Register= (props) => {
             <>   
             <nav className='navbar'> 
             <div className='navbar_logo'>
-            <h2>JobLInk</h2>
+            <Logo/>
+            <h2>JobLink</h2>
             </div>
             <div className='navbar_button'>
             <button className='navbtn_unirse'>Unirse</button>
@@ -32,7 +34,7 @@ const Register= (props) => {
             </div>
                 <label htmlFor="name">Nombre</label>
                 <input value={name} name="name" onChange={(e) => setName(e.target.value)} id="name" placeholder="Name" />
-                <label htmlFor="name">Appellidos</label>
+                <label htmlFor="name">Apellidos</label>
                 <input value={surname} name="surname" onChange={(e) => setSurname(e.target.value)} id="surname" placeholder="Surname" />
                 
                 <label htmlFor="email">Correo electrónico</label>
