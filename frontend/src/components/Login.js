@@ -25,6 +25,10 @@ const Login = (props) => {
         </div>
         </nav>   
         <div className='big_container'>
+        
+        <div className='logoIntro'>
+        <img src="./img/isometric-home 1.png" alt='imagen'/>
+        </div>
             
           <div className="auth_form_container">
            
@@ -39,9 +43,7 @@ const Login = (props) => {
             </form>
          
         </div>
-        <div className='logoIntro'>
-        <img src="./img/isometric-home 1.png" alt='imagen' />
-        </div>
+        
         </div>
         </>
 

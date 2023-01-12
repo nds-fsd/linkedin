@@ -64,9 +64,9 @@ button {
 }
 
 .logoIntro {
-  width: 800px;
-  padding: 20px;
+  width: 900px;
   display: flex;
+  margin-left:-100px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -76,9 +76,11 @@ button {
   padding-top: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   align-content: center;
+  gap:150px;
+  
   
 }
 
