@@ -4,24 +4,50 @@ import Logo from "./logo"
 
 const Register= (props) => {
     const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+    const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] =useState('')
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);}
+    const handleSubmit = () => {
+        const url = 'http://localhost:3001/';
+        const body = {
+            name,
+            surname,
+            email,
+            password
+        };
+        
+        const options = {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(body),
+        }
+        fetch(url, options)
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            reloadPage();
+        });
+    }
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(email);}
 
         return (
-
+            
             <>   
             <nav className='navbar'> 
-            <div className='navbar_logo'>
+            <a href="http://localhost:3000/"><div className='navbar_logo'>
             <Logo/>
             <h2>JobLink</h2>
-            </div>
+            </div></a>
             <div className='navbar_button'>
-            <button className='navbtn_unirse'>Unirse</button>
+            {/* <button className='navbtn_unirse'>Unirse</button> */}
             <button className='navbtn'>Iniciar Sesión</button>
             </div>
             </nav>   
@@ -40,8 +66,8 @@ const Register= (props) => {
                 <label htmlFor="email">Correo electrónico</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
                 <label htmlFor="password">Elige una contraseña</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <button type="submit">Registrarme</button>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                <button type="submit" onClick={handleSubmit}>Registrarme</button>
                 <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
             </form>
            
