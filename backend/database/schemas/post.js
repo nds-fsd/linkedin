@@ -4,9 +4,9 @@ const postSchema = new Schema ({
 
     content: { type: String },
     postedBy: { type: Schema.Types.ObjectId, ref:'User' },
-    comments: { type: Schema.Types.ObjectId, ref:'User' },
-    likes: { type: Schema.Types.ObjectId, ref:'User' },
-    dislikes: { type: Schema.Types.ObjectId, ref:'User' },
+    comments: { type: String },
+    likes: { type: Boolean },
+    dislikes: { type: Boolean },
     //likesCount: { type: Number, default: 0 },
     //dislikesCount: { type: Number, default: 0 },
     //uploadphotos: { type: Image, ref:'User'},
