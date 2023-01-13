@@ -10,7 +10,7 @@ const getUserList = async (req, res) => {
   const registerUser = async (req, res)=>{
   try{ 
     const body = req.body
-      const {username: username,password}  = body
+      const {username,password}  = body
      
       const data = {
           username : username,
