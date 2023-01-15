@@ -17,28 +17,28 @@ const Register = (props) => {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     };
-    const handleSubmit = () => {
-        const payload = {
-            username: username,
-            password: password,
-            email: email,
+    // const handleSubmit = () => {
+    //     const payload = {
+    //         username: username,
+    //         password: password,
+    //         email: email,
 
-        }
+    //     }
 
-        return fetch('http://localhost:3001/user', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
+    //     return fetch('http://localhost:3001/user', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(payload)
 
-        })
-            .then(response => console.log(response));
-        // .then(response => response.json());
+    //     })
+    //         .then(response => console.log(response));
+    //     // .then(response => response.json());
 
 
-    }
+    // }
 
     // const handleSubmit = (e) => {
     //     e.preventDefault();
@@ -60,7 +60,7 @@ const Register = (props) => {
 
             <div className="auth-form-container">
                 <h2>Rellena el formulario y únete a JobLink</h2>
-                <form className="register-form" onSubmit={apiWrapper}>
+                <div className="register-form" >
                     <div className='reg-img'>
                         <img src="./img/Vector.png" alt="logo" />
                     </div>
@@ -94,7 +94,20 @@ const Register = (props) => {
                         name="password"
                     />
 
-                    <button type="submit" onClick={handleSubmit}>Registrarme</button>
+                    <button type="submit" onClick={()=>{
+                        apiWrapper(
+                        "user", 
+                        "POST", 
+                         {
+                            username:username,
+                            email:email,
+                            password:password
+
+                        })
+                        
+                    }
+                        
+                        }>Registrarme</button>
                     <button
                         className="link-btn"
                         onClick={() => props
@@ -102,7 +115,7 @@ const Register = (props) => {
                     >Already have an account? Login here.
                     </button>
 
-                </form>
+                </div>
 
             </div>
         </>
