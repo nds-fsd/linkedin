@@ -1,12 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-  username:{type: String},
-  password:{type: String}
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  username: { type: String, required: true },
   // nombre: { type: String, required: true },
   // apellido1: { type: String, required: true },
   // apellido2: { type: String },
-  // email: { type: String },
+
   // puesto: { type: String }, //1..n tabla de puestos
   // motrar_empresa_actual: { type: Boolean },
   // sector: { type: String }, //1..n  tabla de sectores
@@ -23,6 +24,11 @@ const userSchema = new Schema({
   // tipo_telefono: { type: String }, //Inicio / Trabajo / Movil
   // fecha_nacimiento: { type: Date },
   // web: { type: String },
+
+  relationJob: { type: [Schema.ObjectId], ref: "job" },
+  relationPost: { type: [Schema.ObjectId], ref: "post" },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date },
 });
 
 const User = model("user", userSchema);
