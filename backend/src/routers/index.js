@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router()
 
-const userRoutes = require("./user")
-const jobRoutes = require("./job")
-const companyRoutes = require("./CompanyRoute")
-const postRoutes = require("./post")
+const userRoutes = require("./userRouter")
+const jobRoutes = require("./jobRouter")
+const companyRoutes = require("./companyRouter")
+const postRoutes = require("./postRouter")
 
 
 router.use("/user", userRoutes)
