@@ -1,13 +1,23 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  username: { type: String, required: true },
+// <<<<<<< HEAD:backend/database/schemas/user.js
+  // username:{type: String },
+  // email: { type: String  },
+  // password:{type: String },
+  // surname: { type: String },
+// =======
+  email: { type: String},
+  password: { type: String},
+  username: { type: String},
+// >>>>>>> SPRINT1:backend/src/database/schemas/user.js
   // nombre: { type: String, required: true },
-  // apellido1: { type: String, required: true },
   // apellido2: { type: String },
+// <<<<<<< HEAD:backend/database/schemas/user.js
+  
+// =======
 
+// >>>>>>> SPRINT1:backend/src/database/schemas/user.js
   // puesto: { type: String }, //1..n tabla de puestos
   // motrar_empresa_actual: { type: Boolean },
   // sector: { type: String }, //1..n  tabla de sectores

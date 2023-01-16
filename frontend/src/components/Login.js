@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import  "./Logina.css";
+import  "./logina.css";
+import Logo from "./logo"
+
+
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -12,14 +15,20 @@ const Login = (props) => {
         <>   
         <nav className='navbar'> 
         <div className='navbar_logo'>
-        <h2>JobLInk</h2>
+        <Logo/>
+        <h2>JobLink</h2>
+        
         </div>
         <div className='navbar_button'>
-        <button className='navbtn_unirse'>Unirse</button>
+        <button className='navbtn_unirse'><a href="http://localhost:3000/register">Unirse</a></button>
         <button className='navbtn'>Iniciar Sesión</button>
         </div>
         </nav>   
         <div className='big_container'>
+        
+        <div className='logoIntro'>
+        <img src="./img/isometric-home 1.png" alt='imagen'/>
+        </div>
             
           <div className="auth_form_container">
            
@@ -34,10 +43,7 @@ const Login = (props) => {
             </form>
          
         </div>
-        <div className='logoIntro'>
-        <img src="./img/isometric-home 1.png" alt='imagen' />
-<p>ciao, tesst</p>
-        </div>
+        
         </div>
         </>
 
