@@ -3,6 +3,7 @@ import "./logina.css";
 import { apiWrapper } from "../utils/apiWrapper"
 import Logo from "./logo"
 
+
 const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +18,8 @@ const Register = (props) => {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     };
+
+    
     // const handleSubmit = () => {
     //     const payload = {
     //         username: username,
@@ -104,7 +107,7 @@ const Register = (props) => {
                             password:password
 
                         })
-                        
+                       
                     }
                         
                         }>Registrarme</button>
