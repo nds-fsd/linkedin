@@ -1,9 +1,10 @@
 //import logo from './logo.svg';
 import './App.css';
-import LoginPage from  "./pages/login";
+import LoginPage from  "./pages/LoginPage";
 import ErrorPage from  "./pages/error";
 import AdminPage from  "./pages/admin";
 import HomePage from  "./pages/home";
+import Register from "./pages/register/register"
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<LoginPage></LoginPage>} />
           <Route path="/home" element={<HomePage></HomePage>} />
           <Route path="/admin" element={<AdminPage></AdminPage>} />
+          <Route path="/register" element={<Register></Register>} />
           <Route path="*" element={<ErrorPage></ErrorPage>} />
         </Routes>
       </div>
