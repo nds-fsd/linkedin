@@ -5,6 +5,9 @@ import ErrorPage from  "./pages/error";
 import AdminPage from  "./pages/admin";
 import HomePage from  "./pages/home";
 import Register from "./pages/register/register"
+
+import PanelEdit from "./pages/panelEdit"
+
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -16,6 +19,7 @@ function App() {
           <Route path="/home" element={<HomePage></HomePage>} />
           <Route path="/admin" element={<AdminPage></AdminPage>} />
           <Route path="/register" element={<Register></Register>} />
+          <Route path="/panel" element={<PanelEdit></PanelEdit>}/>
           <Route path="*" element={<ErrorPage></ErrorPage>} />
         </Routes>
       </div>
