@@ -10,9 +10,15 @@ const {
   deleteUser,
 } = require("../controllers/userController");
 
+const {register, login, refreshAccesToken} = require("../controllers/auth")
+const mdAuth = require("../middleware/autenticated") 
+
 const routerUser = Router();
 
-routerUser.post("/", middle.time, middle.validateHasBody, createUser);
+routerUser.post("/register", middle.time, middle.validateHasBody, register);
+routerUser.post("/login", middle.time, middle.validateHasBody, login);
+// routerUser.post("/refreshtoken", middle.time, middle.validateHasBody, refreshAccesToken);
+// routerUser.post("/", middle.time, middle.validateHasBody, createUser);
 routerUser.get("/", middle.time, getUserList);
 routerUser.get("/:id", middle.time, middle.validateIdFormat, getUserById);
 routerUser.patch("/:id", middle.time, middle.validateIdFormat, middle.validateHasBody, updateUser);
