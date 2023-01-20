@@ -99,7 +99,7 @@ const Register = (props) => {
 
                     <button type="submit" onClick={()=>{
                         apiWrapper(
-                        "user", 
+                        "user/register", 
                         "POST", 
                          {
                             username:username,
