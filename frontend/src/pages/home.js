@@ -2,9 +2,11 @@ import React from "react";
 import Header from "../components/header/Header";
 import Sidebar from "../components/sidebar/Sidebar";
 import Feed from "../components/feed/Feed";
+import Post from "../components/post/Post";
 //import Bienvenida from "../components/bienvenida/bienvenida";
 //import Noticias from "../components/noticias/noticias";
 import styles from "./home.module.css";
+import Widget from "../components/widget_right/Widget";
 
 const HomePage = (props) => {
   return (
@@ -14,6 +16,9 @@ const HomePage = (props) => {
      <div className={styles.home__body}>     
        <Sidebar />
        <Feed />
+       <Widget />
+       
+
      </div>
 
       </div>

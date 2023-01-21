@@ -6,14 +6,20 @@ import ImageIcon from '@mui/icons-material/Image';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
-//import Post from './Post';
+import Post from '../post/Post';
 
 const Feed = () => {
-     const [input, setInput] = useState('')
-    // const [posts, setPosts] = useState([]);
+  //   const [input, setInput] = useState('')
+     const [posts, setPosts] = useState([]);
 
-    // useEffect(() => {
-  
+     useEffect(() => {
+       async function fetchData() {
+         const response = await fetch('http://localhost:3001/post');
+         const data = await response.json();
+         setPosts(data);
+       }
+       fetchData();
+     }, []);
 
   return (
     <div className='feed'>
@@ -21,7 +27,8 @@ const Feed = () => {
             <div className='feed__input'>
                 <CreateIcon />
                 <form>
-                    <input value={input} onChange={e=>setInput(e.target.value)} type="text"/>
+                {/* <input value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder='Start a post'/> */}
+                    <input  placeholder='Start a post'/>
                     <button onClick={console.log('hey')} type="submit">Send</button>
                 </form>
             </div>
@@ -33,18 +40,16 @@ const Feed = () => {
             </div>
         </div>
 
-        {/* {posts.map(({id, data:{name, description, message, photoUrl} })=>( 
+        {/* <Post /> */}
+        {posts.map(({_id, title, description, content, photoUrl })=>( 
             <Post 
-            key={id}
-            name={name}
+            key={_id}
+            title={title}
             description={description}
-            message={message}
-            photoUrl={photoUrl}
-            
+            content={content}
+            photoUrl={photoUrl} 
             />
-       )) } */}
-
-        
+)) }
         </div>
   )
 }
