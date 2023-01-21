@@ -9,6 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 const Post = ({title, description, content, photoUrl} ) => {
   return (
+    
     <div className='post'>
         <div className='post__header'>
             <Avatar />
@@ -28,6 +29,7 @@ const Post = ({title, description, content, photoUrl} ) => {
             <InputOption Icon={SendIcon} title="Send" color="grey" />
         </div>
         </div>
+        
   )
 }
 

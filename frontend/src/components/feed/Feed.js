@@ -9,8 +9,10 @@ import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
 
 const Feed = () => {
-  //   const [input, setInput] = useState('')
+     const [input, setInput] = useState('')
      const [posts, setPosts] = useState([]);
+
+     const [refresh, setRefresh] = useState(false);
 
      useEffect(() => {
        async function fetchData() {
@@ -19,16 +21,37 @@ const Feed = () => {
          setPosts(data);
        }
        fetchData();
-     }, []);
+       
+     }, [refresh]);
+
+     //---------------------//
+     async function handlePost(e) {
+        e.preventDefault();
+        const response = await fetch('http://localhost:3001/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ title: input, description: input, content: input, photoUrl: input })
+        });
+        const data = await response.json();
+        console.log(data);
+        setInput('')
+        setRefresh(!refresh);
+      }
+
+
 
   return (
     <div className='feed'>
         <div className='feed_inputContainer'>
             <div className='feed__input'>
                 <CreateIcon />
-                <form>
-                {/* <input value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder='Start a post'/> */}
-                    <input  placeholder='Start a post'/>
+                <form onSubmit={handlePost}>
+                <input value={input} 
+                onChange={e=>setInput(e.target.value)}
+                 type="text" placeholder='Start a post'/>
+                  
                     <button onClick={console.log('hey')} type="submit">Send</button>
                 </form>
             </div>
@@ -40,7 +63,7 @@ const Feed = () => {
             </div>
         </div>
 
-        {/* <Post /> */}
+        <div className='postmap'>
         {posts.map(({_id, title, description, content, photoUrl })=>( 
             <Post 
             key={_id}
@@ -49,7 +72,9 @@ const Feed = () => {
             content={content}
             photoUrl={photoUrl} 
             />
+            
 )) }
+        </div>
         </div>
   )
 }

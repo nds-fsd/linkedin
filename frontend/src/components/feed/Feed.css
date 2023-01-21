@@ -38,10 +38,19 @@
 }
 
 .feed__input>form >button {
-    display: none;
+    /* display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center; */
+    /* display: none; */
 }
 
 .feed__inputOptions {
     display: flex ;
     justify-content: space-evenly;
+}
+
+.postmap{
+    display: flex;
+    flex-direction: column-reverse;
 }
