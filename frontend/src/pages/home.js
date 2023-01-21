@@ -1,14 +1,24 @@
 import React from "react";
-import NavBar from "../components/navBar/NavBar";
-import Bienvenida from "../components/bienvenida/bienvenida";
-import Noticias from "../components/noticias/noticias";
+import Header from "../components/header/Header";
+import Sidebar from "../components/sidebar/Sidebar";
+import Feed from "../components/feed/Feed";
+//import Bienvenida from "../components/bienvenida/bienvenida";
+//import Noticias from "../components/noticias/noticias";
 import styles from "./home.module.css";
 
 const HomePage = (props) => {
   return (
     <>
-      <NavBar />
-      <div className={styles.body}>
+    <div className={styles.home}>      
+      <Header />
+     <div className={styles.home__body}>     
+       <Sidebar />
+       <Feed />
+     </div>
+
+      </div>
+
+      {/* <div className={styles.body}>
         <div className={styles.horizontal}>
           <Bienvenida />
         </div>
@@ -19,7 +29,7 @@ const HomePage = (props) => {
         <div className={styles.horizontal}>
           <Noticias />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -9,18 +9,13 @@
     background-color: lightgreen;
 } */
 
-.horizontal{
-    background-color : lightblue;
-    border:1px solid #000;
-    border-radius: 15px;
-    padding: 20px;
-    margin:10px ;
+.home{
+    background-color: #f3f2ef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.vertical{
-    background-color : lightsalmon;
-    border:1px solid #000;
-    border-radius: 15px;
-    padding: 20px;
-    margin:10px ;
+.home__body {
+    display: flex;
 }
