@@ -15,6 +15,7 @@
     border-radius: 10px;
     border: 1px solid lightgray;
     padding-bottom: 10px;
+    padding-left: 10px;
 }
 
 .header__post > img {
