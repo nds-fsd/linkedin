@@ -1,0 +1,36 @@
+.container__post >h2{
+    color:white;
+    background-color: #6B9D6F;
+}
+
+
+
+
+.container__post {
+    /* position: sticky;
+    top: 200px; */
+    
+    flex: 0.2;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+
+.header__post > img {
+  
+    object-fit: contain;
+    height: 50px;
+    margin-right: 10px;
+    /* position: absolute;
+    top: auto;
+    left:40px; */
+}
+.header__post{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    align-content: center;
+   
+    justify-content: space-evenly;
+}
