@@ -1,7 +1,7 @@
 .fondo {
   position: relative;
   width: 300px;
-  height: 100vh;
+  min-height: 100vh;
   /*background: var(--green);*/
   background: linear-gradient(90deg, var(--green) 0%, var(--green) 35%, var(--lightgreen) 100%);
 

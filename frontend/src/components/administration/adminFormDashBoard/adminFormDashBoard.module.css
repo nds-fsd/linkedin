@@ -125,8 +125,9 @@
   width: 98%;
   padding: 0 10px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
   column-gap: 30px;
+  margin-bottom: 30px;
 }
 
 .details .lastPosts,

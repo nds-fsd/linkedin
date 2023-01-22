@@ -22,14 +22,15 @@ const AdminPage = (props) => {
         navigationIdSelected={navigationIdSelected}
         saveNavigationIdSelected={saveNavigationIdSelected}
       />
-      {navigationIdSelected === "dashboard" ? 
-  <AdminFormDashBoard navigationIdSelected={navigationIdSelected}/>:
-
-        navigationIdSelected === "logout" ? (
-          <AdminLogOut/>
-        ) : (
-        
-        <AdminFormElements navigationIdSelected={navigationIdSelected}/>
+      {navigationIdSelected === "dashboard" ? (
+        <AdminFormDashBoard
+          navigationIdSelected={navigationIdSelected}
+          saveNavigationIdSelected={saveNavigationIdSelected}
+        />
+      ) : navigationIdSelected === "logout" ? (
+        <AdminLogOut />
+      ) : (
+        <AdminFormElements navigationIdSelected={navigationIdSelected} />
       )}
     </div>
   );
