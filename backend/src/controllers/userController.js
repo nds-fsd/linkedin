@@ -24,7 +24,7 @@ const getUserList = async (req, res) => {
   try {
     const user = await UserModel.find().populate("relationJob").populate("relationPost");
 
-    if (user) res.status(302).json(user);
+    if (user) res.status(201).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
@@ -36,7 +36,7 @@ const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await UserModel.findById(id).populate("relationJob").populate("relationPost");
-    if (user) res.status(302).json(user);
+    if (user) res.status(201).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });

@@ -42,7 +42,7 @@ const getJobList = async (req, res) => {
   try {
     const job = await JobModel.find();
 
-    if (job) res.status(302).json(job);
+    if (job) res.status(201).json(job);
     else res.status(404).send({ status: "ERROR", message: "Jobs not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
@@ -54,7 +54,7 @@ const getJobById = async (req, res) => {
   try {
     const { id } = req.params;
     const job = await JobModel.findById(id);
-    if (job) res.status(302).json(job);
+    if (job) res.status(201).json(job);
     else res.status(404).send({ status: "ERROR", message: "Job not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
