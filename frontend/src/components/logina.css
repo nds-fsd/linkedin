@@ -38,16 +38,8 @@ input {
   background-color: #ededed;
 }
 
-button {
-  margin-top: 20px;
-  border: none;
-  background-color: #6B9D6F;
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  color: white;
-}
+
+
 
 .link-btn {
   background: none;
@@ -139,6 +131,19 @@ button {
   color: black;
 
 }
+.navbtn:hover {
+  margin-top: 20px;
+  border: none;
+  background-color: #B0E2B8;
+  padding: 20px;
+  border-radius: 70px;
+  cursor: pointer;
+  margin-left: 50px;
+  margin-right: 10px;
+  color: black;
+  transition: 0.2s;
+
+}
 
 a {
   text-decoration: none;
@@ -166,4 +171,29 @@ a {
 
 .auth-form-container>h2 {
   text-align: center;
+}
+
+
+.submit-button{
+  margin-top: 20px;
+  border: none;
+  background-color: #6B9D6F;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+
+}
+
+.submit-button:hover {
+  margin-top: 20px;
+  border: none;
+  background-color: #B0E2B8;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  transition: 0.2s;
 }
