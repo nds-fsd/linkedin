@@ -14,6 +14,7 @@ function App() {
   return (
     <div>
        <div className="main-router">
+        
         <Routes>
           <Route path="/" element={<LoginPage></LoginPage>} />
           <Route path="/home" element={<HomePage></HomePage>} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="/panel" element={<PanelEdit></PanelEdit>}/>
           <Route path="*" element={<ErrorPage></ErrorPage>} />
         </Routes>
+        
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { apiWrapper } from "../utils/apiWrapper"
 import Logo from "./logo"
 
 
+
 const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,34 +26,7 @@ const Register = (props) => {
         setPassword(e.target.value);
     };
 
-    
-    // const handleSubmit = () => {
-    //     const payload = {
-    //         username: username,
-    //         password: password,
-    //         email: email,
-
-    //     }
-
-    //     return fetch('http://localhost:3001/user', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(payload)
-
-    //     })
-    //         .then(response => console.log(response));
-    //     // .then(response => response.json());
-
-
-    // }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(email);}
-
+      
     return (
 
         <>
@@ -103,7 +77,7 @@ const Register = (props) => {
                         name="password"
                     />
 
-                    <button type="submit" onClick={()=>{
+                    <button className="submit-button" type="submit" onClick={()=>{
                         apiWrapper(
                         "user/register", 
                         "POST", 
@@ -112,17 +86,23 @@ const Register = (props) => {
                             email:email,
                             password:password
 
-                        })
-                        resetForm()
+
+                        }
+                        )
+                        .then((payload)=>{
+                            console.log(payload)
+                        });
+                        
+
                     }
                         
                         }>Registrarme</button>
-                    <button
+                    {/* <button
                         className="link-btn"
                         onClick={() => props
                         .onFormSwitch('login')}
                     >Already have an account? Login here.
-                    </button>
+                    </button> */}
 
                 </div>
 
