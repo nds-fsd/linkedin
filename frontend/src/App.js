@@ -1,4 +1,4 @@
-//import logo from './logo.svg';
+//import logo from './favicon.ico';
 import './App.css';
 import LoginPage from  "./pages/LoginPage";
 import ErrorPage from  "./pages/error";

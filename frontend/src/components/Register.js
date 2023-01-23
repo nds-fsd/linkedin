@@ -10,6 +10,12 @@ const Register = (props) => {
     const [password, setPassword] = useState('');
     const [username, setName] = useState('');
 
+    const resetForm = ()=>{
+        setEmail('');
+        setPassword('');
+        setName('')
+    }
+
     const handleName = (e) => {
         setName(e.target.value);
     };
@@ -80,13 +86,14 @@ const Register = (props) => {
                             email:email,
                             password:password
 
+
                         }
                         )
                         .then((payload)=>{
                             console.log(payload)
                         });
                         
-                       
+
                     }
                         
                         }>Registrarme</button>
