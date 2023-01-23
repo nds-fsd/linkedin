@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
     };
     const newUser = new UserModel(data);
     await newUser.save();
-    res.status(201).json(newUser);
+    res.status(200).json(newUser);
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
   }
@@ -24,7 +24,7 @@ const getUserList = async (req, res) => {
   try {
     const user = await UserModel.find().populate("relationJob").populate("relationPost");
 
-    if (user) res.status(201).json(user);
+    if (user) res.status(200).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });

@@ -39,7 +39,7 @@ const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await PostModel.findById(id);
-    if (post) res.status(201).json(post);
+    if (post) res.status(200).json(post);
     else res.status(404).send({ status: "ERROR", message: "Post not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });

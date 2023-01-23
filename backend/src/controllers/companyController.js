@@ -36,7 +36,7 @@ const getCompanyList = async (req, res) => {
   try {
     const company = await CompanyModel.find().populate("relationJob").populate("relationPost");
 
-    if (company) res.status(201).json(company);
+    if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Companys not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
@@ -48,7 +48,7 @@ const getCompanyById = async (req, res) => {
   try {
     const { id } = req.params;
     const company = await CompanyModel.findById(id).populate("relationJob").populate("relationPost");
-    if (company) res.status(201).json(company);
+    if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
