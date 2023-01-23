@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import styles from "../form/editUser.module.css"
 import { apiWrapper } from '../../utils/apiWrapper';
@@ -197,13 +199,13 @@ const EditUser = (props) => {
                             username:username,
                             email:email,
                             password:password,
-                            name,name,
-                            surname,surname,
-                            country,country,
-                            city, city,
-                            company, company,
-                            role, role,
-                            interest, interest
+                            name:name,
+                            surname:surname,
+                            country:country,
+                            city: city,
+                            company: company,
+                            role: role,
+                            interest: interest
 
                         })
                        

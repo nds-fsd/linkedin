@@ -10,6 +10,7 @@ const userSchema = new Schema({
   email: { type: String},
   password: { type: String},
   username: { type: String},
+  role:{type:String},
 // >>>>>>> SPRINT1:backend/src/database/schemas/user.js
   // nombre: { type: String, required: true },
   // apellido2: { type: String },
