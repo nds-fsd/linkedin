@@ -1,24 +1,41 @@
 import React, { useEffect, useState } from "react";
+import Modal from "../../modal/modal";
+import ModalElement from "../../modal/element/modalElement"
 import styles from "./customTable.module.css";
 
 const CustomTable = (props) => {
   const [mode, setMode] = useState("read");
+  const [openModal, setOpenModal] = useState(false);
+  const [itemId, setItemId] = useState("");
+  const [statusClick, setStatusClick] = useState("");
 
+  
   useEffect(() => {
     setMode(props.mode);
   }, [mode]);
 
   const handleClickAdd = () => {
-    alert("Añadir " + props.element);
+    setStatusClick("C");//Create
+    setOpenModal(true);
+    //alert("Añadir " + props.element);
   };
   const handleClickConsult = (item) => {
-    alert("Consultar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
+    setStatusClick("R");//Read
+    setItemId(JSON.stringify(item["item"]["_id"]))
+    setOpenModal(true);
+    //alert("Consultar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
   const handleClickEdit = (item) => {
-    alert("Editar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
+    setStatusClick("U");//Update
+    setItemId(JSON.stringify(item["item"]["_id"]))
+    setOpenModal(true);
+    //alert("Editar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
   const handleClickDelete = (item) => {
-    alert("Borrar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
+    setStatusClick("D");//Delete
+    setItemId(JSON.stringify(item["item"]["_id"]))
+    setOpenModal(true);
+    //alert("Borrar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
 
   const tableRows = (item) => {
@@ -40,9 +57,16 @@ const CustomTable = (props) => {
               JSON.stringify(props.columsDescription) !== "{}" &&
               props.columsDescription.map((item) => <th key={item.name}>{item.name}</th>)}
             {mode === "write" && <th></th>}
-            {mode === "write" && <th><ion-icon name="add-circle-outline"onClick={() => {
-                        handleClickAdd();
-                      }}></ion-icon></th>}
+            {mode === "write" && (
+              <th>
+                <ion-icon
+                  name="add-circle-outline"
+                  onClick={() => {
+                    handleClickAdd();
+                  }}
+                ></ion-icon>
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -99,6 +123,7 @@ const CustomTable = (props) => {
                     */}
         </tbody>
       </table>
+      <ModalElement open={openModal} onClose={() => setOpenModal(false)} element={props.element} titulo={props.titulo} itemId={itemId} statusClick={statusClick}/>
     </div>
   );
 };

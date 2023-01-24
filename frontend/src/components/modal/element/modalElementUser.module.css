@@ -1,0 +1,18 @@
+
+input{
+  position: relative;
+  width: 90%;
+}
+
+.botones{
+  display: flex;
+  justify-content: right;
+}
+
+.botones button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  margin-right: 10px;
+}

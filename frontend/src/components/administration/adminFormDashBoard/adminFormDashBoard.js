@@ -147,6 +147,7 @@ const AdminFormDashBoard = (props) => {
             columsName={[{ name: "title" }, { name: "content" }, { name: "createdAt" }]}
             mode="read"
             element="post"
+            titulo="Posts"
           />
         </div>
         <div className={styles.lastUsers}>

@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { apiWrapper } from "../../../utils/apiWrapper";
 import CustomTable from "../../custom/customTable/customTable";
+import {camelCase } from "../../../utils/functions";
 import styles from "./adminFormElements.module.css";
 
 const AdminFormElements = (props) => {
-  const camelCase = (param) => {
-    let titleSplit = param.split("");
-    if (param !== "") titleSplit[0] = titleSplit[0].toUpperCase();
-
-    return titleSplit.join("");
-  };
-
   const [jsonElement, setJsonElement] = useState({});
   const [element, setElement] = useState("");
   const [columsDescription, setColumsDescription] = useState({});
@@ -124,6 +118,7 @@ const AdminFormElements = (props) => {
           columsName={columsName}
           mode="write"
           element={element}
+          titulo={props.navigationIdSelected}
         />
         {/*<CustomTable
           json={jsonElement}
