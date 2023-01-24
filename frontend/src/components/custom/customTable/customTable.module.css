@@ -26,12 +26,26 @@
 }
 .styled_table thead tr:first-of-type th:last-of-type {
   border-radius: 0 20px 0 0;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--white);
 }
 
 .styled_table th,
 .styled_table td {
-  padding: 12px 15px;
+  padding: 10px 10px;
 }
+
+.styled_table  td ion-icon{
+  font-size: 1.5em;
+}
+
+.styled_table  td ion-icon:hover{
+  cursor: pointer;
+  color: orangered;
+}
+
+
 .styled_table tbody tr {
   border-bottom: 1px solid #dddddd;
 }

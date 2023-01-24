@@ -136,6 +136,7 @@ const AdminFormDashBoard = (props) => {
             <h2>Last 10 Posts</h2>
           </div>
           {/*handleJsonSortForCreatedAt(jsonPost, false)*/}
+          {/*jsonPost.filter((element,index) => {return index>= jsonPost.length-10})*/}
           <CustomTable
             json={jsonPost}
             columsDescription={[
@@ -144,6 +145,8 @@ const AdminFormDashBoard = (props) => {
               { name: "Fecha Creacion" },
             ]}
             columsName={[{ name: "title" }, { name: "content" }, { name: "createdAt" }]}
+            mode="read"
+            element="post"
           />
         </div>
         <div className={styles.lastUsers}>

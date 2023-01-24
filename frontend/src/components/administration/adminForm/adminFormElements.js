@@ -122,6 +122,8 @@ const AdminFormElements = (props) => {
           json={jsonElement}
           columsDescription={columsDescription}
           columsName={columsName}
+          mode="write"
+          element={element}
         />
         {/*<CustomTable
           json={jsonElement}
