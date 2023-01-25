@@ -14,19 +14,19 @@ const Post = ({title, description, content, photoUrl} ) => {
         <div className='post__header'>
             <Avatar />
             <div className='post__info'>
-        <h2>{title} </h2>
-        <p>{description} </p>
+        <h2 className="post_heading">{title} </h2>
+        <p className='post_parraf'>{description} </p>
 
             </div>
         </div>
         <div className='post__body'>
-            <p>{content} </p>
+            <p> {content} </p>
         </div>
         <div className='post_buttons'>
-            <InputOption Icon={ThumbUpIcon} title="Like" color="grey" />
-            <InputOption Icon={CommentIcon} title="Comment" color="grey" />
-            <InputOption Icon={ShareIcon} title="Share" color="grey" />
-            <InputOption Icon={SendIcon} title="Send" color="grey" />
+            <InputOption className="post_icon" Icon={ThumbUpIcon} title="Like" color="grey" />
+            <InputOption className="post_icon" Icon={CommentIcon} title="Comment" color="grey" />
+            <InputOption className="post_icon" Icon={ShareIcon} title="Share" color="grey" />
+            <InputOption className="post_icon" Icon={SendIcon} title="Send" color="grey" />
         </div>
         </div>
         

@@ -35,9 +35,11 @@ const Jobsmap = () => {
          
         <div className='jobmap'>
         <div className="header__post">
-        <img src="./img/vector.png" alt="ops" />
+            <div className="jobmap_title">
+            <img src="./img/vector.png" alt="ops" />
             <h2> New Job Offers:</h2>
-            <button onClick={() => setRefresh(true)}>Refresh</button>
+            </div>
+                <button onClick={() => setRefresh(true)}>Refresh all Jobs</button>
             </div> 
             {job.map(job => (
                 <JobCard key={job._id} {...job} />
