@@ -52,7 +52,7 @@ const Feed = () => {
                 onChange={e=>setInput(e.target.value)}
                  type="text" placeholder='Start a post'/>
                   
-                    <button onClick={console.log('hey')} type="submit">Send</button>
+                    <button className="submitButton" onClick={console.log('hey')} type="submit">Send</button>
                 </form>
             </div>
             <div className='feed__inputOptions'>
