@@ -3,9 +3,9 @@
     display: flex;
     align-items: center;
     margin-top: 15px;
+    margin-bottom: -5px;
     color: grey;
-    padding: 10px;
-    cursor: pointer;
+   cursor: pointer;
 }
 
 .inputOption:hover {
@@ -16,5 +16,11 @@
 
 .inputOption >h4 {
     margin-left: 5px;
+   
+}
+
+.inputOption >p {
+    font-weight: 700px;
+    padding-left: 5px;
    
 }

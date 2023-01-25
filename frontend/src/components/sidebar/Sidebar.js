@@ -18,7 +18,7 @@ const recentItem =(topic) =>(
         img src="./img/bored_cats_club.jpg"/>
 
         <h2>Jonny Stack</h2>
-        <h4>FullCat Developer!</h4>
+        <h3>FullCat Developer!</h3>
         </div>
         <div className='sidebar__stats'>
             
