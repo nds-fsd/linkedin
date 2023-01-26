@@ -62,7 +62,7 @@ const Login = () => {
                         <h3>La comunidad donde profesionales <br></br>connectan con profesionales</h3>
                         <input {...register("email", { required: true })} placeholder="Introduce tu correo electrónico" />
                         {errors.email && <span>error</span>}
-                        <input {...register("password", { required: true })} placeholder="Introduce tu contraseña" />
+                        <input type="password" {...register("password", { required: true })} placeholder="Introduce tu contraseña" />
                         {errors.password && <span>error</span>}
                         <button className="submit-button" type="submit">Login</button>
                     </form>

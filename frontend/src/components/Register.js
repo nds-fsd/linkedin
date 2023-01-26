@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./logina.css";
 import { apiWrapper } from "../utils/apiWrapper"
 import Logo from "./logo"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Register = (props) => {
@@ -16,6 +18,8 @@ const Register = (props) => {
         setName('')
     }
 
+   
+
     const handleName = (e) => {
         setName(e.target.value);
     };
@@ -26,7 +30,9 @@ const Register = (props) => {
         setPassword(e.target.value);
     };
 
-      
+    const navigate = useNavigate()
+
+
     return (
 
         <>
@@ -42,6 +48,16 @@ const Register = (props) => {
             </nav>
 
             <div className="auth-form-container">
+            <ToastContainer 
+            position="top-center" 
+            autoClose={5000} 
+            hideProgressBar={false} 
+            newestOnTop={false} 
+            closeOnClick rtl={false} 
+            pauseOnFocusLoss 
+            draggable 
+            pauseOnHover />
+
                 <h2>Rellena el formulario y únete a JobLink</h2>
                 <div className="register-form" >
                     <div className='reg-img'>
@@ -77,26 +93,42 @@ const Register = (props) => {
                         name="password"
                     />
 
-                    <button className="submit-button" type="submit" onClick={()=>{
-                        apiWrapper(
-                        "user/register", 
-                        "POST", 
-                         {
-                            username:username,
-                            email:email,
-                            password:password
-
-
-                        }
-                        )
-                        .then((payload)=>{
-                            console.log(payload)
-                        });
-                        
-
-                    }
-                        
-                        }>Registrarme</button>
+<button className="submit-button" type="submit" onClick={async () => {
+    try {
+        await apiWrapper("user/register", "POST", {
+            username:username,
+            email:email,
+            password:password
+        });
+        toast.success("Te has registrado correctamente! ahora vamos al login", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            
+        });
+        resetForm();
+        // use the Link component to redirect the user to the homepage
+        setTimeout(() => {
+            navigate("/");
+        }, 5000);
+        
+    } catch (error) {
+        console.error(error);
+        toast.error("An error occurred. Please try again.", {
+            position: "center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+}}>Registrarme</button>
                     {/* <button
                         className="link-btn"
                         onClick={() => props
