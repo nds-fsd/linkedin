@@ -111,7 +111,7 @@ const Register = (props) => {
             
         });
         resetForm();
-        // use the Link component to redirect the user to the homepage
+        
         setTimeout(() => {
             navigate("/");
         }, 5000);
@@ -119,7 +119,7 @@ const Register = (props) => {
     } catch (error) {
         console.error(error);
         toast.error("An error occurred. Please try again.", {
-            position: "center",
+            position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -128,13 +128,12 @@ const Register = (props) => {
             progress: undefined,
         });
     }
-}}>Registrarme</button>
-                    {/* <button
+}}>Registrarme</button><br></br>
+                    <button
                         className="link-btn"
-                        onClick={() => props
-                        .onFormSwitch('login')}
+                        onClick={() => navigate("/")}
                     >Already have an account? Login here.
-                    </button> */}
+                    </button>
 
                 </div>
 
