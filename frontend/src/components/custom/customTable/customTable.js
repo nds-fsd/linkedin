@@ -11,6 +11,7 @@ const CustomTable = (props) => {
 
   
   useEffect(() => {
+    //para especificar si la tabla se activa em modo lectura o con la visualizacion de los botones CRUD
     setMode(props.mode);
   }, [mode]);
 
@@ -36,6 +37,11 @@ const CustomTable = (props) => {
     setItemId(JSON.stringify(item["item"]["_id"]))
     setOpenModal(true);
     //alert("Borrar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
+  };
+
+  const saveCloseModal= () => {
+    setOpenModal(false);
+    setStatusClick("");
   };
 
   const tableRows = (item) => {
@@ -123,7 +129,7 @@ const CustomTable = (props) => {
                     */}
         </tbody>
       </table>
-      <ModalElement open={openModal} onClose={() => setOpenModal(false)} element={props.element} titulo={props.titulo} itemId={itemId} statusClick={statusClick}/>
+      <ModalElement open={openModal} onClose={saveCloseModal} element={props.element} titulo={props.titulo} itemId={itemId} statusClick={statusClick}/>
     </div>
   );
 };
