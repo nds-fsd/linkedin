@@ -1,0 +1,83 @@
+h2 {
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 60px;
+  color: var(--green);
+}
+
+.inputBox {
+  position: relative;
+  width: 90%;
+  margin: 20px 20px 30px 20px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 5px 0;
+  font-size: 1.1em;
+  margin: 10px 0;
+  background-color: var(--white);
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #999;
+  outline: none;
+  resize: none;
+}
+
+.inputBox span {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  pointer-events: none;
+  padding: 5px 0;
+  margin: 10px;
+  font-size: 1.1em;
+  color: #999;
+  transition: 0.5s;
+}
+
+.inputBox input:focus {
+  border-bottom: 2px solid var(--green);
+}
+.inputBox input:focus ~ span,
+.inputBox input:valid ~ span {
+  color: var(--green);
+  font-size: 0.9em;
+  transform: translateY(-20px) translateX(-10px);
+}
+
+.botones {
+  display: flex;
+  justify-content: right;
+  margin-top: 40px;
+}
+
+.botones button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  margin-right: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: green;
+  color: var(--white);
+  font-size: 15px;
+}
+
+.botones .botonOK {
+  border: 0px;
+  background-color: rgba(0, 128, 0);
+  cursor: pointer;
+}
+
+.botones .botonNOK {
+  border: 0px;
+  background-color: rgb(200, 0, 0);
+  cursor: pointer;
+}
+
+.botones .botonOK:hover,
+.botones .botonNOK:hover {
+  text-decoration: underline;
+}

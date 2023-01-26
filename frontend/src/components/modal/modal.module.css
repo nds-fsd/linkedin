@@ -23,6 +23,7 @@
   align-items: center;
   background: var(--white);
   padding: 2rem;
+  border: 2px solid var(--green);
   border-radius: 20px;
   visibility: hidden;
   opacity: 0;

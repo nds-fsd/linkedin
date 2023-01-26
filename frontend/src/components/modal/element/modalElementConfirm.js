@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./modalElementUser.module.css";
+import styles from "./modalElement.module.css";
 
 const ModalElementConfirm = (props) => {
   const handleClick = (param) => {
@@ -11,10 +11,10 @@ const ModalElementConfirm = (props) => {
       <h2>{`${props.mensaje} `} </h2>{" "}
       <div className={styles.botones}>
         <div>
-          <button onClick={()=> {handleClick(true)}}>Si</button> &nbsp;
+          <button className={styles.botonOK} onClick={()=> {handleClick(true)}}>Si</button> &nbsp;
         </div>
         <div>
-          <button onClick={()=> {handleClick(false)}}>No</button>
+          <button className={styles.botonNOK} onClick={()=> {handleClick(false)}}>No</button>
         </div>
       </div>
     </div>
