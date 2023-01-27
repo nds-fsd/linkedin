@@ -13,5 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2     # checkout the repo
       - run: cd backend && npm install   # install packages
-      - run: npm test       
+      - run: cd backend && npm test       
       
