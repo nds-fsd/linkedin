@@ -24,10 +24,19 @@
   background: var(--white);
   padding: 2rem;
   border: 2px solid var(--green);
-  border-radius: 20px;
+  border-radius: 15px;
+  border-bottom-right-radius: 105px;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 500ms, opacity 500ms;
+  background: rgb(29, 136, 17);
+  background: linear-gradient(
+    6deg,
+    rgba(29, 136, 17, 1) 0%,
+    rgba(253, 253, 255, 1) 12%,
+    rgba(255, 255, 255, 1) 88%,
+    rgba(29, 136, 17, 1) 100%
+  );
 }
 
 .open {
