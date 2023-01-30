@@ -3,6 +3,7 @@ import { camelCase } from "../../../utils/functions";
 import ModalElement from "./modalElement";
 import { apiWrapper } from "../../../utils/apiWrapper";
 import styles from "./modalElement.module.css";
+//import { toast } from 'react-toastify';
 
 const ModalElementUser = (props) => {
   const [title, setTitle] = useState("");
@@ -17,14 +18,20 @@ const ModalElementUser = (props) => {
         case "C": //CREATE
           console.log("Confirm OK CREATE");
           sendBackendPOSTCreate();
+          //TODO Se añaden Toast, indicando que ha sido OK
+          //toast("Confirm OK CREATE");
           break;
         case "U": //UPDATE
           console.log("Confirm OK UPDATE");
           sendBackendUPDATE();
+          //TODO Se añaden Toast, indicando que ha sido OK
+          //toast("Confirm OK UPDATE");
           break;
         case "D": //DELETE
           console.log("Confirm OK DELETE");
           sendBackendDELETE();
+          //TODO Se añaden Toast, indicando que ha sido OK
+          //toast("Confirm OK DELETE");
           break;
       }
       props.onClose();
