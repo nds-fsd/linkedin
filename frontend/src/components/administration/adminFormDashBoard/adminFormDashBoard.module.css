@@ -1,0 +1,149 @@
+.fondo {
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+
+/*NavBar --------------------------------------------------------------------------------------- */
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  padding-top: 5px;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
+}
+
+.search label {
+  position: relative;
+  width: 100px;
+}
+
+.search label input {
+  width: 100%;
+  height: 30px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 15px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+
+.search label ion-icon {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  font-size: 1.2em;
+}
+
+.user {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*Titulo --------------------------------------------------------------------------------------- */
+.title {
+  bottom: 0px;
+  color: rgba(0, 0, 0, 0.04);
+  position: absolute;
+  font-size: 150px;
+  font-weight: bold;
+  font-style: italic;
+  right: 10px;
+  background-color: linear-gradient (315deg, rgb(112, 245, 112), rgb(73, 198, 40));
+}
+
+/*Cards ---------------------------------------------------------------------------------------- */
+.cardBox {
+  position: relative;
+  width: 98%;
+  margin: 10px 0px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 30px;
+}
+
+/*Graphs --------------------------------------------------------------------------------------- */
+.graphBox {
+  position: relative;
+  width: 98%;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 30px;
+  min-height: 200px;
+}
+
+.graphBox .graph {
+  position: relative;
+  background: var(--white);
+  width: 100%;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
+/*Details -------------------------------------------------------------------------------------- */
+.details {
+  position: relative;
+  width: 98%;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  column-gap: 30px;
+  margin-bottom: 30px;
+}
+
+.details .lastPosts,
+.details .lastUsers {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cardHeader h2 {
+  font-weight: 700;
+  color: var(--green);
+  margin-left: 50px;
+}

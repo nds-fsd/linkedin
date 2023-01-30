@@ -1,0 +1,60 @@
+.container__post {
+    /* position: sticky;
+    top: 200px; */
+    
+    flex: 0.2;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 10px 15px 30px 15px;
+    margin-bottom: 10px;
+}
+
+
+.container__post >h2{
+    color:#000000;
+    line-height: 0px;
+    padding-bottom: 20px;
+    font-size: 22px;
+    
+}
+
+.container__post >h2.companyName{
+    color:#000000;
+    line-height: 10px;
+    padding-bottom: 15px;
+
+    
+}
+
+
+.header__post > img {
+  
+    object-fit: contain;
+    height: 50px;
+    margin-right: 10px;
+    /* position: absolute;
+    top: auto;
+    left:40px; */
+}
+.header__post{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    align-content: center;
+   
+    justify-content: space-evenly;
+}
+.container__post >p {
+    line-height: 5px;
+    font-weight: 400;
+    color:rgb(74, 74, 74);
+    padding-bottom: 20px
+}
+
+.container__post >p.job_heading{
+    line-height: 5px;
+    font-weight: 700;
+    color:#6B9D6F;
+    padding-bottom: 5px
+}

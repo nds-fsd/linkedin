@@ -1,14 +1,34 @@
 import React from "react";
-import NavBar from "../components/navBar/NavBar";
-import Bienvenida from "../components/bienvenida/bienvenida";
-import Noticias from "../components/noticias/noticias";
+import Header from "../components/header/Header";
+import Sidebar from "../components/sidebar/Sidebar";
+import Feed from "../components/feed/Feed";
+//import Post from "../components/post/Post";
+//import Bienvenida from "../components/bienvenida/bienvenida";
+//import Noticias from "../components/noticias/noticias";
 import styles from "./home.module.css";
+//import Widget from "../components/widget_right/Widget";
+import Jobsmap from "../components/jobs/Jobs_map";
+//import JobCard  from "../components/jobs/JobCard"
+
 
 const HomePage = (props) => {
   return (
     <>
-      <NavBar />
-      <div className={styles.body}>
+    <div className={styles.home}>      
+      <Header />
+     <div className={styles.home__body}>     
+       <Sidebar />
+       <Feed />
+       {/* <Widget /> */}
+       <Jobsmap />
+       {/* <JobCard /> */}
+       
+
+     </div>
+
+      </div>
+
+      {/* <div className={styles.body}>
         <div className={styles.horizontal}>
           <Bienvenida />
         </div>
@@ -19,7 +39,7 @@ const HomePage = (props) => {
         <div className={styles.horizontal}>
           <Noticias />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
