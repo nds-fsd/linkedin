@@ -20,7 +20,6 @@ function App() {
           <Route path="/home" element={<HomePage></HomePage>} />
           <Route path="/admin" element={<AdminPage></AdminPage>} />
           <Route path="/register" element={<Register></Register>} />
-          <Route path="/panel" element={<PanelEdit></PanelEdit>}/>
           <Route path="*" element={<ErrorPage></ErrorPage>} />
         </Routes>
         
