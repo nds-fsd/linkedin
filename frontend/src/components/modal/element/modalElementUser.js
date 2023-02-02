@@ -3,12 +3,19 @@ import { camelCase } from "../../../utils/functions";
 import ModalElement from "./modalElement";
 import { apiWrapper } from "../../../utils/apiWrapper";
 import styles from "./modalElement.module.css";
-//import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const ModalElementUser = (props) => {
   const [title, setTitle] = useState("");
   const [openModalConfirm, setOpenModalConfirm] = useState(false);
   const [modalconfirmation, setModalConfirmation] = useState(false);
+
+  const [usuario, setUsuario] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [apellido1, setApellido1] = useState("");
+  const [apellido2, setApellido2] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const saveModalConfirmation = (param) => {
     setModalConfirmation(param);
@@ -18,20 +25,16 @@ const ModalElementUser = (props) => {
         case "C": //CREATE
           console.log("Confirm OK CREATE");
           sendBackendPOSTCreate();
-          //TODO Se añaden Toast, indicando que ha sido OK
-          //toast("Confirm OK CREATE");
           break;
         case "U": //UPDATE
           console.log("Confirm OK UPDATE");
           sendBackendUPDATE();
-          //TODO Se añaden Toast, indicando que ha sido OK
-          //toast("Confirm OK UPDATE");
+          toast("Confirm OK UPDATE");
           break;
         case "D": //DELETE
           console.log("Confirm OK DELETE");
           sendBackendDELETE();
-          //TODO Se añaden Toast, indicando que ha sido OK
-          //toast("Confirm OK DELETE");
+          toast("Confirm OK DELETE");
           break;
       }
       props.onClose();
@@ -42,27 +45,52 @@ const ModalElementUser = (props) => {
     }
   };
 
-  const sendBackendPOSTCreate = () => {};
-  const sendBackendUPDATE = () => {};
+  const sendBackendPOSTCreate = async () => {
+    apiWrapper("user/register", "POST", {
+      username: usuario,
+      email: email,
+      password: password,
+      /*
+      "nombre":nombre,
+      "apellido1":apellido1,
+      "apellido2":apellido2,
+      */
+    }).then((res) => {
+      console.log(res);
+    });
+
+    //TODO : No funciona
+    toast.success("Usuario Creado correctamente", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const sendBackendUPDATE = () => {
+    apiWrapper(`user/${props.itemId.replace('"', "").replace('"', "")}`, "PATCH", {
+      username: usuario,
+      email: email,
+      /*
+      "nombre":nombre,
+      "apellido1":apellido1,
+      "apellido2":apellido2,
+      */
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+
   const sendBackendDELETE = () => {
-    //Se ha marcado que se desea eliminar el registro
-    //TODO  APIWRAPPER
-    /*
-      apiWrapper(
-        "user", 
-        "POST", 
-         {
-            username:username,
-            email:email,
-            password:password
-
-
-        }
-        )
-        .then((payload)=>{
-            console.log(payload)
-        });
-  */
+    apiWrapper(`user/${props.itemId.replace('"', "").replace('"', "")}`, "DELETE").then(
+      (payload) => {
+        console.log(payload);
+      }
+    );
   };
 
   const handleClick = (param) => {
@@ -83,12 +111,29 @@ const ModalElementUser = (props) => {
     switch (props.statusClick) {
       case "C":
         setTitle(`Crear un nuevo Registro de "${camelCase(props.titulo)}"`);
+        setNombre("");
+        setApellido1("");
+        setApellido2("");
+        setEmail("");
+        setPassword("");
         break;
       case "R":
         setTitle(`Consultar un nuevo Registro de "${camelCase(props.titulo)}"`);
+        //Leemos los datos de la ficha del usuario
+        apiWrapper(`user/${props.itemId.replace('"', "").replace('"', "")}`, "GET").then((res) => {
+          setUsuario(res.username);
+          setEmail(res.email);
+        });
+
         break;
       case "U":
         setTitle(`Actualizar un nuevo Registro de "${camelCase(props.titulo)}"`);
+        //Leemos los datos de la ficha del usuario
+        apiWrapper(`user/${props.itemId.replace('"', "").replace('"', "")}`, "GET").then((res) => {
+          setUsuario(res.username);
+          setEmail(res.email);
+        });
+
         break;
       case "D":
         setTitle(`Eliminar un nuevo Registro de "${camelCase(props.titulo)}"`);
@@ -111,40 +156,72 @@ const ModalElementUser = (props) => {
           type="text"
           required="required"
           disabled={props.statusClick === "R" ? "disabled" : null}
+          value={usuario}
+          onChange={(e) => {
+            setUsuario(e.target.value);
+          }}
         />
-        <span>Nombre</span>
+        <span  hidden={props.statusClick === "R" && usuario!=="" ? "hidden" : null}>Usuario</span>
       </div>
       <div className={styles.inputBox}>
         <input
           type="text"
           required="required"
           disabled={props.statusClick === "R" ? "disabled" : null}
+          value={nombre}
+          onChange={(e) => {
+            setNombre(e.target.value);
+          }}
         />
-        <span>Primer Apellido</span>
+        <span hidden={props.statusClick === "R" && nombre!=="" ? "hidden" : null}>Nombre</span>
       </div>
       <div className={styles.inputBox}>
         <input
           type="text"
           required="required"
           disabled={props.statusClick === "R" ? "disabled" : null}
+          value={apellido1}
+          onChange={(e) => {
+            setApellido1(e.target.value);
+          }}
         />
-        <span>Segundo Apellido</span>
+        <span hidden={props.statusClick === "R" && apellido1!=="" ? "hidden" : null}>Primer Apellido</span>
       </div>
       <div className={styles.inputBox}>
         <input
           type="text"
           required="required"
           disabled={props.statusClick === "R" ? "disabled" : null}
+          value={apellido2}
+          onChange={(e) => {
+            setApellido2(e.target.value);
+          }}
         />
-        <span>Email</span>
+        <span hidden={props.statusClick === "R" && apellido2!=="" ? "hidden" : null}>Segundo Apellido</span>
       </div>
       <div className={styles.inputBox}>
         <input
           type="text"
           required="required"
           disabled={props.statusClick === "R" ? "disabled" : null}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
-        <span>Cambiar Password</span>
+        <span hidden={props.statusClick === "R" && email!=="" ? "hidden" : null}>Email</span>
+      </div>
+      <div className={styles.inputBox}>
+        <input
+          type={props.statusClick === "U" ? "hidden" : "text"}
+          required="required"
+          disabled={props.statusClick === "R" ? "disabled" : null}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <span hidden={props.statusClick === "U" ? "hidden" : null} >Cambiar Password</span>
       </div>
       {props.statusClick === "R" && (
         <div className={styles.botones}>
