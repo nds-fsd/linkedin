@@ -51,6 +51,7 @@ const AdminFormElements = (props) => {
           { name: "titulo" },
           { name: "Descripcion" },
           { name: "contenido" },
+          { name: "usuario" },
           { name: "comentarios" },
           { name: "Fecha Creacion" },
         ]);
@@ -58,6 +59,7 @@ const AdminFormElements = (props) => {
           { name: "title" },
           { name: "description" },
           { name: "content" },
+          { name: "user" },
           { name: "comments" },
           { name: "createdAt" },
         ]);
