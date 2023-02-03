@@ -44,7 +44,7 @@ const user = await User.findById(userId) // Relación Schemas 03
 //Endpoint Read All -----------------------------------------------------------(R)
 const getPostList = async (req, res) => {
   try {
-    const post = await PostModel.find()//.populate("user");
+    const post = await PostModel.find()//TODO.populate("user");
 
     if (post) res.status(201).json(post);
     else res.status(404).send({ status: "ERROR", message: "Posts not found" });
@@ -57,7 +57,7 @@ const getPostList = async (req, res) => {
 const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await PostModel.findById(id) //.populate("user");
+    const post = await PostModel.findById(id) //TODO.populate("user");
     if (post) res.status(200).json(post);
     else res.status(404).send({ status: "ERROR", message: "Post not found" });
   } catch (error) {
