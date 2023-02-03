@@ -45,7 +45,7 @@ const Login = () => {
 
                 </div>
                 <div className='navbar_button'>
-                    <button className='navbtn_unirse'><a href="http://localhost:3000/register">Unirse</a></button>
+                    <button className='navbtn_unirse' onClick={() => navigate("/register")} >Unirse</button>
                     <button className='navbtn'>Iniciar Sesión</button>
                 </div>
             </nav>
