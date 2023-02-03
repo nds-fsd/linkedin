@@ -1,10 +1,24 @@
 const PostModel = require("../database/schemas/post");
+const User = require("../database/schemas/user") //relación schemas 01
 
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createPost = async (req, res) => {
   try {
     const body = req.body;
-    const { title, description, content, postedBy, comments, createdAt, updatedAt } = body;
+    const { 
+      title, 
+      description, 
+      content, 
+      postedBy, 
+      comments, 
+      createdAt, 
+      updatedAt,
+      userId, //Relación Schemas 02
+    } = body;
+
+const user = await User.findById(userId) // Relación Schemas 03
+
+
     const data = {
       title,
       description,
@@ -13,9 +27,13 @@ const createPost = async (req, res) => {
       comments,
       createdAt,
       updatedAt,
+      user: user._id // Relación Schemas 04
     };
     const newPost = new PostModel(data);
     await newPost.save();
+    user.relationPost = user.relationPost.concat(newPost._id) //relación Schemas 05
+    await user.save()
+
     res.status(201).json(newPost);
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });

@@ -140,11 +140,12 @@ const AdminFormDashBoard = (props) => {
           <CustomTable
             json={jsonPost}
             columsDescription={[
-              { name: "titulo" },
-              { name: "contenido" },
+              { name: "Titulo" },
+              { name: "Contenido" },
+              {name:  "Usuario"},
               { name: "Fecha Creacion" },
             ]}
-            columsName={[{ name: "title" }, { name: "content" }, { name: "createdAt" }]}
+            columsName={[{ name: "title" }, { name: "content" }, {name:"user"}, { name: "createdAt" }]}
             mode="read"
             element="post"
             titulo="Posts"

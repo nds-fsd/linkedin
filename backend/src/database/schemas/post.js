@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema({
   title: { type: String, required: true  },
-  description: { type: String, required: true  },
+  description: { type: String },
   content: { type: String },
   //postedBy: { type: Schema.Types.ObjectId, ref: "User" },
   comments: { type: String },
@@ -15,6 +15,9 @@ const postSchema = new Schema({
   //createdevents: { type: Event, ref:'User'},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date },
+  user:{ type: [Schema.ObjectId], ref: "user" },
+  
+
 
   //pinned: Boolean,
 });
