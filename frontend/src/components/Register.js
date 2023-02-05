@@ -5,7 +5,6 @@ import Logo from "./logo"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-import { setUserSession } from "../utils/localStorage.utils"
 import { funcionZZ } from './Login';
 
 
@@ -19,7 +18,7 @@ const Register = (props) => {
         console.log(data)
         funcionZZ({ ...data, username:username, password: password }, useNavigate);
       
-      toast.success("You have successfully registered! Taking you to the Home page...", {
+      toast.success("Registrado Correctamente! Vamos a la Home page...", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
