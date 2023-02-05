@@ -8,8 +8,7 @@ import { setUserSession } from "../utils/localStorage.utils"
 
 
 const Login = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPass] = useState('');    
+    
     const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -29,7 +28,6 @@ const Login = () => {
             
             
             .then(data => {
-                console.log(data)
                 setUserSession(data)
                 navigate("/home")
             })
