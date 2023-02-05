@@ -18,7 +18,7 @@ const Register = (props) => {
     const handleSuccessfulRegistration = (data,password) => {
         console.log(data)
         setUserSession(data)
-        funcionZZ(data, useNavigate, password)
+        funcionZZ({...data,username,password}, useNavigate)
         ;
       
       toast.success("You have successfully registered! Taking you to the Home page...", {
@@ -120,7 +120,7 @@ const Register = (props) => {
                             (data)=> {
 console.log(data);
 handleSuccessfulRegistration(data);
-funcionZZ({ ...data, password: password }, useNavigate);
+funcionZZ({ ...data, username:username, password: password }, useNavigate);
 
 setUserSession(data);
      });
