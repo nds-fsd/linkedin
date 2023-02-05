@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
-
+import { funcionZZ } from './Login';
 
 
 const Register = (props) => {
@@ -15,9 +15,10 @@ const Register = (props) => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
   
-    const handleSuccessfulRegistration = (data) => {
+    const handleSuccessfulRegistration = (data,password) => {
         console.log(data)
         setUserSession(data)
+        funcionZZ(data, useNavigate, password)
         ;
       
       toast.success("You have successfully registered! Taking you to the Home page...", {
@@ -29,16 +30,10 @@ const Register = (props) => {
         draggable: true,
         progress: undefined,
       });
-      resetForm();
+     
       setTimeout(() => {
         navigate("/home");
-      }, 5000);
-    };
-  
-    const resetForm = () => {
-      setEmail("");
-      setPassword("");
-      setUsername("");
+      }, 3000);
     };
   
     const handleUsername = (e) => {
@@ -53,29 +48,6 @@ const Register = (props) => {
       setPassword(e.target.value);
     };
   
-    const handleSubmit = async (e) => {
-      try {
-        e.preventDefault();
-        const response = await apiWrapper("user/register", "POST", {
-          username: username,
-          email: email,
-          password: password,
-        });
-        const data = response.data;
-        handleSuccessfulRegistration(data);
-      } catch (error) {
-        console.error(error);
-        toast.error("An error has occurred. Please try again.", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    };
   
     return (
       <>
@@ -127,7 +99,7 @@ const Register = (props) => {
                      id="email"
                      name="email"
                  />
-                                 <label htmlFor="password">Elige una contraseña</label>
+             <label htmlFor="password">Elige una contraseña</label>
                 <input value={password}
                     onChange={handlePassword}
                     type="password"
@@ -136,29 +108,23 @@ const Register = (props) => {
                     name="password"
                 />
 
-                <button className="submit-button" type="submit" onClick={async () => {
+                <button className="submit-button" type="submit" 
+                onClick={async () => {
                     try {
-                        const response = await apiWrapper("user/register", "POST", {
+                        await apiWrapper("user/register", "POST", {
                             username:username,
                             email:email,
                             password:password
-                        });
-                        const data =response.data
+                        })
+                        .then(
+                            (data)=> {
+console.log(data);
+handleSuccessfulRegistration(data);
+funcionZZ({ ...data, password: password }, useNavigate);
 
-                        handleSuccessfulRegistration(data);
-                        toast.success("Te has registrado correctamente! Ahora vamos a la Home.", {
-                            position: "top-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                        resetForm();
-                        setUserSession(data);
-
-                        setTimeout(() => {
+setUserSession(data);
+     });
+                       setTimeout(() => {
                             navigate("/home");
                         }, 5000);
                     } catch (error) {
@@ -175,6 +141,8 @@ const Register = (props) => {
                     }
                 }}>Registrarme</button>
                 <br />
+               
+               {/* other button */}
                 <button
                     className="link-btn"
                     onClick={() => navigate("/")}
