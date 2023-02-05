@@ -15,11 +15,9 @@ const Register = (props) => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
   
-    const handleSuccessfulRegistration = (data,password) => {
+    const handleSuccessfulRegistration = (data) => {
         console.log(data)
-        setUserSession(data)
-        funcionZZ({...data,username,password}, useNavigate)
-        ;
+        funcionZZ({ ...data, username:username, password: password }, useNavigate);
       
       toast.success("You have successfully registered! Taking you to the Home page...", {
         position: "top-center",
@@ -33,7 +31,7 @@ const Register = (props) => {
      
       setTimeout(() => {
         navigate("/home");
-      }, 3000);
+      }, 5000);
     };
   
     const handleUsername = (e) => {
@@ -120,13 +118,7 @@ const Register = (props) => {
                             (data)=> {
 console.log(data);
 handleSuccessfulRegistration(data);
-funcionZZ({ ...data, username:username, password: password }, useNavigate);
-
-setUserSession(data);
      });
-                       setTimeout(() => {
-                            navigate("/home");
-                        }, 5000);
                     } catch (error) {
                         console.error(error);
                         toast.error("Ha ocurrido un error. Por favor, inténtalo de nuevo.", {
