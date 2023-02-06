@@ -4,7 +4,7 @@ const express = require("express");
 const {connectDB} = require("./database");
 const cors = require("cors");
 
-let port = process.env.PORT;
+let port = process.env.PORT ?? 8080;
 
 if(process.env.NODE_ENV !== 'test'){
     connectDB().then((error) => {

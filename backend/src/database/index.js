@@ -7,7 +7,7 @@ const {MongoMemoryServer} = require('mongodb-memory-server');
 
 const connectDB = async () => {
 
-  let dbUrl = process.env.DB_URL;
+  let dbUrl = process.env.MONGO_URL;
   if (process.env.NODE_ENV === 'test') {
       mongod = await MongoMemoryServer.create();
       dbUrl = mongod.getUri();
