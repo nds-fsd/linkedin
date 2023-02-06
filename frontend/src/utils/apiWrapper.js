@@ -1,4 +1,6 @@
+
 export const apiWrapper = (url, method, body = {}, headers = {}) => {
+  const URL_BACKEND = window.location.hostname === 'job-link.netlify.app/' ? 'https://job-link.up.railway.app' : 'http://localhost3001';
   const options = {
     method: method,
     mode: "cors",
@@ -13,7 +15,7 @@ export const apiWrapper = (url, method, body = {}, headers = {}) => {
   //if (method === "POST" || method === "PATCH") options.body = JSON.stringify(body);
   if (body && JSON.stringify(body) !=="{}") options.body = JSON.stringify(body);
 
-  return fetch("http://localhost:3001/" + url, options).then((response) => {
+  return fetch(URL_BACKEND + url, options).then((response) => {
     //console.log("apiWrapper (body): " + JSON.stringify(body));
     //console.log("apiWrapper (status): " + response.status);
     //console.log("apiWrapper (url): " + url);
