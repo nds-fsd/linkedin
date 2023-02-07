@@ -15,11 +15,11 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage></LoginPage>} />
           <Route path="/register" element={<Register></Register>} />
-          <Route path="/home" element={<HomePage></HomePage>} />
+          {/* <Route path="/home" element={<HomePage></HomePage>} /> */}
 
 
                     
-          {/* <Route path="home" element={
+          /* <Route path="home" element={
             <PrivateRoutesAdmin>
               {<HomePage />}
             </PrivateRoutesAdmin>} /> 
@@ -27,7 +27,7 @@ function App() {
           <Route path="admin" element={
             <PrivateRoutesAdmin >
               {<AdminPage />}
-            </PrivateRoutesAdmin>} /> */}
+            </PrivateRoutesAdmin>} /> */
 
           <Route path="*" element={<ErrorPage></ErrorPage>} />
 
