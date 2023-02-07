@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 const middle = require("../middleware/validations.js");
+const mdAuth = require("../middleware/autenticated") 
 
 const {
   createPost,
@@ -12,10 +13,10 @@ const {
 
 const routerPost = Router();
 
-routerPost.post("/", middle.time, middle.validateHasBody, createPost);
-routerPost.get("/", middle.time, getPostList);
-routerPost.get("/:id", middle.time, middle.validateIdFormat, getPostById);
-routerPost.patch("/:id", middle.time, middle.validateIdFormat, middle.validateHasBody, updatePost);
-routerPost.delete("/:id", middle.time, middle.validateIdFormat, deletePost);
+routerPost.post("/", [md_auth.asureAuth, middle.time, middle.validateHasBody], createPost);
+routerPost.get("/", [md_auth.asureAuth, middle.time], getPostList);
+routerPost.get("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat], getPostById);
+routerPost.patch("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat,middle.validateHasBody], updatePost);
+routerPost.delete("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat], deletePost);
 
 module.exports = routerPost;
