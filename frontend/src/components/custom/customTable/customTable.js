@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../modal/modal";
-import ModalElement from "../../modal/element/modalElement"
+import ModalElement from "../../modal/element/modalElement";
 import styles from "./customTable.module.css";
 
 const CustomTable = (props) => {
@@ -9,39 +9,64 @@ const CustomTable = (props) => {
   const [itemId, setItemId] = useState("");
   const [statusClick, setStatusClick] = useState("");
 
-  
   useEffect(() => {
     //para especificar si la tabla se activa em modo lectura o con la visualizacion de los botones CRUD
     setMode(props.mode);
   }, [mode]);
 
   const handleClickAdd = () => {
-    setStatusClick("C");//Create
+    setStatusClick("C"); //Create
     setOpenModal(true);
     //alert("Añadir " + props.element);
   };
   const handleClickConsult = (item) => {
-    setStatusClick("R");//Read
-    setItemId(JSON.stringify(item["item"]["_id"]))
+    setStatusClick("R"); //Read
+    setItemId(JSON.stringify(item["item"]["_id"]));
     setOpenModal(true);
     //alert("Consultar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
   const handleClickEdit = (item) => {
-    setStatusClick("U");//Update
-    setItemId(JSON.stringify(item["item"]["_id"]))
+    setStatusClick("U"); //Update
+    setItemId(JSON.stringify(item["item"]["_id"]));
     setOpenModal(true);
     //alert("Editar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
   const handleClickDelete = (item) => {
-    setStatusClick("D");//Delete
-    setItemId(JSON.stringify(item["item"]["_id"]))
+    setStatusClick("D"); //Delete
+    setItemId(JSON.stringify(item["item"]["_id"]));
     setOpenModal(true);
     //alert("Borrar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
 
-  const saveCloseModal= () => {
+  const saveCloseModal = () => {
     setOpenModal(false);
     setStatusClick("");
+  };
+
+  const getValueItem = (item, itemColumnName) => {
+    //const str = 'text.1#nombre.1#contenido';
+    const str = itemColumnName; //campoInicial     + "." +  positionPopulate + "#"  + nombreColumnaPopulate     + "." +  positionPopulate + "#"  + nombreColumnaPopulate ...
+    const words = str.split(".");
+
+    let resultado = "";
+    if (words.length == 1) {
+      resultado = item[words[0]];
+    } else {
+      if (item[words[0]].length > 0) {
+        console.log("SI");
+
+        if (words.length > 1) {
+          for (let i = 1; i < words.length; i++) {
+            const positionPopulate = words[i].split("#")[0];
+            const textPopulate = words[i].split("#")[1];
+            console.log(positionPopulate + "   " + textPopulate);
+            resultado = item[words[0]][positionPopulate][textPopulate];
+          }
+        }
+      }
+    }
+
+    return resultado;
   };
 
   const tableRows = (item) => {
@@ -49,7 +74,7 @@ const CustomTable = (props) => {
     //itemColumn = columnas definidas a pintar en la Tabla
 
     return props.columsName.map((itemColumn, index) => (
-      <td key={item["_id"] + "#" + itemColumn.name}>{item[itemColumn.name]}</td>
+      <td key={item["_id"] + "#" + itemColumn.name}>{getValueItem(item, itemColumn.name)}</td>
     ));
   };
 
@@ -129,7 +154,14 @@ const CustomTable = (props) => {
                     */}
         </tbody>
       </table>
-      <ModalElement open={openModal} onClose={saveCloseModal} element={props.element} titulo={props.titulo} itemId={itemId} statusClick={statusClick}/>
+      <ModalElement
+        open={openModal}
+        onClose={saveCloseModal}
+        element={props.element}
+        titulo={props.titulo}
+        itemId={itemId}
+        statusClick={statusClick}
+      />
     </div>
   );
 };

@@ -145,7 +145,7 @@ const AdminFormDashBoard = (props) => {
               {name:  "Usuario"},
               { name: "Fecha Creacion" },
             ]}
-            columsName={[{ name: "title" }, { name: "content" }, {name:"user"}, { name: "createdAt" }]}
+            columsName={[{ name: "title" }, { name: "content" }, {name:"user.0#email"}, { name: "createdAt" }]}
             mode="read"
             element="post"
             titulo="Posts"
