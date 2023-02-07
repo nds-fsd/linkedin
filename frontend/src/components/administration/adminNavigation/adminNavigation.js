@@ -6,6 +6,7 @@ const AdminNavigation = (props) => {
 
   const handleClick = (param) => {
     props.saveNavigationIdSelected(param);
+    props.reloadElement();
   };
 
   return (

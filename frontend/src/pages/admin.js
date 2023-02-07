@@ -9,6 +9,12 @@ const AdminPage = (props) => {
   console.log("inicio");
 
   const [navigationIdSelected, setNavigationIdSelected] = useState("dashboard");
+  const [reload, setReload] = useState(false);
+
+  const reloadElement = () => {
+    setReload(!reload);
+    console.log("reload"+ reload.toString())
+  };
 
   const saveNavigationIdSelected = (param) => {
     setNavigationIdSelected(param);
@@ -21,6 +27,7 @@ const AdminPage = (props) => {
       <AdminNavigation
         navigationIdSelected={navigationIdSelected}
         saveNavigationIdSelected={saveNavigationIdSelected}
+        reloadElement={reloadElement}
       />
       {navigationIdSelected === "dashboard" ? (
         <AdminFormDashBoard
@@ -30,7 +37,7 @@ const AdminPage = (props) => {
       ) : navigationIdSelected === "logout" ? (
         <AdminLogOut />
       ) : (
-        <AdminFormElements navigationIdSelected={navigationIdSelected} />
+        <AdminFormElements reload={reload} navigationIdSelected={navigationIdSelected} />
       )}
     </div>
   );
