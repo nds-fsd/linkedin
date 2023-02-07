@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const middle = require("../middleware/validations.js");
-const mdAuth = require("../middleware/autenticated") 
+const md_auth = require("../middleware/autenticated") 
 
 const {
   createCompany,
@@ -11,7 +11,7 @@ const {
   deleteCompany,
 } = require("../controllers/companyController");
 
-const md_auth =require ('../middleware/autenticated')
+
 
 const routerCompany = Router();
 
