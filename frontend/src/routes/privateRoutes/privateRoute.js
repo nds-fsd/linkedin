@@ -11,7 +11,8 @@ export  const PrivateRoutesAdmin = async ({children}) => {
 
     if(tokenDecoded.role === 'admin') return children 
     if (tokenDecoded.role ==='user') return children
-    if(!tokenDecoded) return <Navigate to="/"/>
+    if(!tokenDecoded) return <Navigate to="/"/> //*TODO redirect si no hay token
+    
    
   
   }
