@@ -85,11 +85,13 @@ const AdminFormElements = (props) => {
 
     console.log("useEffect -> " + element);
     if (element) {
+      console.log("API GET")
       apiWrapper(element, "GET").then((res) => {
         setJsonElement(res);
+        console.log(jsonElement);
       });
     }
-  }, [element]);
+  }, [element,props.reload]);
 
   return (
     <div className={styles.fondo}>

@@ -49,18 +49,25 @@ const CustomTable = (props) => {
     const words = str.split(".");
 
     let resultado = "";
-    if (words.length == 1) {
-      resultado = item[words[0]];
-    } else {
-      if (item[words[0]].length > 0) {
-        console.log("SI");
 
-        if (words.length > 1) {
-          for (let i = 1; i < words.length; i++) {
-            const positionPopulate = words[i].split("#")[0];
-            const textPopulate = words[i].split("#")[1];
-            console.log(positionPopulate + "   " + textPopulate);
-            resultado = item[words[0]][positionPopulate][textPopulate];
+    if (item !== undefined) {
+      if (words.length == 1) {
+        resultado = item[words[0]];
+      } else {
+        console.log("words = " + words[0]);
+        console.log(item);
+        console.log(item[words[0]]);
+
+        if (item[words[0]] !== undefined && item[words[0]].length > 0) {
+          console.log("SI");
+
+          if (words.length > 1) {
+            for (let i = 1; i < words.length; i++) {
+              const positionPopulate = words[i].split("#")[0];
+              const textPopulate = words[i].split("#")[1];
+              console.log(positionPopulate + "   " + textPopulate);
+              resultado = item[words[0]][positionPopulate][textPopulate];
+            }
           }
         }
       }
