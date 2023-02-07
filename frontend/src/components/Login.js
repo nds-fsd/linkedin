@@ -4,18 +4,18 @@ import "./logina.css";
 import Logo from "./logo"
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
+import jwtDecode from "jwt-decode"
 
 
 
 const Login = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPass] = useState('');    
+    
     const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         // setLoading(loading) // email y password
         fetch("http://localhost:3001/user/login", {
             method: 'POST',
@@ -29,10 +29,16 @@ const Login = () => {
             
             
             .then(data => {
-                console.log(data)
                 setUserSession(data)
-                navigate("/home")
+                const dataDecoded = jwtDecode(data);
+                console.log(dataDecoded)
+                if(dataDecoded.role === "user") return navigate("/home")
+                if(dataDecoded.role ==="admin") return navigate("/admin")
+                      
+                
             })
+            .catch((error)=>{
+                console.log(error)})
     };
 
 

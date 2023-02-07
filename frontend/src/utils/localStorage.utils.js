@@ -16,7 +16,7 @@ export const getStorageObject = (key) => {
   
   export const getUserToken = () => {
     const session = getStorageObject('user-session');
-    if (session) {
+     if (session) {
       return session.token;
     }
     return null;
