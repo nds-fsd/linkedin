@@ -1,18 +1,25 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { getUserToken } from "../../utils/localStorage.utils";
+import { Navigate} from "react-router-dom";
+import jwtDecode from "jwt-decode"
+import React from "react";
 
 
-
-export const PrivateRoutes = () => {
-    //En este punto no funciona getUserToken()
-
-    if (getUserToken) {
-      return <Outlet />;
-    } else {
-      return <Navigate to="/" />;
-    }
-  };
+export  const PrivateRoutesAdmin = async ({children}) => {
   
+  const userSession = window.localStorage.getItem('user-session')
+  const tokenDecoded = jwtDecode(userSession)
+  console.log(tokenDecoded)
+
+    if(tokenDecoded.role === 'admin') return children 
+    if (tokenDecoded.role ==='user') return children
+    if(!tokenDecoded) return <Navigate to="/"/>
+   
+  
+  }
+
+
+
+
+    
 
 
 

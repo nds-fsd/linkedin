@@ -11,7 +11,8 @@ function createAccesToken(user){
         token_type:"access",
         user_id: user._id,
         iat: Date.now(),
-        exp: expToken.getTime()
+        exp: expToken.getTime(),
+        role: user.role
     }
 
     return jwt.sign(payload, jwtSecretKey)
