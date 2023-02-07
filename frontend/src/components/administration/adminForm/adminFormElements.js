@@ -59,7 +59,7 @@ const AdminFormElements = (props) => {
           { name: "title" },
           { name: "description" },
           { name: "content" },
-          { name: "user" },
+          { name: "user.0#email" },
           { name: "comments" },
           { name: "createdAt" },
         ]);
