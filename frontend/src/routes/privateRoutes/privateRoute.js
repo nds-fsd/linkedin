@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode"
 import React from "react";
 
 
-export  const PrivateRoutesAdmin = async ({children}) => {
+export  const PrivateRoutesAdmin = ({children}) => {
   
   const userSession = window.localStorage.getItem('user-session')
   const tokenDecoded = jwtDecode(userSession)
