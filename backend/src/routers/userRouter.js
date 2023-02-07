@@ -21,10 +21,10 @@ routerUser.post("/register",  register);
 routerUser.post("/login",  login);
 // routerUser.post("/refreshtoken", middle.time, middle.validateHasBody, refreshAccesToken);
 // routerUser.post("/", middle.time, middle.validateHasBody, createUser);
-routerUser.get("/", [middle.time,md_auth.asureAuth], getUserList);
-routerUser.get("/me", [middle.time,md_auth.asureAuth], getMe);
-routerUser.get("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat], getUserById);
-routerUser.patch("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat,middle.validateHasBody], updateUser);
-routerUser.delete("/:id", [md_auth.asureAuth, middle.time, middle.validateIdFormat], deleteUser);
+routerUser.get("/", [middle.time], getUserList);
+routerUser.get("/me", [middle.time], getMe);
+routerUser.get("/:id", [middle.time, middle.validateIdFormat], getUserById);
+routerUser.patch("/:id", [middle.time, middle.validateIdFormat,middle.validateHasBody], updateUser);
+routerUser.delete("/:id", [middle.time, middle.validateIdFormat], deleteUser);
 
 module.exports = routerUser;
