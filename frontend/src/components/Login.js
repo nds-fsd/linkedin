@@ -8,37 +8,47 @@ import jwtDecode from "jwt-decode"
 
 
 
+
+export const Submit_register =(data,navigate) =>{
+    
+    console.log(data)
+    fetch("http://localhost:3001/user/login", {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        
+        
+        .then(data => {
+            setUserSession(data)
+            const dataDecoded = jwtDecode(data);
+            console.log(dataDecoded)
+             
+             if(dataDecoded.role === "user") return navigate("/home")
+            if(dataDecoded.role ==="admin") return navigate("/admin")
+                  
+            
+        })
+        .catch((error)=>{
+            console.log(error)})
+
+}
+
 const Login = () => {
     
     const navigate = useNavigate()
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
+   
+    const onSubmit = (dataDecoded) => {
         // console.log(data)
         // setLoading(loading) // email y password
-        fetch("http://localhost:3001/user/login", {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            
-            
-            .then(data => {
-                setUserSession(data)
-                const dataDecoded = jwtDecode(data);
-                console.log(dataDecoded)
-                if(dataDecoded.role === "user") return navigate("/home")
-                if(dataDecoded.role ==="admin") return navigate("/admin")
-                      
-                
-            })
-            .catch((error)=>{
-                console.log(error)})
+        Submit_register(dataDecoded,navigate)
+     
     };
 
 
