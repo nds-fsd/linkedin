@@ -19,15 +19,15 @@ function App() {
 
 
                     
-          /* <Route path="home" element={
+           <Route path="home" element={
             <PrivateRoutesAdmin>
-              {<HomePage />}
+              <HomePage />
             </PrivateRoutesAdmin>} /> 
 
           <Route path="admin" element={
             <PrivateRoutesAdmin >
-              {<AdminPage />}
-            </PrivateRoutesAdmin>} /> */
+              <AdminPage />
+            </PrivateRoutesAdmin>} /> 
 
           <Route path="*" element={<ErrorPage></ErrorPage>} />
 

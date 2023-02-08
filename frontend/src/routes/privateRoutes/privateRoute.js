@@ -1,20 +1,34 @@
-import { Navigate} from "react-router-dom";
+import {Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode"
-import React from "react";
+
+
+
+
 
 
 export  const PrivateRoutesAdmin = ({children}) => {
+
+ 
   
   const userSession = window.localStorage.getItem('user-session')
-  const tokenDecoded = jwtDecode(userSession)
+ 
+  const tokenDecoded =  userSession===null?"":jwtDecode(userSession)
   console.log(tokenDecoded)
 
-    if(tokenDecoded.role === 'admin') return children 
-    if (tokenDecoded.role ==='user') return children
-    if(!tokenDecoded) return <Navigate to="/"/> //*TODO redirect si no hay token
+ 
+  if(tokenDecoded === "") return <Navigate to ="/" replace/>
+
+  if(tokenDecoded && !(children.type.name==='AdminPage' && tokenDecoded.role==='user')) {return children} 
+  else {return <Navigate to ="/home" replace/>}
+ 
+  
+ 
+    
+    
+  
     
    
-  
+
   }
 
 
