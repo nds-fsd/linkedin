@@ -5,19 +5,32 @@ import Logo from "./logo"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import {Submit_register} from './Login';
 
 
 const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setName] = useState('');
-
-    const resetForm = ()=>{
-        setEmail('');
-        setPassword('');
-        setName('')
-    }
-
+    const navigate = useNavigate();
+   
+    const handleSuccessfulRegistration = (data) => {
+      console.log(data)
+      Submit_register({ ...data, username:username, password: password }, useNavigate);
+      toast.success("Registrado Correctamente! Vamos a la Home page...", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+     
+      setTimeout(() => {
+        navigate("/home");
+      }, 5000);
+    };
    
 
     const handleName = (e) => {
@@ -30,22 +43,18 @@ const Register = (props) => {
         setPassword(e.target.value);
     };
 
-    const navigate = useNavigate()
-
-
     return (
 
         <>
-            <nav className='navbar'>
-                <a href="http://localhost:3000/"><div className='navbar_logo'>
-                    <Logo />
-                    <h2>JobLink</h2>
-                </div></a>
-                <div className='navbar_button'>
-                    {/* <button className='navbtn_unirse'>Unirse</button> */}
-                    <button className='navbtn'>Iniciar Sesión</button>
-                </div>
-            </nav>
+             <nav className="navbar" onClick={() => navigate("/")}>
+          <div className="navbar_logo">
+            <Logo />
+            <h2>JobLink</h2>
+          </div>
+          <div className="navbar_button">
+            <button className="navbtn">Login</button>
+          </div>
+        </nav>
 
             <div className="auth-form-container">
             <ToastContainer 
@@ -93,29 +102,20 @@ const Register = (props) => {
                         name="password"
                     />
 
-<button className="submit-button" type="submit" onClick={async () => {
-    try {
-        await apiWrapper("user/register", "POST", {
-            username:username,
-            email:email,
-            password:password
-        });
-        toast.success("Te has registrado correctamente! ahora vamos al login", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            
-        });
-        resetForm();
-        
-        setTimeout(() => {
-            navigate("/");
-        }, 5000);
-        
+<button className="submit-button" type="submit" 
+                onClick={async () => {
+                    try {
+                        await apiWrapper("user/register", "POST", {
+                            username:username,
+                            email:email,
+                            password:password
+                        })
+                        .then(
+                            (data)=> {
+console.log(data);
+handleSuccessfulRegistration(data);
+     });
+
     } catch (error) {
         console.error(error);
         toast.error("An error occurred. Please try again.", {
