@@ -13,11 +13,7 @@ const Register = (props) => {
     const [password, setPassword] = useState('');
     const [username, setName] = useState('');
     const navigate = useNavigate();
-    // const resetForm = ()=>{
-    //     setEmail('');
-    //     setPassword('');
-    //     setName('')
-    // }
+   
     const handleSuccessfulRegistration = (data) => {
       console.log(data)
       Submit_register({ ...data, username:username, password: password }, useNavigate);
