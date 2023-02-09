@@ -13,7 +13,7 @@ const recentItem =(topic) =>(
   return (
     <div className='sidebar'>
         <div className='sidebar__top'>
-        <img src="./img/pexels-gradienta-6985001.jpg" alt="" />
+        <img src="https://images.pexels.com/photos/6985184/pexels-photo-6985184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
         <Avatar className='sidebar__avatar' 
         img src="./img/bored_cats_club.jpg"/>
 

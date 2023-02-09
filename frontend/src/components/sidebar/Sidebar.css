@@ -7,6 +7,11 @@
     height: fit-content;
 }
 
+.sidebar h2{
+    margin: 1rem 0rem;
+    color: black;
+}
+
 .sidebar__avatar {
     margin-bottom: 10px;
     object-fit: contain;
