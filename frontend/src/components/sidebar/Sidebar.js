@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import "./Sidebar.css"
 import { Avatar } from '@mui/material'
+import {apiWrapper} from "../../utils/apiWrapper"
+import jwtDecode from "jwt-decode"
+
 
 export const Sidebar = () => {
+    const userSession = jwtDecode(window.localStorage.getItem('user-session'))
+    const userId= (userSession.user_id)
+    const [data,setData] = useState({})
+
+    useEffect(() => {
+       apiWrapper("user/"+userId)
+       .then((response) => setData(response))
+          }, [])
+
+const fullName = data.nombre+" "+data.apellido
+    
+
 const recentItem =(topic) =>( 
     <div className='sidebar__recentItem'>
         <span className='sidebar__hash'>#</span>
@@ -17,7 +32,7 @@ const recentItem =(topic) =>(
         <Avatar className='sidebar__avatar' 
         img src="./img/bored_cats_club.jpg"/>
 
-        <h2>Jonny Stack</h2>
+        <h2>{fullName ? fullName : "Usuario Sin Nombre"}</h2>
         <h3>FullCat Developer!</h3>
         </div>
         <div className='sidebar__stats'>
