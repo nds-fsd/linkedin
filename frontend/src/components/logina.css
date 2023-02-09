@@ -4,11 +4,102 @@ body {
   /* box-sizing: border-box; */
 }
 
+.navbar {
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+
+  
+  
+}
+
+/* NavBar */
+
+.navbar_logo {
+  /* border: solid 3px #ccc;  */
+  padding: 20px;
+  width: 20%;
+  gap: 40px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap:40px;
+}
+
+.navbar h2{
+  margin-bottom: 0px ;
+}
+
+.navbar_button {
+  margin: 0px 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  
+  
+
+
+}
+
+
+.navbtn {
+  margin-top: 20px;
+  border: none;
+  background-color: #6B9D6F;
+  padding: 24px 20px;
+  border-radius: 70px;
+  cursor: pointer;
+}
+.navbtn:hover {
+  background-color: #B0E2B8;
+  margin-top: 20px;
+  border: none;
+  padding: 24px 20px;
+  border-radius: 70px;
+  cursor: pointer;
+  
+}
+
+a {
+  text-decoration: none;
+  color: black
+}
+
+.navbtn_unirse {
+  margin-top: 20px;
+  border: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 70px;
+  cursor: pointer;
+  
+  color: black;
+}
+
+.big_container {
+  padding: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap:60px;
+   
+}
+
+
+
 .login_form,
 .register-form {
-  width: 400px;
+  width: 25rem;
   margin: 0 auto;
-  padding: 40px;
+  padding: 2.5rem;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -17,6 +108,7 @@ body {
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
 
 .reg-img {
   background-color: white;
@@ -37,9 +129,6 @@ input {
   ;
   background-color: #ededed;
 }
-
-
-
 
 .link-btn {
   
@@ -66,107 +155,30 @@ input {
   align-items: center;
 }
 
-.big_container {
-  padding: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  gap:60px;
-  
-  
-}
 
 .logoIntro>img {
   width: 100%;
 }
 
+
+
+
+
+
+
+
 .login_form>h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
+  line-height: 3.8rem;
   font-weight: 500;
 }
 
 .login_form>h3 {
-
+  
   font-weight: 400;
 }
 
-.navbar {
-  margin-top: 15px;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  
-  
-}
 
-.navbar h2{
-  margin-bottom: 0px ;
-}
-
-.navbar_button {
-  width: 70%;
-  /* border: solid 3px #ccc; */
-  /* padding: 20px; */
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  
-
-
-}
-
-.navbar_logo {
-  /* border: solid 3px #ccc;  */
-  padding: 20px;
-  width: 20%;
-  gap: 40px;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  
-  
-
-  gap:40px;
-}
-
-.navbtn {
-  margin-top: 20px;
-  border: none;
-  background-color: #6B9D6F;
-  padding: 24px 20px;
-  border-radius: 70px;
-  cursor: pointer;
-}
-.navbtn:hover {
-  background-color: #B0E2B8;
-  margin-top: 20px;
-  border: none;
-  padding: 24px 20px;
-  border-radius: 70px;
-  cursor: pointer;
-
-}
-
-a {
-  text-decoration: none;
-  color: black
-}
-
-.navbtn_unirse {
-  margin-top: 20px;
-  border: none;
-  background-color: white;
-  padding: 20px;
-  border-radius: 70px;
-  cursor: pointer;
-
-  color: black;
-}
 
 .auth-form-container .reg-img {
   /* text-align: center; */
@@ -190,7 +202,7 @@ a {
   cursor: pointer;
   font-weight: bold;
   color: white;
-
+  
 }
 
 .submit-button:hover {
@@ -203,4 +215,57 @@ a {
   font-weight: bold;
   color: rgb(0, 0, 0);
   transition: 0.2s;
+
+
 }
+
+  @media screen and (max-width: 880px) {
+
+    .navbar {
+     
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;      
+      justify-content: center;
+      
+    }
+
+    navbar_button{
+      display: grid;
+    }
+
+    
+  .big_container {
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      gap:60px;
+       
+    }
+  
+    .logoIntro{
+      display: none;
+    }
+  }
+
+
+  @media screen and (max-width: 475px) {
+    .login_form{
+  width: 100vh;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+    
+  }
