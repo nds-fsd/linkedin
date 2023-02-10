@@ -15,6 +15,7 @@ export const Sidebar = () => {
        .then((response) => setData(response))
           }, [])
 
+
 const fullName = data.nombre+" "+data.apellido
     
 
@@ -32,7 +33,7 @@ const recentItem =(topic) =>(
         <Avatar className='sidebar__avatar' 
         img src="./img/bored_cats_club.jpg"/>
 
-        <h2>{fullName ? fullName : "Usuario Sin Nombre"}</h2>
+        <h2>{data.nombre ? fullName : "Señor Anónimo"}</h2>
         <h3>FullCat Developer!</h3>
         </div>
         <div className='sidebar__stats'>
