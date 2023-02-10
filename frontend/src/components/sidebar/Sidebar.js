@@ -36,7 +36,7 @@ const recentItem =(topic) =>(
         <p>{topic}</p>
     </div>
   );
-  const navigate = useNavigate();
+  
   const handleAvatarClick = () => {
     navigate("/profile/123456");
   };
