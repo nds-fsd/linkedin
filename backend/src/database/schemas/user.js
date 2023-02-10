@@ -9,7 +9,7 @@ const userSchema = new Schema({
   // =======
   nombre: { type: String },
   apellido: { type: String },
-  
+  avatar:{type:String},
   email: { type: String},
   password: { type: String},
   username: { type: String},

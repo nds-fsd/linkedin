@@ -17,6 +17,8 @@ export const Sidebar = () => {
 
 
 const fullName = data.nombre+" "+data.apellido
+const avatar = data.avatar
+const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png"
     
 
 const recentItem =(topic) =>( 
@@ -29,9 +31,9 @@ const recentItem =(topic) =>(
   return (
     <div className='sidebar'>
         <div className='sidebar__top'>
-        <img src="https://images.pexels.com/photos/6985184/pexels-photo-6985184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+        <img src={"https://images.pexels.com/photos/6985184/pexels-photo-6985184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="" />
         <Avatar className='sidebar__avatar' 
-        img src="./img/bored_cats_club.jpg"/>
+        img src={data.avatar ? avatar: anonimAvatar }/>
 
         <h2>{data.nombre ? fullName : "Señor Anónimo"}</h2>
         <h3>FullCat Developer!</h3>
