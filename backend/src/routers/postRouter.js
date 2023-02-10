@@ -15,7 +15,7 @@ const routerPost = Router();
 
 routerPost.post("/", middle.time, middle.validateHasBody, createPost);
 routerPost.get("/", middle.time, getPostList);
-routerPost.get("/:id", middle.time, middle.validateIdFormat, getPostById);
+routerPost.get("/:id", middle.time, middle.validateIdFormat,md_auth.asureAuth, getPostById);
 routerPost.patch("/:id",  middle.time, middle.validateIdFormat,middle.validateHasBody, updatePost);
 routerPost.delete("/:id", middle.time, middle.validateIdFormat, deletePost);
 

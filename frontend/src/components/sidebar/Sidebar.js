@@ -3,12 +3,21 @@ import "./Sidebar.css"
 import { Avatar } from '@mui/material'
 import {apiWrapper} from "../../utils/apiWrapper"
 import jwtDecode from "jwt-decode"
+import {useNavigate} from "react-router-dom"
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 export const Sidebar = () => {
+    
+    const navigate = useNavigate()
     const userSession = jwtDecode(window.localStorage.getItem('user-session'))
     const userId= (userSession.user_id)
     const [data,setData] = useState({})
+
+    const logOutUser = () =>{
+        window.localStorage.removeItem('user-session')
+        navigate("/")
+    }
 
     useEffect(() => {
        apiWrapper("user/"+userId)
@@ -37,6 +46,8 @@ const recentItem =(topic) =>(
 
         <h2>{data.nombre ? fullName : "Señor Anónimo"}</h2>
         <h3>FullCat Developer!</h3>
+        <button className='logOut' onClick={logOutUser}>LOGOUT <LogoutIcon className='logout-icon'/></button>
+        {/* <span onClick={logOutUser}>Logout</span> */}
         </div>
         <div className='sidebar__stats'>
             
