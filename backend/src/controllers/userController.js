@@ -1,4 +1,4 @@
-const { use } = require("bcrypt/promises");
+
 const UserModel = require("../database/schemas/user");
 
 //Endpoint CREATE -------------------------------------------------------------(C)
@@ -65,7 +65,7 @@ const updateUser = async (req, res) => {
   try {
     console.log(req);
     const { id } = req.params;
-    const user = await UserModel.findByIdAndUpdate(id, req.body);
+    const user = await UserModel.findByIdAndUpdate(id, req.body).populate("relationJob").populate("relationPost"); ;
     if (user) res.status(200).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not Found. Not Updated" });
   } catch (error) {
