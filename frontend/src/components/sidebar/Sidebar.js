@@ -35,43 +35,47 @@ const recentItem =(topic) =>(
         <span className='sidebar__hash'>#</span>
         <p>{topic}</p>
     </div>
-)
+  );
+  const navigate = useNavigate();
+  const handleAvatarClick = () => {
+    navigate("/profile/123456");
+  };
 
   return (
+
     <div className='sidebar'>
         <div className='sidebar__top'>
         <img src={"https://images.pexels.com/photos/6985184/pexels-photo-6985184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="" />
         <Avatar className='sidebar__avatar' 
-        img src={data.avatar ? avatar: anonimAvatar }/>
+        img src={data.avatar ? avatar: anonimAvatar }
+        onClick={() => {
+            handleAvatarClick();
+          }}/>
 
         <h2>{data.nombre ? fullName : "Señor Anónimo"}</h2>
         <h3>FullCat Developer!</h3>
-        <button className='logOut' onClick={logOutUser}>LOGOUT <LogoutIcon className='logout-icon'/></button>
-        {/* <span onClick={logOutUser}>Logout</span> */}
-        </div>
-        <div className='sidebar__stats'>
-            
-        <div className='sidebar__stat'>
-            <p>Who viewed you</p>
-            <p className='sidebar__statNumber'>2,544</p>
-        </div> 
-        <div className='sidebar__stat'>
-        <p>Views on post</p>
-            <p className='sidebar__statNumber'>2,344</p>
-
-        </div>
-        </div>
-        <div className='sidebar__bottom'>
-        <p>Recent</p>
-        {recentItem('reactjs')}
-        {recentItem('programming')}
-        {recentItem('softwareengineering')}
-        {recentItem('design')}
-        {recentItem('developer')}
-        </div>
         
-        </div>
-  )
-}
+        
+        <button className='logOut' onClick={logOutUser}>LOGOUT <LogoutIcon className='logout-icon'/></button>
 
-export default Sidebar
+        </div>
+      <div className="sidebar__stats">
+
+        <div className="sidebar__stat">
+          <p>Views on post</p>
+          <p className="sidebar__statNumber">2,344</p>
+        </div>
+      </div>
+      <div className="sidebar__bottom">
+        <p>Recent</p>
+        {recentItem("reactjs")}
+        {recentItem("programming")}
+        {recentItem("softwareengineering")}
+        {recentItem("design")}
+        {recentItem("developer")}
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

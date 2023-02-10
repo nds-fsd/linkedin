@@ -1,5 +1,6 @@
 //import logo from './favicon.ico';
 import './App.css';
+import ProfileUserPage from  "./pages/profileUser";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/error";
 import AdminPage from "./pages/admin";
@@ -16,13 +17,12 @@ function App() {
           <Route path="/" element={<LoginPage></LoginPage>} />
           <Route path="/register" element={<Register></Register>} />
           {/* <Route path="/home" element={<HomePage></HomePage>} /> */}
-
-
                     
            <Route path="home" element={
             <PrivateRoutesAdmin>
               <HomePage />
             </PrivateRoutesAdmin>} /> 
+          <Route path="/profile/:idUser" element={<ProfileUserPage></ProfileUserPage>} />
 
           <Route path="admin" element={
             <PrivateRoutesAdmin >
