@@ -29,6 +29,7 @@ const CustomTable = (props) => {
     setStatusClick("U"); //Update
     setItemId(JSON.stringify(item["item"]["_id"]));
     setOpenModal(true);
+
     //alert("Editar " + JSON.stringify(item["item"]["_id"]) + " " + props.element);
   };
   const handleClickDelete = (item) => {
@@ -41,6 +42,7 @@ const CustomTable = (props) => {
   const saveCloseModal = () => {
     setOpenModal(false);
     setStatusClick("");
+    if (statusClick === "C" || statusClick === "U" || statusClick === "D") props.reload();
   };
 
   const getValueItem = (item, itemColumnName) => {

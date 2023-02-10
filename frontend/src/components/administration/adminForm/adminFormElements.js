@@ -10,6 +10,12 @@ const AdminFormElements = (props) => {
   const [columsDescription, setColumsDescription] = useState({});
   const [columsName, setColumsName] = useState({});
 
+  const [reloadTable, setReloadTable] = useState(false);
+
+  const reloadElement = () => {
+    setReloadTable(!reloadTable);
+  };
+
   useEffect(() => {
     console.log("props " + props.navigationIdSelected);
     switch (props.navigationIdSelected.toLowerCase()) {
@@ -91,7 +97,7 @@ const AdminFormElements = (props) => {
         console.log(jsonElement);
       });
     }
-  }, [element,props.reload]);
+  }, [element,props.reload,reloadTable]);
 
   return (
     <div className={styles.fondo}>
@@ -123,6 +129,7 @@ const AdminFormElements = (props) => {
           mode="write"
           element={element}
           titulo={props.navigationIdSelected}
+          reload={reloadElement}
         />
         {/*<CustomTable
           json={jsonElement}
