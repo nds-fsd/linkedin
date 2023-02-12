@@ -1,3 +1,4 @@
+
 const UserModel = require("../database/schemas/user");
 
 //Endpoint CREATE -------------------------------------------------------------(C)
@@ -18,6 +19,22 @@ const createUser = async (req, res) => {
     return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
   }
 };
+
+
+// La función get Me nos dará informació sobre el usuario que está consultando
+async function getMe(req,res){
+  const user_id = req.user.user_id;
+
+  
+  
+  const response = await UserModel.findById(user_id)
+
+  if(!response){
+    res.status(400).json("no se ha encontrado al usuario")
+  } else {
+    res.status(200).json(response)
+  }
+}
 
 //Endpoint Read All -----------------------------------------------------------(R)
 const getUserList = async (req, res) => {
@@ -48,7 +65,7 @@ const updateUser = async (req, res) => {
   try {
     console.log(req);
     const { id } = req.params;
-    const user = await UserModel.findByIdAndUpdate(id, req.body);
+    const user = await UserModel.findByIdAndUpdate(id, req.body).populate("relationJob").populate("relationPost"); ;
     if (user) res.status(200).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not Found. Not Updated" });
   } catch (error) {
@@ -73,4 +90,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  getMe,
 };

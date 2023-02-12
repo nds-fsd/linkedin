@@ -16,9 +16,9 @@ const Post = ({title, description, content, photoUrl} ) => {
             <div className='post__info'>
         <h2 className="post_heading">{title} </h2>
         <p className='post_parraf'>{description} </p>
-
-            </div>
         </div>
+        </div>
+        <div className='divider'></div>
         <div className='post__body'>
             <p> {content} </p>
         </div>

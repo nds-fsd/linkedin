@@ -1,0 +1,6 @@
+test_role@email.com : admin (usuario sin foto)
+test_role2@email.com: user (con nombre y foto)
+
+davidmasbaga3@email.com: con foto, nombre y post
+usermulty@email.com: usuario sin nombre
+

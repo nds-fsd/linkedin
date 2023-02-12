@@ -6,14 +6,20 @@ const userSchema = new Schema({
   // email: { type: String  },
   // password:{type: String },
   // surname: { type: String },
-// =======
+  // =======
+  nombre: { type: String },
+  apellido: { type: String },
+  avatar:{type:String},
   email: { type: String},
   password: { type: String},
   username: { type: String},
-  role:{type:String},
-// >>>>>>> SPRINT1:backend/src/database/schemas/user.js
-  // nombre: { type: String, required: true },
-  // apellido2: { type: String },
+
+  role:{
+    type:String,
+    enum: ['user','admin'],
+    default:'user'
+  },
+
 // <<<<<<< HEAD:backend/database/schemas/user.js
   
 // =======

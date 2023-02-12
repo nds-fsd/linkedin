@@ -4,35 +4,51 @@ import "./logina.css";
 import Logo from "./logo"
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
+import jwtDecode from "jwt-decode"
 
 
+
+
+export const Submit_register =(data,navigate) =>{
+    
+    console.log(data)
+    fetch("http://localhost:3001/user/login", {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        
+        
+        .then(data => {
+            setUserSession(data)
+            const dataDecoded = jwtDecode(data);
+            console.log(dataDecoded)
+             
+             if(dataDecoded.role === "user") return navigate("/home")
+            if(dataDecoded.role ==="admin") return navigate("/admin")
+                  
+            
+        })
+        .catch((error)=>{
+            console.log(error)})
+
+}
 
 const Login = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPass] = useState('');    
+    
     const navigate = useNavigate()
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data)
+   
+    const onSubmit = (dataDecoded) => {
+        // console.log(data)
         // setLoading(loading) // email y password
-        fetch("http://localhost:3001/user/login", {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            
-            
-            .then(data => {
-                console.log(data)
-                setUserSession(data)
-                navigate("/home")
-            })
+        Submit_register(dataDecoded,navigate)
+     
     };
 
 
@@ -42,8 +58,8 @@ const Login = () => {
                 <div className='navbar_logo'>
                     <Logo />
                     <h2>JobLink</h2>
-
                 </div>
+
                 <div className='navbar_button'>
                     <button className='navbtn_unirse'><a href="http://localhost:3000/register">Unirse</a></button>
                     <button className='navbtn'>Iniciar Sesión</button>

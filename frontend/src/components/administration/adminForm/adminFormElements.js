@@ -10,6 +10,12 @@ const AdminFormElements = (props) => {
   const [columsDescription, setColumsDescription] = useState({});
   const [columsName, setColumsName] = useState({});
 
+  const [reloadTable, setReloadTable] = useState(false);
+
+  const reloadElement = () => {
+    setReloadTable(!reloadTable);
+  };
+
   useEffect(() => {
     console.log("props " + props.navigationIdSelected);
     switch (props.navigationIdSelected.toLowerCase()) {
@@ -51,6 +57,7 @@ const AdminFormElements = (props) => {
           { name: "titulo" },
           { name: "Descripcion" },
           { name: "contenido" },
+          { name: "usuario" },
           { name: "comentarios" },
           { name: "Fecha Creacion" },
         ]);
@@ -58,6 +65,7 @@ const AdminFormElements = (props) => {
           { name: "title" },
           { name: "description" },
           { name: "content" },
+          { name: "user.0#email" },
           { name: "comments" },
           { name: "createdAt" },
         ]);
@@ -83,11 +91,13 @@ const AdminFormElements = (props) => {
 
     console.log("useEffect -> " + element);
     if (element) {
+      console.log("API GET")
       apiWrapper(element, "GET").then((res) => {
         setJsonElement(res);
+        console.log(jsonElement);
       });
     }
-  }, [element]);
+  }, [element,props.reload,reloadTable]);
 
   return (
     <div className={styles.fondo}>
@@ -119,6 +129,7 @@ const AdminFormElements = (props) => {
           mode="write"
           element={element}
           titulo={props.navigationIdSelected}
+          reload={reloadElement}
         />
         {/*<CustomTable
           json={jsonElement}

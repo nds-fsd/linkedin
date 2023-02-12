@@ -1,10 +1,25 @@
 const PostModel = require("../database/schemas/post");
+const User = require("../database/schemas/user") //relación schemas 01
 
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createPost = async (req, res) => {
   try {
     const body = req.body;
-    const { title, description, content, postedBy, comments, createdAt, updatedAt } = body;
+    const { 
+      title, 
+      description, 
+      content, 
+      postedBy, 
+      comments, 
+      createdAt, 
+      updatedAt,
+      userId, //Relación Schemas 02
+    } = body;
+
+    
+const user = await User.findById(userId) // Relación Schemas 03
+
+
     const data = {
       title,
       description,
@@ -13,9 +28,13 @@ const createPost = async (req, res) => {
       comments,
       createdAt,
       updatedAt,
+      user: user._id // Relación Schemas 04
     };
     const newPost = new PostModel(data);
     await newPost.save();
+    user.relationPost = user.relationPost.concat(newPost._id) //relación Schemas 05
+    await user.save()
+
     res.status(201).json(newPost);
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
@@ -25,7 +44,7 @@ const createPost = async (req, res) => {
 //Endpoint Read All -----------------------------------------------------------(R)
 const getPostList = async (req, res) => {
   try {
-    const post = await PostModel.find();
+    const post = await PostModel.find().populate("user");
 
     if (post) res.status(201).json(post);
     else res.status(404).send({ status: "ERROR", message: "Posts not found" });
@@ -38,7 +57,7 @@ const getPostList = async (req, res) => {
 const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await PostModel.findById(id);
+    const post = await PostModel.findById(id) //TODO.populate("user");
     if (post) res.status(200).json(post);
     else res.status(404).send({ status: "ERROR", message: "Post not found" });
   } catch (error) {
