@@ -178,7 +178,16 @@ input {
   font-weight: 400;
 }
 
-
+.error{
+  color:#AD1A15;
+  background-color:#ffe0df ;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  
+  
+  
+}
 
 .auth-form-container .reg-img {
   /* text-align: center; */
@@ -266,6 +275,8 @@ input {
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+
 
     
   }

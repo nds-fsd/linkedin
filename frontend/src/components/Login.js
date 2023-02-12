@@ -12,6 +12,8 @@ import jwtDecode from "jwt-decode"
 export const Submit_register =(data,navigate) =>{
     
     console.log(data)
+    
+    
     fetch("http://localhost:3001/user/login", {
         method: 'POST',
         headers: {
@@ -77,9 +79,9 @@ const Login = () => {
                         <h1>Te damos <br></br>la bienvenida</h1>
                         <h3>La comunidad donde profesionales <br></br>connectan con profesionales</h3>
                         <input {...register("email", { required: true })} placeholder="Introduce tu correo electrónico" />
-                        {errors.email && <span>error</span>}
+                        {errors.email && <span className='error'>Introduce tu correo electrónico</span>}
                         <input type="password" {...register("password", { required: true })} placeholder="Introduce tu contraseña" />
-                        {errors.password && <span>error</span>}
+                        {errors.password && <span className='error'>Introduce tu contraseña</span>}
                         <button className="submit-button" type="submit">Login</button>
                     </form>
 
