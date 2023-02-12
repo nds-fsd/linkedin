@@ -1,0 +1,38 @@
+.logout{
+    background-color:#6B9D6F ;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content:space-around;
+    gap: 10px;
+    border:none;
+    padding: 8px 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:5px 0px;
+    color:white;
+    font-weight: 700;
+    
+}
+
+.logout:hover{
+    background-color:#B0E2B8 ;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content:space-around;
+    gap: 10px;
+    border:none;
+    padding: 8px 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:5px 0px;
+    color:rgb(0, 0, 0);
+    font-weight: 700;
+    
+}
+
+.logout-icon{
+    width: 1.2rem;
+
+}
