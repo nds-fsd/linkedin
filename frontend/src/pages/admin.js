@@ -4,6 +4,7 @@ import AdminNavigation from "../components/administration/adminNavigation/adminN
 import AdminFormDashBoard from "../components/administration/adminFormDashBoard/adminFormDashBoard";
 import AdminFormElements from "../components/administration/adminForm/adminFormElements";
 import AdminLogOut from "../components/administration/adminLogOut/adminLogOut";
+import AdminHome from "../components/administration/adminHome/adminHome";
 
 const AdminPage = (props) => {
   console.log("inicio");
@@ -13,7 +14,7 @@ const AdminPage = (props) => {
 
   const reloadElement = () => {
     setReload(!reload);
-    console.log("reload"+ reload.toString())
+    console.log("reload" + reload.toString());
   };
 
   const saveNavigationIdSelected = (param) => {
@@ -36,8 +37,13 @@ const AdminPage = (props) => {
         />
       ) : navigationIdSelected === "logout" ? (
         <AdminLogOut />
+      ) : navigationIdSelected === "home" ? (
+        <AdminHome />
       ) : (
-        <AdminFormElements reload={reload} navigationIdSelected={navigationIdSelected} />
+        <AdminFormElements
+          reload={reload}
+          navigationIdSelected={navigationIdSelected}
+        />
       )}
     </div>
   );
