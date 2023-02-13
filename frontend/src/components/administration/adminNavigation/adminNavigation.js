@@ -22,7 +22,9 @@ const AdminNavigation = (props) => {
           <div
             id="dashboard"
             onClick={() => handleClick("dashboard")}
-            className={props.navigationIdSelected === "dashboard" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "dashboard" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="pie-chart-outline"></ion-icon>
@@ -34,7 +36,9 @@ const AdminNavigation = (props) => {
           <div
             id="usuarios"
             onClick={() => handleClick("usuarios")}
-            className={props.navigationIdSelected === "usuarios" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "usuarios" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="people-outline"></ion-icon>
@@ -46,7 +50,9 @@ const AdminNavigation = (props) => {
           <div
             id="empresas"
             onClick={() => handleClick("empresas")}
-            className={props.navigationIdSelected === "empresas" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "empresas" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="home-outline"></ion-icon>
@@ -58,7 +64,9 @@ const AdminNavigation = (props) => {
           <div
             id="ofertas"
             onClick={() => handleClick("ofertas")}
-            className={props.navigationIdSelected=== "ofertas" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "ofertas" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="desktop-outline"></ion-icon>
@@ -70,7 +78,9 @@ const AdminNavigation = (props) => {
           <div
             id="posts"
             onClick={() => handleClick("posts")}
-            className={props.navigationIdSelected === "posts" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "posts" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="id-card-outline"></ion-icon>
@@ -80,9 +90,25 @@ const AdminNavigation = (props) => {
         </li>
         <li>
           <div
+            id="GoHome"
+            onClick={() => handleClick("home")}
+            className={
+              props.navigationIdSelected === "home" ? styles.hovered : ``
+            }
+          >
+            <span className={styles.icon}>
+              <ion-icon name="home"></ion-icon>
+            </span>
+            <span className={styles.title}>Go Home</span>
+          </div>
+        </li>{" "}
+        <li>
+          <div
             id="logout"
             onClick={() => handleClick("logout")}
-            className={props.navigationIdSelected === "logout" ? styles.hovered : ``}
+            className={
+              props.navigationIdSelected === "logout" ? styles.hovered : ``
+            }
           >
             <span className={styles.icon}>
               <ion-icon name="log-out-outline"></ion-icon>
