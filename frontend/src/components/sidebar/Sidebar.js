@@ -36,7 +36,7 @@ const recentItem =(topic) =>(
   );
   
   const handleAvatarClick = () => {
-    navigate("/profile/123456");
+    navigate(`/profile/${data._id}`);
   };
 
   return (
