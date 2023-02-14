@@ -14,7 +14,7 @@ export const apiWrapper = (url, method, body = {}, headers = {}) => {
 
   //if (method === "POST" || method === "PATCH") options.body = JSON.stringify(body);
   if (body && JSON.stringify(body) !=="{}") options.body = JSON.stringify(body);
-
+  
   return fetch(URL_BACKEND + url, options).then((response) => {
     //console.log("apiWrapper (body): " + JSON.stringify(body));
     //console.log("apiWrapper (status): " + response.status);
