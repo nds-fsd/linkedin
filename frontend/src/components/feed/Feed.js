@@ -19,8 +19,8 @@ const Feed = () => {
        async function fetchData() {
          const response = await
          
-         apiWrapper("post/", "POST", data)
-        //  fetch('http://localhost:3001/post');
+         apiWrapper("post", "GET")
+       
          const data = await response.json();
          setPosts(data);
        }
@@ -31,13 +31,13 @@ const Feed = () => {
      //---------------------//
      async function handlePost(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:3001/post', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ title: input, description: input, content: input, photoUrl: input })
-        });
+        const response = await
+        
+         apiWrapper("post/", "POST", 
+         { title: input, description: input, 
+          content: input, photoUrl: input } )
+
+
         const data = await response.json();
         console.log(data);
         setInput('')
