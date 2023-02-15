@@ -5,6 +5,7 @@ import Logo from "./logo"
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
 import jwtDecode from "jwt-decode"
+import { apiWrapper } from '../utils/apiWrapper';
 
 
 
@@ -14,15 +15,10 @@ export const Submit_register =(data,navigate) =>{
     console.log(data)
     
     
-    fetch("http://localhost:3001/user/login", {
-        method: 'POST',
-        headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.json())
+    
+        apiWrapper("user/login/", "POST", data)
+    
+        
         
         
         .then(data => {
