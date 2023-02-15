@@ -4,7 +4,7 @@ import { Avatar, Button } from "@mui/material";
 import { apiWrapper } from "../../utils/apiWrapper";
 import Logout from "../logout/Logout";
 import CompanyAdd from "@mui/icons-material/Add";
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
@@ -94,13 +94,23 @@ export const ProfileBar = (props) => {
     setObjectChanged(value);
   };
 
+  const [claseAñadirEmpresa, setClaseAñadirEmpresa] = useState(`${styles.sidebar__detail}`);
+  const handleClickEmpresa = () => {
+    setClaseAñadirEmpresa(`${styles.sidebar__detail_ampliado}`);
+  };
+  useEffect(() => {}, [claseAñadirEmpresa]);
+
+  const [checkTab, setCheckTab] = useState("tab3");
+  const handleClickCheckTab = (value) => {
+    setCheckTab(value);
+  };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
         <img src="./img/pexels-gradienta-6985001.jpg" alt="" />
         <Avatar
           className={styles.sidebar__avatar}
-          img
           src={data.avatar ? avatar : anonimAvatar}
           alt=""
         />
@@ -167,108 +177,164 @@ export const ProfileBar = (props) => {
           <span className={styles.espacio}>&nbsp;</span>
         </div>
 
-        <div className={styles.grouped}>
-          <span>Educacion</span>
-          <div className={styles.values}>
-            <span>Institucion</span>
-            <input
-              type="text"
-              placeholder="Universidad, .."
-              value={educacionInstitucion}
-              onChange={(e) => {
-                handleChange(setEducacionInstitucion, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Titulacion</span>
-            <input
-              type="text"
-              value={educacionTitulacion}
-              onChange={(e) => {
-                handleChange(setEducacionTitulacion, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Disciplina</span>
-            <input
-              type="text"
-              placeholder="Empresariales, ..."
-              value={educacionDisciplina}
-              onChange={(e) => {
-                handleChange(setEducacionDisciplina, e.target.value);
-              }}
-            />
-          </div>
-        </div>
+        <div className={styles.tabs}>
+          <input
+            className={styles.tab}
+            id={styles["tab1"]}
+            type="radio"
+            name="tabs"
+            checked={checkTab === "tab1" ? "checked" : null}
+          />
+          <label
+            className={styles.label}
+            htmlFor="tab1"
+            onClick={() => {
+              handleClickCheckTab("tab1");
+            }}
+          >
+            Educacion
+          </label>
 
-        <div className={styles.grouped}>
-          <span>Ubicacion</span>
-          <div className={styles.values}>
-            <span>Pais</span>
-            <input
-              type="text"
-              value={ubicacionPais}
-              onChange={(e) => {
-                handleChange(setUbicacionPais, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Codigo Postal</span>
-            <input
-              type="text"
-              value={ubicacionCodigoPostal}
-              onChange={(e) => {
-                handleChange(setUbicacionCodigoPostal, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Ciudad</span>
-            <input
-              type="text"
-              value={ubicacionCiudad}
-              onChange={(e) => {
-                handleChange(setUbicacionCiudad, e.target.value);
-              }}
-            />
-          </div>
-        </div>
+          <input
+            className={styles.tab}
+            id={styles["tab2"]}
+            type="radio"
+            name="tabs"
+            checked={checkTab === "tab2" ? "checked" : null}
+          />
+          <label
+            className={styles.label}
+            htmlFor="tab2"
+            onClick={() => {
+              handleClickCheckTab("tab2");
+            }}
+          >
+            Ubicacion
+          </label>
 
-        <div className={styles.grouped}>
-          <span>Trabajo Actual</span>
-          <div className={styles.values}>
-            <span>Nombre de la Empresa</span>
-            <input
-              type="text"
-              value={empresaActual}
-              onChange={(e) => {
-                handleChange(setEmpresaActual, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Puesto de Trabajo</span>
-            <input
-              type="text"
-              value={puesto}
-              onChange={(e) => {
-                handleChange(setPuesto, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>Sector</span>
-            <input
-              type="text"
-              value={sector}
-              onChange={(e) => {
-                handleChange(setSector, e.target.value);
-              }}
-            />
-          </div>
+          <input
+            className={styles.tab}
+            id={styles["tab3"]}
+            type="radio"
+            name="tabs"
+            checked={checkTab === "tab3" ? "checked" : null}
+          />
+          <label
+            className={styles.label}
+            htmlFor="tab3"
+            onClick={() => {
+              handleClickCheckTab("tab3");
+            }}
+          >
+            Trabajo Actual
+          </label>
+
+          <section id={styles["content1"]}>
+            <div>
+              <div className={styles.values}>
+                <span>Institucion</span>
+                <input
+                  type="text"
+                  placeholder="Universidad, .."
+                  value={educacionInstitucion}
+                  onChange={(e) => {
+                    handleChange(setEducacionInstitucion, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Titulacion</span>
+                <input
+                  type="text"
+                  value={educacionTitulacion}
+                  onChange={(e) => {
+                    handleChange(setEducacionTitulacion, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Disciplina</span>
+                <input
+                  type="text"
+                  placeholder="Empresariales, ..."
+                  value={educacionDisciplina}
+                  onChange={(e) => {
+                    handleChange(setEducacionDisciplina, e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section id={styles["content2"]}>
+            <div>
+              <div className={styles.values}>
+                <span>Pais</span>
+                <input
+                  type="text"
+                  value={ubicacionPais}
+                  onChange={(e) => {
+                    handleChange(setUbicacionPais, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Codigo Postal</span>
+                <input
+                  type="text"
+                  value={ubicacionCodigoPostal}
+                  onChange={(e) => {
+                    handleChange(setUbicacionCodigoPostal, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Ciudad</span>
+                <input
+                  type="text"
+                  value={ubicacionCiudad}
+                  onChange={(e) => {
+                    handleChange(setUbicacionCiudad, e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section id={styles["content3"]}>
+            <div>
+              <div className={styles.values}>
+                <span>Nombre de la Empresa</span>
+                <input
+                  type="text"
+                  value={empresaActual}
+                  onChange={(e) => {
+                    handleChange(setEmpresaActual, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Puesto de Trabajo</span>
+                <input
+                  type="text"
+                  value={puesto}
+                  onChange={(e) => {
+                    handleChange(setPuesto, e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.values}>
+                <span>Sector</span>
+                <input
+                  type="text"
+                  value={sector}
+                  onChange={(e) => {
+                    handleChange(setSector, e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+          </section>
         </div>
 
         <div className={styles.values}>
@@ -282,31 +348,59 @@ export const ProfileBar = (props) => {
           </Button>
         </div>
       </div>
-      <div className={styles.sidebar__detail}>
-        <button
-          className={styles.companyAdd}
-          onClick={() => {
-            alert("click");
-          }}
-        >
-          <CompanyAdd className={styles.companyAdd_icon} />
-          Añadir Empresa
-        </button>
+      {/*<div className={styles.sidebar__detail}>*/}
+      <div className={claseAñadirEmpresa}>
+        <div className={styles.detailCabecera}>
+          <button
+            className={styles.companyAdd}
+            onClick={() => {
+              handleClickEmpresa();
+            }}
+          >
+            <CompanyAdd className={styles.companyAdd_icon} />
+            Añadir Empresa
+          </button>
+        </div>
+
+        <div className={styles.detailContenido}>
+          <div className={styles.values}>
+            <span>TEXTO</span>
+            <input
+              type="text"
+              value={sector}
+              onChange={(e) => {
+                handleChange(setSector, e.target.value);
+              }}
+            />
+          </div>
+          <div className={styles.values}>
+            <span>TEXTO</span>
+            <input
+              type="text"
+              value={sector}
+              onChange={(e) => {
+                handleChange(setSector, e.target.value);
+              }}
+            />
+          </div>
+        </div>
       </div>
       {/*
       <div className={styles.sidebar__bottom}>
         <p>Recent</p>
       </div>
       */}
-       <ToastContainer 
-            position="bottom-right" 
-            autoClose={5000} 
-            hideProgressBar={false} 
-            newestOnTop={false} 
-            closeOnClick rtl={false} 
-            pauseOnFocusLoss 
-            draggable 
-            pauseOnHover />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
