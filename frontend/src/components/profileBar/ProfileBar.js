@@ -4,6 +4,7 @@ import { Avatar, Button } from "@mui/material";
 import { apiWrapper } from "../../utils/apiWrapper";
 import Logout from "../logout/Logout";
 import CompanyAdd from "@mui/icons-material/Add";
+import { ToastContainer,toast } from 'react-toastify';
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
@@ -82,6 +83,9 @@ export const ProfileBar = (props) => {
     apiWrapper("user/" + userId, "PATCH", body).then((response) => {
       //alert("updated Profile -> " + response);
       setActualizar(true);
+      toast.success("Se han actualizado el Perfil", {
+        autoClose: 3000,
+      });
     });
     //setActualizar(true);
   };
@@ -101,7 +105,7 @@ export const ProfileBar = (props) => {
           alt=""
         />
         <h2>{fullName}</h2>
-        <Logout content="LOGOUT" />
+        {/*<Logout content="LOGOUT" />*/}
       </div>
 
       <div className={styles.sidebar__stats}>
@@ -294,6 +298,15 @@ export const ProfileBar = (props) => {
         <p>Recent</p>
       </div>
       */}
+       <ToastContainer 
+            position="bottom-right" 
+            autoClose={5000} 
+            hideProgressBar={false} 
+            newestOnTop={false} 
+            closeOnClick rtl={false} 
+            pauseOnFocusLoss 
+            draggable 
+            pauseOnHover />
     </div>
   );
 };
