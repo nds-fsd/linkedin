@@ -11,12 +11,13 @@ import {Submit_register} from './Login';
 const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [username, setName] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
     const navigate = useNavigate();
    
     const handleSuccessfulRegistration = (data) => {
       console.log(data)
-      Submit_register({ ...data, username:username, password: password }, useNavigate);
+      Submit_register({ ...data, nombre:nombre, password: password }, useNavigate);
       toast.success("Registrado Correctamente! Vamos a la Home page...", {
         position: "top-center",
         autoClose: 5000,
@@ -33,9 +34,14 @@ const Register = (props) => {
     };
    
 
-    const handleName = (e) => {
-        setName(e.target.value);
+    const handleNombre = (e) => {
+        setNombre(e.target.value);
     };
+
+    const handleApellido = (e) => {
+        setApellido(e.target.value);
+    };
+
     const handleEmail = (e) => {
         setEmail(e.target.value);
     };
@@ -72,14 +78,23 @@ const Register = (props) => {
                     <div className='reg-img'>
                         <img src="./img/Vector.png" alt="logo" />
                     </div>
-                    <label htmlFor="username">Nombre de Usuario</label>
+                    <label htmlFor="nombre">Nombre</label>
 
                     <input
-                        value={username}
+                        value={nombre}
                         name="name"
-                        onChange={handleName}
+                        onChange={handleNombre}
                         id="username"
-                        placeholder="Nombre de usuario"
+                        placeholder="Nombre"
+                    />
+                    <label htmlFor="apellido">Apellido</label>
+
+                    <input
+                        value={apellido}
+                        name="name"
+                        onChange={handleApellido}
+                        id="username"
+                        placeholder="Nombre"
                     />
 
                     <label htmlFor="email">Correo electrónico</label>
@@ -106,9 +121,10 @@ const Register = (props) => {
                 onClick={async () => {
                     try {
                         await apiWrapper("user/register", "POST", {
-                            username:username,
+                            nombre:nombre,
                             email:email,
-                            password:password
+                            password:password,
+                            apellido:apellido
                         })
                         .then(
                             (data)=> {

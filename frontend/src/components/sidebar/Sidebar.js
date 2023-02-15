@@ -20,7 +20,7 @@ export const Sidebar = () => {
     useEffect(() => {
        apiWrapper("user/"+userId)
        .then((response) => setData(response))
-          }, [])
+          }, [userId])
 
 
 const fullName = data.nombre+" "+data.apellido
