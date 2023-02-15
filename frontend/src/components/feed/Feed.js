@@ -7,6 +7,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
+import { apiWrapper } from '../../utils/apiWrapper';
 
 const Feed = () => {
      const [input, setInput] = useState('')
@@ -16,7 +17,10 @@ const Feed = () => {
 
      useEffect(() => {
        async function fetchData() {
-         const response = await fetch('http://localhost:3001/post');
+         const response = await
+         
+         apiWrapper("post/", "POST", data)
+        //  fetch('http://localhost:3001/post');
          const data = await response.json();
          setPosts(data);
        }
