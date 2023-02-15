@@ -17,9 +17,6 @@ export const Submit_register =(data,navigate) =>{
     
     
         apiWrapper("user/login/", "POST", data)
-    
-        
-        
         
         .then(data => {
             setUserSession(data)
