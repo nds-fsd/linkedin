@@ -39,7 +39,7 @@ async function getMe(req,res){
 //Endpoint Read All -----------------------------------------------------------(R)
 const getUserList = async (req, res) => {
   try {
-    const user = await UserModel.find().populate("relationJob").populate("relationPost");
+    const user = await UserModel.find().populate("relationJob").populate("relationPost").populate("relationCompany");
 
     if (user) res.status(200).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not found" });

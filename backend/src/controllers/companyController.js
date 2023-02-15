@@ -1,4 +1,5 @@
 const CompanyModel = require("../database/schemas/company");
+const User = require("../database/schemas/user")
 
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createCompany = async (req, res) => {
@@ -12,7 +13,10 @@ const createCompany = async (req, res) => {
       company_size,
       company_type,
       company_description,
+      userId
     } = body;
+
+    const user = await User.findById(userId)
 
     const data = {
       name: name,
@@ -22,9 +26,15 @@ const createCompany = async (req, res) => {
       company_size: company_size,
       company_type: company_type,
       company_description: company_description,
+      user: user._id,
+
     };
     const newCompany = new CompanyModel(data);
     await newCompany.save();
+    user.relationCompany = user.relationCompany.concat(newCompany._id)
+    await user.save()
+
+
     res.status(201).json(newCompany);
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
@@ -34,7 +44,7 @@ const createCompany = async (req, res) => {
 //Endpoint Read All -----------------------------------------------------------(R)
 const getCompanyList = async (req, res) => {
   try {
-    const company = await CompanyModel.find().populate("relationJob").populate("relationPost");
+    const company = await CompanyModel.find().populate("user");
 
     if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Companys not found" });

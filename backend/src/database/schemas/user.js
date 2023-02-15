@@ -42,6 +42,7 @@ const userSchema = new Schema({
    fecha_nacimiento: { type: Date },
    web: { type: String },
 
+  relationCompany: { type: [Schema.ObjectId], ref: "company" },
   relationJob: { type: [Schema.ObjectId], ref: "job" },
   relationPost: { type: [Schema.ObjectId], ref: "post" },
   createdAt: { type: Date, default: Date.now },
