@@ -10,6 +10,7 @@ const {
   updateUser,
   deleteUser,
   getMe,
+  getUserPosts,
 } = require("../controllers/userController");
 
 const {register, login, refreshAccesToken} = require("../controllers/auth")
@@ -24,6 +25,7 @@ routerUser.post("/login",  login);
 routerUser.get("/", [middle.time], getUserList);
 routerUser.get("/me", [middle.time], getMe);
 routerUser.get("/:id", [middle.time, middle.validateIdFormat], getUserById);
+routerUser.get("/:id/posts", [middle.time, middle.validateIdFormat], getUserPosts);
 routerUser.patch("/:id", [middle.time, middle.validateIdFormat,middle.validateHasBody], updateUser);
 routerUser.delete("/:id", [middle.time, middle.validateIdFormat], deleteUser);
 

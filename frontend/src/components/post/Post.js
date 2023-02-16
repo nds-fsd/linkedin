@@ -7,15 +7,15 @@ import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 
-const Post = ({title, description, content, photoUrl} ) => {
+const Post = ({name, date, content, photoUrl} ) => {
   return (
     
     <div className='post'>
         <div className='post__header'>
-            <Avatar />
+            <Avatar sx={{ width: 75, height: 75 }} src={photoUrl}/>
             <div className='post__info'>
-        <h2 className="post_heading">{title} </h2>
-        <p className='post_parraf'>{description} </p>
+        <h2 className="post_heading">{name} </h2>
+        <p className='post_parraf'>{date} </p>
         </div>
         </div>
         <div className='divider'></div>

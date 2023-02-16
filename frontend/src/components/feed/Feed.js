@@ -7,22 +7,56 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
+import { tokenDecoder } from '../../utils/tokenDecoder'
 
 const Feed = () => {
      const [input, setInput] = useState('')
      const [posts, setPosts] = useState([]);
+     const [user,setUser] = useState({})
 
      const [refresh, setRefresh] = useState(false);
 
+      const userId= tokenDecoder()
+
+      // console.log(userId)
+
+      //TODO Cambiar fetchData por api Wrapper
+
      useEffect(() => {
        async function fetchData() {
-         const response = await fetch('http://localhost:3001/post');
+         const response = await fetch('http://localhost:3001/user/'+userId+'/posts');
          const data = await response.json();
          setPosts(data);
+         
+        //  console.log(data)
+        //  console.log(data[0].user[0])
+
+         
        }
        fetchData();
        
      }, [refresh]);
+
+
+     useEffect(() => {
+       async function fetchData() {
+         const response = await fetch('http://localhost:3001/user/'+userId);
+         const data = await response.json();
+         setUser(data);
+         
+        //  console.log(data)
+         
+
+         
+       }
+       fetchData();
+       
+     }, [refresh]);
+     
+
+   
+
+     
 
      //---------------------//
      async function handlePost(e) {
@@ -64,16 +98,15 @@ const Feed = () => {
         </div>
 
         <div className='postmap'>
-        {posts.map(({_id, title, description, content, photoUrl })=>( 
-            <Post 
-            key={_id}
-            title={title}
-            description={description}
-            content={content}
-            photoUrl={photoUrl} 
-            />
+        {posts.map((e)=>(e.user[0] === userId ? <Post photoUrl={user.avatar} name={user.nombre+" "+user.apellido} content={e.content} date={e.createdAt}/> : "")
+          
+        
             
-)) }
+            
+            
+            
+            
+) }
         </div>
         </div>
   )
