@@ -47,11 +47,28 @@ const getCompanyList = async (req, res) => {
 const getCompanyById = async (req, res) => {
   try {
     const { id } = req.params;
-    const company = await CompanyModel.findById(id).populate("relationJob").populate("relationPost");
+    const company = await CompanyModel.findById(id)
+      .populate("relationJob")
+      .populate("relationPost");
     if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+  }
+};
+
+//Endpoint Read One By Id -----------------------------------------------------(R)
+const getCompanyByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    console.log("name= "+ name);
+    const company = await CompanyModel.find({ name: { $regex: name, $options: "i" } })
+      .populate("relationJob")
+      .populate("relationPost");
+    if (company) res.status(200).json(company);
+    else res.status(404).send({ status: "ERROR", message: "Company not found" });
+  } catch (error) {
+    return res.status(500).send({ status: "ERROR TRYCATCH ByName", message: error });
   }
 };
 
@@ -83,6 +100,7 @@ module.exports = {
   createCompany,
   getCompanyList,
   getCompanyById,
+  getCompanyByName,
   updateCompany,
   deleteCompany,
 };

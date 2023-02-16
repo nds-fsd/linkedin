@@ -1,0 +1,142 @@
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.contenedor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 30px;
+}
+
+.search {
+  width: 100%;
+  border: 0px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+}
+
+.search > input {
+  position: relative;
+  width: 100vh;
+  border-radius: 0;
+  background-color: transparent;
+  margin: 0;
+  font-size: 13px;
+}
+
+.search > .searchIcon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.contenido {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 50px;
+}
+.izquierda {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.derecha {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 200;
+}
+
+.tabCompany {
+  display: none;
+}
+
+.labelCompany {
+  display: inline-block;
+  margin: 0 -1px 0;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: left;
+  color: #bbb;
+}
+
+.labelCompany:before {
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+.labelCompany:hover {
+  color: #888;
+  cursor: pointer;
+}
+
+.tabCompany:checked + .labelCompany {
+  color: #555;
+  font-weight: 700;
+  border: 1px solid #ddd;
+  border-left: 2px solid orange;
+  border-right: 1px solid #fff;
+}
+
+:not(.tabCompany:checked) + .labelCompany {
+  border-right: 1px solid #ddd;
+}
+
+.tablaLabel {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-left: 50px;
+}
+.tablaInput {
+  position: relative;
+  display: flex;
+  justify-content: right;
+  width: 80%;
+  margin-left: 50px;
+}
+
+.tablaButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.tablaButtonNuevo {
+  background-color: #962d2d; 
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 10px;
+  padding: 8px 32px;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  margin: 5px 0px;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+}
+.tablaButtonVincular {
+  background-color: #6b9d6f;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 10px;
+  padding: 8px 32px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 0px;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+}

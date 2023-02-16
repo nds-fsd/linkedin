@@ -5,6 +5,7 @@ import { apiWrapper } from "../../utils/apiWrapper";
 import Logout from "../logout/Logout";
 import CompanyAdd from "@mui/icons-material/Add";
 import { ToastContainer, toast } from "react-toastify";
+import ProfileAddCompany from "./addCompany/ProfileAddCompany";
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
@@ -119,13 +120,15 @@ export const ProfileBar = (props) => {
       </div>
 
       <div className={styles.sidebar__stats}>
-        <div className={styles.sidebar__stat}>
-          <p>Who viewed you</p>
-          <p className={styles.sidebar__statNumber}>2,544</p>
-        </div>
-        <div className={styles.sidebar__stat}>
-          <p>Views on post</p>
-          <p className={styles.sidebar__statNumber}>2,344</p>
+        <div className={styles.enLinea}>
+          <div className={styles.sidebar__stat}>
+            <p>Who viewed you</p>
+            <p className={styles.sidebar__statNumber}>2,544</p>
+          </div>
+          <div className={styles.sidebar__stat}>
+            <p>Views on post</p>
+            <p className={styles.sidebar__statNumber}>2,344</p>
+          </div>
         </div>
       </div>
       <div className={styles.sidebar__stats}>
@@ -361,35 +364,9 @@ export const ProfileBar = (props) => {
             Añadir Empresa
           </button>
         </div>
+        <ProfileAddCompany />
+      </div>
 
-        <div className={styles.detailContenido}>
-          <div className={styles.values}>
-            <span>TEXTO</span>
-            <input
-              type="text"
-              value={sector}
-              onChange={(e) => {
-                handleChange(setSector, e.target.value);
-              }}
-            />
-          </div>
-          <div className={styles.values}>
-            <span>TEXTO</span>
-            <input
-              type="text"
-              value={sector}
-              onChange={(e) => {
-                handleChange(setSector, e.target.value);
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      {/*
-      <div className={styles.sidebar__bottom}>
-        <p>Recent</p>
-      </div>
-      */}
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
