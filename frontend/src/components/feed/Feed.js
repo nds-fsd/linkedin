@@ -7,23 +7,49 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
+import { tokenDecoder } from '../../utils/tokenDecoder'
 import { apiWrapper } from '../../utils/apiWrapper';
 
 const Feed = () => {
      const [input, setInput] = useState('')
      const [posts, setPosts] = useState([]);
+     const [user,setUser] = useState({})
 
      const [refresh, setRefresh] = useState(false);
 
-     useEffect(() => {
-      async function fetchData() {
-        const data = await apiWrapper("post", "GET");
-        setPosts(data);
-      }
-      fetchData();
-    }, [refresh]);
+      const userId= tokenDecoder()
 
-     //---------------------//
+      console.log(userId)
+
+      //TODO Cambiar fetchData por api Wrapper
+
+              
+        
+        useEffect(() => {
+          async function fetchData() {
+            const data = await apiWrapper('user/'+userId+'/posts');
+            setPosts(data);
+          }
+          fetchData();
+        }, [refresh]);
+
+          // console.log(posts)
+          // console.log(posts[0].user)
+          
+
+     useEffect(() => {
+     async function fetchData() {
+        const data = await apiWrapper('user/'+userId);
+         setUser(data);
+         
+        //  console.log(user)
+      
+       }
+       fetchData();
+       
+     }, [refresh]);
+
+      
      async function handlePost(e) {
         e.preventDefault();
         const response = await
@@ -33,12 +59,15 @@ const Feed = () => {
           content: input, photoUrl: input } )
 
 
-        const data = await response.json();
-        console.log(data);
-        setInput('')
-        setRefresh(!refresh);
-      }
+         
 
+
+
+      const data = await response.json();
+      console.log(data);
+      setInput('')
+      setRefresh(!refresh);
+    }
 
 
   return (
@@ -63,16 +92,15 @@ const Feed = () => {
         </div>
 
         <div className='postmap'>
-        {posts.map(({_id, title, description, content, photoUrl })=>( 
-            <Post 
-            key={_id}
-            title={title}
-            description={description}
-            content={content}
-            photoUrl={photoUrl} 
-            />
+        {posts.map((e)=>(e.user[0] === userId ? <Post photoUrl={user.avatar} name={user.nombre+" "+user.apellido} content={e.content} date={e.createdAt}/> : "")
+          
+        
             
-)) }
+            
+            
+            
+            
+) }
         </div>
         </div>
   )
