@@ -16,17 +16,12 @@ const Feed = () => {
      const [refresh, setRefresh] = useState(false);
 
      useEffect(() => {
-       async function fetchData() {
-         const response = await
-         
-         apiWrapper("post", "GET")
-       
-         const data = await response.json();
-         setPosts(data);
-       }
-       fetchData();
-       
-     }, [refresh]);
+      async function fetchData() {
+        const data = await apiWrapper("post", "GET");
+        setPosts(data);
+      }
+      fetchData();
+    }, [refresh]);
 
      //---------------------//
      async function handlePost(e) {
