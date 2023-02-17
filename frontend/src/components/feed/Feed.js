@@ -8,6 +8,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
 import { tokenDecoder } from '../../utils/tokenDecoder'
+import { apiWrapper } from '../../utils/apiWrapper';
 
 const Feed = () => {
      const [input, setInput] = useState('')
@@ -18,36 +19,36 @@ const Feed = () => {
 
       const userId= tokenDecoder()
 
-      // console.log(userId)
+      console.log(userId)
 
       //TODO Cambiar fetchData por api Wrapper
 
-     useEffect(() => {
-       async function fetchData() {
-         const response = await fetch('http://localhost:3001/user/'+userId+'/posts');
-         const data = await response.json();
-         setPosts(data);
-         
-        //  console.log(data)
-        //  console.log(data[0].user[0])
+              
+        
+        useEffect(() => {
+          async function fetchData() {
+            const data = await apiWrapper('user/'+userId+'/posts');
+            setPosts(data);
+          }
+          fetchData();
+        }, [refresh]);
+
+          // console.log(posts)
+          // console.log(posts[0].user)
+          
+
 
          
-       }
-       fetchData();
-       
-     }, [refresh]);
+ 
 
 
      useEffect(() => {
        async function fetchData() {
-         const response = await fetch('http://localhost:3001/user/'+userId);
-         const data = await response.json();
+        const data = await apiWrapper('user/'+userId);
          setUser(data);
          
-        //  console.log(data)
-         
-
-         
+        //  console.log(user)
+      
        }
        fetchData();
        
@@ -60,20 +61,19 @@ const Feed = () => {
 
      //---------------------//
      async function handlePost(e) {
-        e.preventDefault();
-        const response = await fetch('http://localhost:3001/post', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ title: input, description: input, content: input, photoUrl: input })
-        });
-        const data = await response.json();
-        console.log(data);
-        setInput('')
-        setRefresh(!refresh);
-      }
+      e.preventDefault();
+      const response = await
+      
+       apiWrapper("post/", "POST", 
+       { title: input, description: input, 
+        content: input, photoUrl: input } )
 
+
+      const data = await response.json();
+      console.log(data);
+      setInput('')
+      setRefresh(!refresh);
+    }
 
 
   return (
