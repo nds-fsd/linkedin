@@ -7,6 +7,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from '../post/Post';
+import { apiWrapper } from '../../utils/apiWrapper';
 
 const Feed = () => {
      const [input, setInput] = useState('')
@@ -15,25 +16,23 @@ const Feed = () => {
      const [refresh, setRefresh] = useState(false);
 
      useEffect(() => {
-       async function fetchData() {
-         const response = await fetch('http://localhost:3001/post');
-         const data = await response.json();
-         setPosts(data);
-       }
-       fetchData();
-       
-     }, [refresh]);
+      async function fetchData() {
+        const data = await apiWrapper("post", "GET");
+        setPosts(data);
+      }
+      fetchData();
+    }, [refresh]);
 
      //---------------------//
      async function handlePost(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:3001/post', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ title: input, description: input, content: input, photoUrl: input })
-        });
+        const response = await
+        
+         apiWrapper("post/", "POST", 
+         { title: input, description: input, 
+          content: input, photoUrl: input } )
+
+
         const data = await response.json();
         console.log(data);
         setInput('')
