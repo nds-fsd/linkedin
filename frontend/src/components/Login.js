@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
 import jwtDecode from "jwt-decode"
 import { apiWrapper } from '../utils/apiWrapper';
+import { useEffect } from 'react';
+
 
 
 
@@ -38,15 +40,13 @@ const Login = () => {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-   
+
     const onSubmit = (dataDecoded) => {
         // console.log(data)
         // setLoading(loading) // email y password
-        Submit_register(dataDecoded,navigate)
-     
+       Submit_register(dataDecoded,navigate)   
     };
-
-
+   
     return (
         <>
             <nav className='navbar'>
@@ -62,7 +62,7 @@ const Login = () => {
                     Unirse
                      
                     </button>
-                    <button className='navbtn'>Iniciar Sesión</button>
+                    <button className='navbtn' onClick={()=>navigate("/home")}>Iniciar Sesión</button>
                 </div>
             </nav>
             <div className='big_container'>
