@@ -5,6 +5,7 @@ import Logo from "./logo"
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
 import jwtDecode from "jwt-decode"
+import { apiWrapper } from '../utils/apiWrapper';
 
 
 
@@ -14,16 +15,8 @@ export const Submit_register =(data,navigate) =>{
     console.log(data)
     
     
-    fetch("http://localhost:3001/user/login", {
-        method: 'POST',
-        headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        
+    
+        apiWrapper("user/login/", "POST", data)
         
         .then(data => {
             setUserSession(data)
@@ -63,7 +56,12 @@ const Login = () => {
                 </div>
 
                 <div className='navbar_button'>
-                    <button className='navbtn_unirse'><a href="http://localhost:3000/register">Unirse</a></button>
+                    <button className='navbtn_unirse'onClick={() => navigate("/register")}>
+                   
+                        
+                    Unirse
+                     
+                    </button>
                     <button className='navbtn'>Iniciar Sesión</button>
                 </div>
             </nav>

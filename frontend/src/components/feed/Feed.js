@@ -37,13 +37,8 @@ const Feed = () => {
           // console.log(posts[0].user)
           
 
-
-         
- 
-
-
      useEffect(() => {
-       async function fetchData() {
+     async function fetchData() {
         const data = await apiWrapper('user/'+userId);
          setUser(data);
          
@@ -53,20 +48,19 @@ const Feed = () => {
        fetchData();
        
      }, [refresh]);
-     
 
-   
-
-     
-
-     //---------------------//
-     async function handlePost(e) {
-      e.preventDefault();
-      const response = await
       
-       apiWrapper("post/", "POST", 
-       { title: input, description: input, 
-        content: input, photoUrl: input } )
+     async function handlePost(e) {
+        e.preventDefault();
+        const response = await
+        
+         apiWrapper("post/", "POST", 
+         { title: input, description: input, 
+          content: input, photoUrl: input } )
+
+
+         
+
 
 
       const data = await response.json();

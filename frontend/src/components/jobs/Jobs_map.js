@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
 import "./Jobs_map.css"
+import { apiWrapper } from '../../utils/apiWrapper';
 
 // const [job, setJob] = useState([]);
 // const [refresh, setRefresh] = useState(false);
@@ -23,12 +24,11 @@ const Jobsmap = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('http://localhost:3001/job');
-            const data = await response.json();
-            setJob(data);
+          const data = await apiWrapper('job', 'GET');
+          setJob(data);
         }
         fetchData();
-    }, [refresh]);
+      }, [refresh]);
 
     return (
         <>
