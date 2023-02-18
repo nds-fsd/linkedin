@@ -1,3 +1,5 @@
+
+
 const time = (req, res, next) => {
     console.log("\nTime : " + new Date());
     console.log("\tvalidate = " + req.method);
@@ -20,6 +22,22 @@ const validateHasBody = (req, res, next) => {
   next();
 };
 
+const User = require( "../database/schemas/user");
+
+const uniqueUser = async (req, res, next) =>{
+  
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if(user) {
+      return res.status(400).send({status:"ERROR", message:"Email already exists"});
+    }
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({status:"ERROR", message:"Internal server error"});
+  }
+}
 
 //TODO Comprobar que en BBDD no hayan elementos repetidos (schema UNIQUE)
 
@@ -27,4 +45,5 @@ module.exports = {
   validateIdFormat,
   validateHasBody,
   time,
+  uniqueUser
 };
