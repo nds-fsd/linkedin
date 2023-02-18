@@ -39,11 +39,21 @@ const uniqueUser = async (req, res, next) =>{
   }
 }
 
+const passNeeded = (req, res, next) => {
+  const { password } = req.body;
+  
+  if(!password) {
+    return res.status(400).send({status:"ERROR", message:"You need a password!"});
+  }
+  
+  next();
+}
 //TODO Comprobar que en BBDD no hayan elementos repetidos (schema UNIQUE)
 
 module.exports = {
   validateIdFormat,
   validateHasBody,
   time,
-  uniqueUser
+  uniqueUser,
+  passNeeded
 };
