@@ -48,6 +48,34 @@ const passNeeded = (req, res, next) => {
   
   next();
 }
+
+const emailNeeded = (req, res, next) => {
+  const { email } = req.body;
+  
+  if(!email) {
+    return res.status(400).send({status:"ERROR", message:"You need an EMAIL address!"});
+  }
+  
+  next();
+}
+
+const unknowUser = async (req, res, next) =>{
+  
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if(!user) {
+      return res.status(400).send({status:"ERROR", message:"Email NOT FOUND"});
+    }
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({status:"ERROR", message:"Internal server error"});
+  }
+}
+
+
+
 //TODO Comprobar que en BBDD no hayan elementos repetidos (schema UNIQUE)
 
 module.exports = {
@@ -55,5 +83,7 @@ module.exports = {
   validateHasBody,
   time,
   uniqueUser,
-  passNeeded
+  passNeeded,
+  emailNeeded,
+  unknowUser
 };
