@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { Submit_register } from "./Login";
 
+
 const Register = (props) => {
   const {
     register,
@@ -94,6 +95,7 @@ handleSuccessfulRegistration(data);
           <input
             type="text"
             placeholder="Nombre"
+            minLength="3"
             {...register("nombre", { required: true })}
           />
           {errors.nombre && (
@@ -103,6 +105,7 @@ handleSuccessfulRegistration(data);
           <label htmlFor="apellido">Apellido</label>
           <input
             type="text"
+            minLength="3"
             placeholder="Apellido"
             {...register("apellido", { required: true })}
           />
@@ -123,6 +126,7 @@ handleSuccessfulRegistration(data);
 <label htmlFor="password">Elige una contraseña</label>
 <input
   type="password"
+  minLength="4"
   placeholder="********"
   id="password"
   name="password"
