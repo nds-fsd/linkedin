@@ -1,12 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-// <<<<<<< HEAD:backend/database/schemas/user.js
-  // username:{type: String },
-  // email: { type: String  },
-  // password:{type: String },
-  // surname: { type: String },
-  // =======
+
   nombre: { type: String },
   apellido: { type: String },
   avatar:{type:String},
@@ -20,11 +15,7 @@ const userSchema = new Schema({
     default:'user'
   },
 
-// <<<<<<< HEAD:backend/database/schemas/user.js
-  
-// =======
 
-// >>>>>>> SPRINT1:backend/src/database/schemas/user.js
    puesto: { type: String }, //1..n tabla de puestos
    empresa_actual: { type: String },
    sector: { type: String }, //1..n  tabla de sectores
@@ -47,6 +38,15 @@ const userSchema = new Schema({
   relationPost: { type: [Schema.ObjectId], ref: "post" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date },
+  followers: [{
+    type: Schema.ObjectId,
+    ref: 'user'
+  }],
+  following: [{
+    type: Schema.ObjectId,
+    ref: 'user'
+  }]
+ 
 });
 
 const User = model("user", userSchema);
