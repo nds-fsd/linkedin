@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import "./Sidebar.css"
 import { Avatar } from '@mui/material'
 import {apiWrapper} from "../../utils/apiWrapper"
+import FollowSuggest from "./FollowSuggest/followSuggest"
 
 import {useNavigate} from "react-router-dom"
 import { tokenDecoder } from '../../utils/tokenDecoder'
@@ -65,12 +66,13 @@ const recentItem =(topic) =>(
         </div>
       </div>
       <div className="sidebar__bottom">
-        <p>Recent</p>
+        {/* <p>Recent</p>
         {recentItem("reactjs")}
         {recentItem("programming")}
         {recentItem("softwareengineering")}
         {recentItem("design")}
-        {recentItem("developer")}
+        {recentItem("developer")} */}
+        <FollowSuggest/>
       </div>
     </div>
   );
