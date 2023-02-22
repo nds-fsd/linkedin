@@ -2,17 +2,17 @@ import React, { useState,useEffect } from 'react'
 import "./Sidebar.css"
 import { Avatar } from '@mui/material'
 import {apiWrapper} from "../../utils/apiWrapper"
-import jwtDecode from "jwt-decode"
+
 import {useNavigate} from "react-router-dom"
+import { tokenDecoder } from '../../utils/tokenDecoder'
 
 import Logout from "../logout/Logout"
 
 
 export const Sidebar = () => {
-    
-    const navigate = useNavigate()
-    const userSession = jwtDecode(window.localStorage.getItem('user-session'))
-    const userId= (userSession.user_id)
+
+    const navigate = useNavigate()  
+    const userId= tokenDecoder()
     const [data,setData] = useState({})
 
    
@@ -20,7 +20,7 @@ export const Sidebar = () => {
     useEffect(() => {
        apiWrapper("user/"+userId)
        .then((response) => setData(response))
-          }, [])
+          }, [userId])
 
 
 const fullName = data.nombre+" "+data.apellido
@@ -36,7 +36,7 @@ const recentItem =(topic) =>(
   );
   
   const handleAvatarClick = () => {
-    navigate("/profile/123456");
+    navigate(`/profile/${data._id}`);
   };
 
   return (

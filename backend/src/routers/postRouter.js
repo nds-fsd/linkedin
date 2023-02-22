@@ -13,7 +13,7 @@ const {
 
 const routerPost = Router();
 
-routerPost.post("/", middle.time, middle.validateHasBody, createPost);
+routerPost.post("/", middle.time, createPost);
 routerPost.get("/", middle.time, getPostList);
 routerPost.get("/:id", middle.time, middle.validateIdFormat,md_auth.asureAuth, getPostById);
 routerPost.patch("/:id",  middle.time, middle.validateIdFormat,middle.validateHasBody, updatePost);

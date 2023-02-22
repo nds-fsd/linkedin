@@ -5,6 +5,9 @@ import Logo from "./logo"
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../utils/localStorage.utils"
 import jwtDecode from "jwt-decode"
+import { apiWrapper } from '../utils/apiWrapper';
+import { useEffect } from 'react';
+
 
 
 
@@ -14,19 +17,12 @@ export const Submit_register =(data,navigate) =>{
     console.log(data)
     
     
-    fetch("http://localhost:3001/user/login", {
-        method: 'POST',
-        headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        
+    
+        apiWrapper("user/login/", "POST", data)
         
         .then(data => {
             setUserSession(data)
+            console.log(data)
             const dataDecoded = jwtDecode(data);
             console.log(dataDecoded)
              
@@ -45,15 +41,13 @@ const Login = () => {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-   
+
     const onSubmit = (dataDecoded) => {
         // console.log(data)
         // setLoading(loading) // email y password
-        Submit_register(dataDecoded,navigate)
-     
+       Submit_register(dataDecoded,navigate)   
     };
-
-
+   
     return (
         <>
             <nav className='navbar'>
@@ -63,8 +57,13 @@ const Login = () => {
                 </div>
 
                 <div className='navbar_button'>
-                    <button className='navbtn_unirse'><a href="http://localhost:3000/register">Unirse</a></button>
-                    <button className='navbtn'>Iniciar Sesión</button>
+                    <button className='navbtn_unirse'onClick={() => navigate("/register")}>
+                   
+                        
+                    Unirse
+                     
+                    </button>
+                    <button className='navbtn' onClick={()=>navigate("/home")}>Iniciar Sesión</button>
                 </div>
             </nav>
             <div className='big_container'>

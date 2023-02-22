@@ -39,7 +39,7 @@ async function getMe(req,res){
 //Endpoint Read All -----------------------------------------------------------(R)
 const getUserList = async (req, res) => {
   try {
-    const user = await UserModel.find().populate("relationJob").populate("relationPost");
+    const user = await UserModel.find().populate("relationJob").populate("relationPost").populate("relationCompany");
 
     if (user) res.status(200).json(user);
     else res.status(404).send({ status: "ERROR", message: "User not found" });
@@ -58,6 +58,18 @@ const getUserById = async (req, res) => {
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
   }
+};
+
+const getUserPosts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findById(id).populate("relationJob").populate("relationPost");
+    if (user) res.status(201).json(user.relationPost);
+    else res.status(404).send({ status: "ERROR", message: "User not found" });
+  } catch (error) {
+    return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+  }
+  
 };
 
 //Endpoint Update -------------------------------------------------------------(U)
@@ -91,4 +103,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getMe,
+  getUserPosts
 };

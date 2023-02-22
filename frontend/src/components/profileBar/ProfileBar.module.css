@@ -1,7 +1,7 @@
 .sidebar {
   position: sticky;
   top: 200px;
-background-color: red;
+  /*background-color: red;*/
   flex: 1;
   border-radius: 10px;
   text-align: center;
@@ -61,17 +61,79 @@ background-color: red;
   padding: 0px 20px;
 }
 
+.grouped{
+  border:1px solid lightgrey;
+  border-radius: 10px;
+  margin: 5px 100px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.grouped > span{
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  color: grey;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.espacio {
+  height: 3rem;
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: grey;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0px 20px;
+}
+
+.values > select {
+  padding: 10px;
+  border-radius: 10px;
+  border-radius: 10px;
+  background-color: lightgrey;
+  border: 0px;
+}
+
+.values > select > option {
+  color: grey;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.values > input {
+  width: 70%;
+  height: 0.5rem;
+  text-align: right;
+}
+
 .sidebar__statNumber {
   font-weight: bold;
   color: #0a66c2 !important;
 }
 
-.sidebar__stats {
+.sidebar__detail {
+display: flex;
+justify-content: right;
+
   padding: 10px;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   border: 1px solid lightgray;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  background-color: white;
+  margin-bottom: 50px;
+}
+
+.sidebar__stats {
+  padding: 10px;
+  /*margin-bottom: 10px;*/
+  border: 1px solid lightgray;
+  border-bottom: 0px solid lightgray;
+  /* border-bottom-left-radius: 10px;*/
+  /* border-bottom-right-radius: 10px;*/
   background-color: white;
 }
 
@@ -104,4 +166,48 @@ background-color: red;
 .sidebar__hash {
   margin-right: 10px;
   margin-left: 5px;
+}
+
+
+
+.companyAdd{
+  background-color:#6B9D6F ;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content:space-around;
+  gap: 10px;
+  border:2px solid #6B9D6F;
+  padding: 8px 32px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin:5px 0px;
+  color:white;
+  font-weight: 600;
+  font-size: 13px;
+  
+}
+
+.companyAdd:hover{
+  
+  background-color:#B0E2B8 ;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content:space-around;
+  gap: 10px;
+  border:2px solid #6B9D6F;
+  padding: 8px 32px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin:5px 0px;
+  color:rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 13px;
+  
+}
+
+.companyAdd_icon{
+  width: 1.2rem;
+
 }
