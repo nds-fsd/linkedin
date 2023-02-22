@@ -23,8 +23,8 @@ const md_auth = require ("../middleware/autenticated")
 
 const routerUser = Router();
 
-routerUser.post("/register",  register);
-routerUser.post("/login",  login);
+routerUser.post("/register", [middle.uniqueUser, middle.passNeeded, middle.emailNeeded], register);
+routerUser.post("/login", [middle.passNeeded, middle.emailNeeded, middle.unknowUser],  login);
 // routerUser.post("/refreshtoken", middle.time, middle.validateHasBody, refreshAccesToken);
 // routerUser.post("/", middle.time, middle.validateHasBody, createUser);
 routerUser.get("/", [middle.time], getUserList);
