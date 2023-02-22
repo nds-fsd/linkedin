@@ -32,7 +32,9 @@ async function register(req, res) {
     //Guardamos el usuario en DB
     user.save((error, userStorage) => {
         if (!error) {
+            
             res.status(200).send(userStorage)
+
         } else {
             res.status(400).send({ msg: "Error al crear el usuario" })
         }

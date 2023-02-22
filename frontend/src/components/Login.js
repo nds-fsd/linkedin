@@ -22,6 +22,7 @@ export const Submit_register =(data,navigate) =>{
         
         .then(data => {
             setUserSession(data)
+            console.log(data)
             const dataDecoded = jwtDecode(data);
             console.log(dataDecoded)
              
