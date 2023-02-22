@@ -17,36 +17,39 @@ const Register = (props) => {
   } = useForm();
   const navigate = useNavigate();
 
-  const handleSuccessfulRegistration = (data) => {
-    console.log(data)
-    Submit_register({ ...data, nombre:data.nombre, password: data.password }, useNavigate);
-    toast.success("Registrado Correctamente! Vamos a la Home page...", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+  // const handleSuccessfulRegistration = (data) => {
+  //   console.log(data)
+  //   Submit_register({ ...data, nombre:data.nombre, password: data.password }, useNavigate);
+  //   toast.success("Registrado Correctamente! Vamos a la Home page...", {
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
    
-    setTimeout(() => {
-      navigate("/home");
-    }, 5000);
-  };
+  //   setTimeout(() => {
+  //     navigate("/home");
+  //   }, 5000);
+  // };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (payload) => {
     try {
         await apiWrapper("user/register", "POST", {
-          nombre:data.nombre,
-          email:data.email,
-            password:data.password,
-            apellido:data.apellido
+          nombre:payload.nombre,
+          email:payload.email,
+            password:payload.password,
+            apellido:payload.apellido
         })
         .then(
             (data)=> {
 console.log(data);
-handleSuccessfulRegistration(data);
+
+// handleSuccessfulRegistration(data);
+const autoLogin = {email: payload.email, password:payload.password};
+Submit_register(autoLogin,navigate);
       });
     } catch (error) {
       console.error(error);
