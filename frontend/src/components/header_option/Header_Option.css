@@ -1,24 +1,40 @@
 .headerOption {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px;
-    color: grey;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  color: grey;
+  cursor: pointer;
 }
 
-.headerOption:hover{
-    color: black;
+.headerOption:hover {
+  color: black;
 }
 
 .headerOption__title {
-    font-size: 12px;
-    font-weight: 400;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-
 .headerOption__icon {
-    object-fit: contain;
-    height: 25px !important;
-    width: 25px !important;
+  object-fit: contain;
+  height: 25px !important;
+  width: 25px !important;
+}
+.flotante_LogOut_Off {
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  visibility:hidden;
+}
+
+.flotante_LogOut_On {
+  position: absolute;
+  border-radius: 10px;
+  top: 65px;
+  opacity: 1;
+  visibility: visible;
+}
+.flotante_LogOut_On > div {
+  cursor: pointer;
 }

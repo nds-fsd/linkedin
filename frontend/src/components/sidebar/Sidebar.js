@@ -58,7 +58,7 @@ const recentItem =(topic) =>(
         <h3>FullCat Developer!</h3>
         
         
-      <Logout content="LOGOUT" />
+      {/*<Logout content="LOGOUT" />*/}
 
         </div>
       <div className="sidebar__stats">
