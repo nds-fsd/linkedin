@@ -31,6 +31,8 @@ routerUser.get("/", [middle.time], getUserList);
 routerUser.get("/me", [middle.time], getMe);
 routerUser.get("/:id", [middle.time, middle.validateIdFormat], getUserById);
 routerUser.get("/:id/posts", [middle.time, middle.validateIdFormat], getUserPosts);
+routerUser.get("/", [middle.time], getUserList);
+
 routerUser.patch("/:id", [middle.time, middle.validateIdFormat,middle.validateHasBody], updateUser);
 routerUser.delete("/:id", [middle.time, middle.validateIdFormat], deleteUser);
 

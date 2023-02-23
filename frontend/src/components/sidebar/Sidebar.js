@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import "./Sidebar.css"
 import { Avatar } from '@mui/material'
 import {apiWrapper} from "../../utils/apiWrapper"
+import FollowSuggest from "./FollowSuggest/followSuggest"
 
 import {useNavigate} from "react-router-dom"
 import { tokenDecoder } from '../../utils/tokenDecoder'
@@ -15,7 +16,10 @@ export const Sidebar = () => {
     const userId= tokenDecoder()
     const [data,setData] = useState({})
 
-   
+    const followers = data?.followers?.length
+    const followings = data?.following?.length
+
+  
 
     useEffect(() => {
        apiWrapper("user/"+userId)
@@ -26,7 +30,7 @@ export const Sidebar = () => {
 const fullName = data.nombre+" "+data.apellido
 const avatar = data.avatar
 const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png"
-    
+// console.log(data)    
 
 const recentItem =(topic) =>( 
     <div className='sidebar__recentItem'>
@@ -60,17 +64,29 @@ const recentItem =(topic) =>(
       <div className="sidebar__stats">
 
         <div className="sidebar__stat">
-          <p>Views on post</p>
-          <p className="sidebar__statNumber">2,344</p>
+          
+          <div className='left-side-followers'>
+            <h3>Followers</h3>
+            <p>{followers}</p>
+          </div>
+          <div className='right-side-followers'>
+            <h3>Followings</h3>
+            <p>{followings}</p>
+          </div>
+
+          {/* <p>Views on post</p>
+          <p className="sidebar__statNumber">2,344</p> */}
         </div>
       </div>
       <div className="sidebar__bottom">
-        <p>Recent</p>
+        <h3>Suggested Following</h3>
+        {/* <p>Recent</p>
         {recentItem("reactjs")}
         {recentItem("programming")}
         {recentItem("softwareengineering")}
         {recentItem("design")}
-        {recentItem("developer")}
+        {recentItem("developer")} */}
+        <FollowSuggest/>
       </div>
     </div>
   );

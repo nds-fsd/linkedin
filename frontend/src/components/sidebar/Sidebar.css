@@ -56,19 +56,29 @@
 }
 
 .sidebar__stat {
-    margin-top: 10px;
+    padding:0.5rem 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+
+}
+
+.sidebar__stat >div >h3 {
+    font-size: 1rem;
+
+    
+
+}
+
+.sidebar__stat >div >p {
+    font-size: 1.2rem;
+    line-height: 0.5;
+
+    
 
 }
 
 
-.sidebar__stat >p {
-    color: grey;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 0px 20px;
-}
+
 
 .sidebar__statNumber{
     font-weight: bold;
@@ -87,9 +97,9 @@ border: 1px solid lightgray;
 
 .sidebar__bottom {
     text-align: left;
-    padding: 10px 20px;
-    border: 1px solid lightgrey;
-    background-color: white;
+    
+    
+    
     border-radius: 10px;
     margin-top: 10px;
 }
