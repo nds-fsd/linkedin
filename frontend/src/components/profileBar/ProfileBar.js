@@ -147,15 +147,15 @@ export const ProfileBar = (props) => {
         {/*<Logout content="LOGOUT" />*/}
       </div>
 
-      <div className={styles.sidebar__stats}>
+      <div className={styles.sidebar__stats_dark}>
         <div className={styles.enLinea}>
           <div className={styles.sidebar__stat}>
-            <p>Who viewed you</p>
-            <p className={styles.sidebar__statNumber}>2,544</p>
+            <p>Followers</p>
+            <p className={styles.sidebar__statNumber}>{data?.followers?.length}</p>
           </div>
           <div className={styles.sidebar__stat}>
-            <p>Views on post</p>
-            <p className={styles.sidebar__statNumber}>2,344</p>
+            <p>Followings</p>
+            <p className={styles.sidebar__statNumber}>{data?.following?.length}</p>
           </div>
         </div>
       </div>
