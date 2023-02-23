@@ -6,16 +6,16 @@ const bcrypt = require("bcryptjs");
 //*TODO Quitar todos los msg sin {}. Fuera send, todo JSON
 
 async function register(req, res) {
-    const { username, password, email, nombre, apellido,avatar } = req.body
+    const {  password, email, nombre, apellido,avatar } = req.body
 
-    if (!username) res.status(400).send({ msg: "El username es obligatorio" })
+    
     if (!password) res.status(400).send({ msg: "El password es obligatorio" })
     if (!email) res.status(400).send({ msg: "El email es obligatorio" })
 
     //Si las validaciones anteriores están OK, crearemos el nuevo usuario
     const user = new User(
         {
-            username,
+            
             email: email.toLowerCase(),
             password,
             nombre,
@@ -32,7 +32,9 @@ async function register(req, res) {
     //Guardamos el usuario en DB
     user.save((error, userStorage) => {
         if (!error) {
+            
             res.status(200).send(userStorage)
+
         } else {
             res.status(400).send({ msg: "Error al crear el usuario" })
         }

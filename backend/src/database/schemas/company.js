@@ -13,6 +13,8 @@ const companySchema = new Schema({
   owner:{type: Schema.ObjectId, ref:"user"},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date },
+  user:{ type: [Schema.ObjectId], ref: "user" },
+  relationJob: { type: [Schema.ObjectId], ref: "job" },
 });
 
 const Company = model("company", companySchema);

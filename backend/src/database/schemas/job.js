@@ -13,6 +13,8 @@ const jobSchema = new Schema({
   //experience: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date },
+  user:{ type: [Schema.ObjectId], ref: "user" },
+  company:{ type: [Schema.ObjectId], ref: "company" }
 });
 
 const Job = model("job", jobSchema);
