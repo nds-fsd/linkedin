@@ -36,7 +36,7 @@ const followUser = async (req, res) => {
 
 const unfollowUser = async (req, res) => {
   try {
-    const follower = await User.findById(req.user.id); // El usuario que sigue
+    const follower = await User.findById(req.body.follower); // El usuario que sigue
     const following = await User.findById(req.params.id); // El usuario que está siendo seguido
 
     // Comprobar si el usuario ya está siguiendo al usuario objetivo
@@ -61,7 +61,28 @@ const unfollowUser = async (req, res) => {
 };
 
 
+ 
+  // const getFollowers = async (req, res) => {
+  //   try {
+  //     const { id } = req.params;
+  //     const followers = await Follow.findById(id) //TODO.populate("user");
+  //     if (followers) res.status(200).json(followers);
+  //     else res.status(404).send({ status: "ERROR", message: "Post not found" });
+  //   } catch (error) {
+  //     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+  //   }
+  // };
+
+  
+
+ 
+
+
+
+
+
 module.exports = {
   followUser,
-  unfollowUser
+  unfollowUser,
+  
 }

@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 const middle = require("../middleware/validations.js");
 
-const {followUser} = require("../controllers/followController")
+const {followUser, unfollowUser} = require("../controllers/followController")
 
 
 const {
@@ -36,6 +36,8 @@ routerUser.get("/", [middle.time], getUserList);
 routerUser.patch("/:id", [middle.time, middle.validateIdFormat,middle.validateHasBody], updateUser);
 routerUser.delete("/:id", [middle.time, middle.validateIdFormat], deleteUser);
 
+routerUser.delete("/:id/follows",[middle.time], unfollowUser)
 routerUser.post("/:id/follows",[middle.time], followUser )
+
 
 module.exports = routerUser;
