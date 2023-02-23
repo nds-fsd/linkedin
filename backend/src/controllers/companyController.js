@@ -61,10 +61,17 @@ const getCompanyById = async (req, res) => {
 const getCompanyByName = async (req, res) => {
   try {
     const { name } = req.params;
-    console.log("name= "+ name);
-    const company = await CompanyModel.find({ name: { $regex: name, $options: "i" } })
-      .populate("relationJob")
-      .populate("relationPost");
+    console.log("name= " + name);
+
+    const company =
+      name === "$.$"//"AllValues"
+        ? await CompanyModel.find()
+            .populate("relationJob")
+            .populate("relationPost")
+        : await CompanyModel.find({ name: { $regex: name, $options: "i" } })
+            .populate("relationJob")
+            .populate("relationPost");
+
     if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
@@ -72,10 +79,24 @@ const getCompanyByName = async (req, res) => {
   }
 };
 
+//Endpoint Read By Owner -----------------------------------------------------(R)
+const getCompanyByOwner = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("id Owner= " + id);
+    const company = await CompanyModel.find({ owner: id });
+    if (company) res.status(200).json(company);
+    else res.status(404).send({ status: "ERROR", message: "Company not found" });
+  } catch (error) {
+    return res.status(500).send({ status: "ERROR TRYCATCH ByOwner", message: error });
+  }
+};
+
 //Endpoint Update -------------------------------------------------------------(U)
 const updateCompany = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(req.body);
     const company = await CompanyModel.findByIdAndUpdate(id, req.body);
     if (company) res.status(200).json(company);
     else res.status(404).send({ status: "ERROR", message: "Company not Found. Not Updated" });
@@ -101,6 +122,7 @@ module.exports = {
   getCompanyList,
   getCompanyById,
   getCompanyByName,
+  getCompanyByOwner,
   updateCompany,
   deleteCompany,
 };

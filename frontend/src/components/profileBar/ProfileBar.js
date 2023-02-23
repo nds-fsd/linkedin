@@ -6,10 +6,13 @@ import Logout from "../logout/Logout";
 import CompanyAdd from "@mui/icons-material/Add";
 import { ToastContainer, toast } from "react-toastify";
 import ProfileAddCompany from "./addCompany/ProfileAddCompany";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
   const [actualizar, setActualizar] = useState(true);
+  const [ownerCompany, setOwnerCompany] = useState({});
+
   const [data, setData] = useState({});
 
   const [puesto, setPuesto] = useState("");
@@ -28,6 +31,8 @@ export const ProfileBar = (props) => {
   const [tipoTelefono, setTipoTelefono] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [web, setWeb] = useState("");
+
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (actualizar) {
@@ -53,7 +58,20 @@ export const ProfileBar = (props) => {
       });
       setActualizar(!actualizar);
     }
-  }, [userId]);
+
+    apiWrapper("company/owner/" + userId, "GET").then((response) => {
+      if (JSON.stringify(response) !== undefined) {
+        if (response) {
+          const resAux = response.map((element) => {
+            return element;
+          });
+          setOwnerCompany(resAux);
+        }
+      }
+      //console.log("OWNER ----" + JSON.stringify(response));
+      //console.log("OWNER ----" + ownerCompany.length);
+    });
+  }, [userId, reload]);
 
   const fullName = data.nombre + " " + data.apellido;
   const avatar = data.avatar;
@@ -84,7 +102,7 @@ export const ProfileBar = (props) => {
     apiWrapper("user/" + userId, "PATCH", body).then((response) => {
       //alert("updated Profile -> " + response);
       setActualizar(true);
-      toast.success("Se han actualizado el Perfil", {
+      toast.success("Se ha actualizado el Perfil", {
         autoClose: 3000,
       });
     });
@@ -104,6 +122,16 @@ export const ProfileBar = (props) => {
   const [checkTab, setCheckTab] = useState("tab3");
   const handleClickCheckTab = (value) => {
     setCheckTab(value);
+  };
+
+  const handleClickDeleteLinkCompany = () => {
+    const res = apiWrapper("company/" + ownerCompany[0]._id, "PATCH", { owner: null });
+    //alert("handleClickDeleteLinkCompany" + ownerCompany[0]._id);
+    reloadPage();
+  };
+
+  const reloadPage = () => {
+    setReload(!reload);
   };
 
   return (
@@ -328,13 +356,28 @@ export const ProfileBar = (props) => {
               </div>
               <div className={styles.values}>
                 <span>Sector</span>
+                <select
+                  value={sector}
+                  onChange={(e) => {
+                    handleChange(setSector, e.target.value);
+                  }}
+                >
+                  <option></option>
+                  <option>Alimentacion</option>
+                  <option>Tecnologia</option>
+                  <option>Marketing</option>
+                  <option>Restauracion</option>
+                  <option>Artes Escenicas</option>
+                </select>
+
+                {/*}
                 <input
                   type="text"
                   value={sector}
                   onChange={(e) => {
                     handleChange(setSector, e.target.value);
                   }}
-                />
+                />*/}
               </div>
             </div>
           </section>
@@ -354,17 +397,41 @@ export const ProfileBar = (props) => {
       {/*<div className={styles.sidebar__detail}>*/}
       <div className={claseAñadirEmpresa}>
         <div className={styles.detailCabecera}>
-          <button
-            className={styles.companyAdd}
-            onClick={() => {
-              handleClickEmpresa();
-            }}
-          >
-            <CompanyAdd className={styles.companyAdd_icon} />
-            Añadir Empresa
-          </button>
+          <div className={styles.textoEmpresa}>
+            Propietario de la Empresa : {ownerCompany.length > 0 ? ownerCompany[0].name : ""}
+          </div>
+          <div className={styles.botonesEmpresa}>
+            <button
+              className={
+                styles.companyAdd +
+                " " +
+                (ownerCompany.length > 0 ? styles.companyAdd_hidden : styles.companyAdd_visible)
+              }
+              onClick={() => {
+                handleClickEmpresa();
+              }}
+            >
+              <CompanyAdd className={styles.companyAdd_icon}></CompanyAdd>
+              Añadir Empresa
+            </button>
+            <DeleteIcon
+              className={
+                styles.companyAdd_icon +
+                " " +
+                (ownerCompany.length > 0 ? styles.companyAdd_visible : styles.companyAdd_hidden)
+              }
+              onClick={() => {
+                handleClickDeleteLinkCompany();
+              }}
+            />
+          </div>
         </div>
-        <ProfileAddCompany />
+
+        {ownerCompany.length > 0 ? (
+          <></>
+        ) : (
+          <ProfileAddCompany userId={userId} reloadPage={reloadPage} />
+        )}
       </div>
 
       <ToastContainer

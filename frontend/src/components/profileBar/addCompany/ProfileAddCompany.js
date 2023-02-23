@@ -3,8 +3,8 @@ import styles from "./ProfileAddCompany.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { apiWrapper } from "../../../utils/apiWrapper";
 
-export const ProfileAddCompany = () => {
-  const [checkTabCompany, setCheckTabCompany] = useState("tabCompany1");
+export const ProfileAddCompany = (props) => {
+  const [checkTabCompany, setCheckTabCompany] = useState("");
 
   const handleClickCheckTabCompany = (value, company) => {
     setCheckTabCompany(value);
@@ -37,8 +37,15 @@ export const ProfileAddCompany = () => {
   };
 
   useEffect(() => {
-    console.log(companySelected);
-  }, [companySelected]);
+    console.log("inicio");
+    handleClickSearch("$.$"); //forzams a mostrar todas las empresas
+  }, []);
+
+  const handleClickLinkCompany = () => {
+    console.log("zz " + companySelected._id);
+    const res = apiWrapper("company/" + companySelected._id, "PATCH", { owner: props.userId });
+    props.reloadPage();
+  };
 
   return (
     <div className={styles.contenedor}>
@@ -59,45 +66,70 @@ export const ProfileAddCompany = () => {
           }}
         />
       </div>
-      <div className={styles.contenido}>
-        <div className={styles.izquierda}>
-          {companys &&
-            companys.map((element, index) => (
-              <>
-                <input
-                  className={styles.tabCompany}
-                  id={styles["tabCompany" + index]}
-                  type="radio"
-                  name="tabsCompany"
-                  checked={checkTabCompany === "tabCompany" + index ? "checked" : null}
-                />
-                <label
-                  className={styles.labelCompany}
-                  htmlFor={"tabCompany" + index}
-                  onClick={() => {
-                    handleClickCheckTabCompany(`tabCompany${index}`, element);
-                  }}
-                >
-                  {`${element.name} ( ${element._id} )`}
-                </label>
-              </>
-            ))}
-        </div>
-        <div className={styles.derecha}>
-          <label className={styles.tablaLabel}>Nombre : </label>
-          <input className={styles.tablaInput} type="text" value={companySelected.name} />
-          <label className={styles.tablaLabel}>Sitio Web : </label>
-          <input className={styles.tablaInput} type="text" value={companySelected.website} />
-          <label className={styles.tablaLabel}>Tipo de Compañia : </label>
-          <input className={styles.tablaInput} type="text" value={companySelected.company_type} />
-          <label className={styles.tablaLabel}>Tamaño de la Compañia : </label>
-          <input className={styles.tablaInput} type="text" value={companySelected.company_size} />
-          <div className={styles.tablaButtons}>
-            <button className={styles.tablaButtonNuevo}>NUEVO</button>
-            <button className={styles.tablaButtonVincular}>VINCULAR</button>
+
+      {companys && companys !== [] && (
+        <div className={styles.contenido}>
+          <div className={styles.izquierda}>
+            {
+              //companys &&
+              companys.map((element, index) => (
+                <>
+                  <input
+                    className={styles.tabCompany}
+                    id={styles["tabCompany" + index]}
+                    type="radio"
+                    name="tabsCompany"
+                    checked={checkTabCompany === "tabCompany" + index ? "checked" : null}
+                  />
+                  <label
+                    className={styles.labelCompany}
+                    htmlFor={"tabCompany" + index}
+                    onClick={() => {
+                      handleClickCheckTabCompany(`tabCompany${index}`, element);
+                    }}
+                  >
+                    {`${element.name} ( ${element._id} )`}
+                  </label>
+                </>
+              ))
+            }
+          </div>
+          <div
+            className={
+              styles.derecha /*+
+      emsVisible === true ? styles.tablaValues_visible : styles.tablaValues_hidden)*/
+            }
+          >
+            <div className={styles.tablaValues}>
+              <label className={styles.tablaLabel}>Nombre : </label>
+              <input className={styles.tablaInput} type="text" value={companySelected.name} />
+              <label className={styles.tablaLabel}>Sitio Web : </label>
+              <input className={styles.tablaInput} type="text" value={companySelected.website} />
+              <label className={styles.tablaLabel}>Tipo de Compañia : </label>
+              <input
+                className={styles.tablaInput}
+                type="text"
+                value={companySelected.company_type}
+              />
+              <label className={styles.tablaLabel}>Tamaño de la Compañia : </label>
+              <input
+                className={styles.tablaInput}
+                type="text"
+                value={companySelected.company_size}
+              />
+            </div>
+            <div className={styles.tablaButtons}>
+              {/*<button className={styles.tablaButtonNuevo}>NUEVO</button>*/}
+              <button
+                className={styles.tablaButtonVincular}
+                onClick={() => handleClickLinkCompany()}
+              >
+                VINCULAR
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
