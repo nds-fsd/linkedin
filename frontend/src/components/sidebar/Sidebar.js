@@ -16,15 +16,10 @@ export const Sidebar = () => {
     const userId= tokenDecoder()
     const [data,setData] = useState({})
 
+    const followers = data?.followers?.length
+    const followings = data?.following?.length
+
   
-    
-
-    
-
-    
-    
-
-   
 
     useEffect(() => {
        apiWrapper("user/"+userId)
@@ -35,7 +30,7 @@ export const Sidebar = () => {
 const fullName = data.nombre+" "+data.apellido
 const avatar = data.avatar
 const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png"
-console.log(data)    
+// console.log(data)    
 
 const recentItem =(topic) =>( 
     <div className='sidebar__recentItem'>
@@ -72,11 +67,11 @@ const recentItem =(topic) =>(
           
           <div className='left-side-followers'>
             <h3>Followers</h3>
-            <p>1</p>
+            <p>{followers}</p>
           </div>
           <div className='right-side-followers'>
             <h3>Followings</h3>
-            <p>2</p>
+            <p>{followings}</p>
           </div>
 
           {/* <p>Views on post</p>
