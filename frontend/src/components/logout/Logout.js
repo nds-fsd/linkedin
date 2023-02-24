@@ -14,7 +14,7 @@ function Logout(props) {
 
   return (
     <div>
-        <button className='logout' onClick={handleClick} >{props.content}<LogoutIcon className='logout-icon'/></button>
+        <button className='logout' onClick={() => handleClick()} >{props.content}<LogoutIcon className='logout-icon'/></button>
     </div>
   )
 }

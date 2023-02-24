@@ -1,24 +1,15 @@
-.body {
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-}
-
-/* div{
-    background-color: lightgreen;
-} */
-
 .home{
     background-color: #f3f2ef;
     display: flex;
     flex-direction: column;
     align-items: center;
+     
+    
 }
 
 .home__body {
     display: flex;
     justify-content: center;
-    width: 80%;
-
-    padding-top: 100px;
+    padding-top: 50px;
+    width: 100vw;
 }

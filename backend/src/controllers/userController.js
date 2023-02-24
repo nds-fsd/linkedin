@@ -1,6 +1,7 @@
 
 const UserModel = require("../database/schemas/user");
 
+
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createUser = async (req, res) => {
   try {
@@ -38,15 +39,49 @@ async function getMe(req,res){
 
 //Endpoint Read All -----------------------------------------------------------(R)
 const getUserList = async (req, res) => {
-  try {
-    const user = await UserModel.find().populate("relationJob").populate("relationPost").populate("relationCompany");
+  const {sector} = req.query
 
-    if (user) res.status(200).json(user);
-    else res.status(404).send({ status: "ERROR", message: "User not found" });
-  } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
+  if(sector === undefined){
+    try {
+      const user = await UserModel.find().populate("relationJob").populate("relationPost").populate("relationCompany");
+  
+      if (user) res.status(200).json(user);
+      else res.status(404).send({ status: "ERROR", message: "User not found" });
+    } catch (error) {
+      return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
+    }
+    
+  }else{
+    try {
+      const user = await UserModel.find({sector}).populate("relationJob").populate("relationPost").populate("relationCompany");
+  
+      if (user) res.status(200).json(user);
+      else res.status(404).send({ status: "ERROR", message: "User not found" });
+    } catch (error) {
+      return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
+    }
+
   }
+
+
 };
+
+
+async function getUsersRole(req, res) {
+  const { role } = req.query;
+  let response = null;
+  if (role === undefined) {
+      response = await UserModel.find();
+  } else {
+      response = await UserModel.find({ role }) //*-Deberemos buscar con la ruta */users?active=(true|false). ej= */users?active=true para sacar todos los activos
+  }
+
+  res.status(200).send(response)
+}
+
+
+
+
 
 //Endpoint Read One By Id -----------------------------------------------------(R)
 const getUserById = async (req, res) => {
@@ -71,6 +106,31 @@ const getUserPosts = async (req, res) => {
   }
   
 };
+
+const getUserFollowers = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findById(id).populate("followers")
+    if (user) res.status(201).json(user.followers);
+    else res.status(404).send({ status: "ERROR", message: "User not found" });
+  } catch (error) {
+    return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+  }
+  
+};
+
+const getUserFollowings = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findById(id).populate("following")
+    if (user) res.status(201).json(user.following);
+    else res.status(404).send({ status: "ERROR", message: "User not found" });
+  } catch (error) {
+    return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+  }
+  
+};
+
 
 //Endpoint Update -------------------------------------------------------------(U)
 const updateUser = async (req, res) => {
@@ -103,5 +163,7 @@ module.exports = {
   updateUser,
   deleteUser,
   getMe,
-  getUserPosts
+  getUserPosts,
+  getUserFollowers,
+  getUserFollowings
 };

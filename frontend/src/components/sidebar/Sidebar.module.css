@@ -5,14 +5,17 @@
     border-radius: 10px;
     text-align: center;
     height: fit-content;
+    width: 50vw;
 }
 
 .sidebar h2{
     margin: 1rem 0rem;
     color: black;
+    
 }
 
 .sidebar__avatar {
+    cursor: pointer;
     margin-bottom: 10px;
     object-fit: contain;
     height: 150px !important;
@@ -30,7 +33,7 @@
 .sidebar__top >h2 {
     
     font-size: 24px;
-    line-height: 0px;
+    line-height: 25px;
 }
 
 
@@ -56,19 +59,48 @@
 }
 
 .sidebar__stat {
-    margin-top: 10px;
+    padding:0.5rem 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    
+}
+
+.sidebar__stat >div >h3 {
+    font-size: 1rem;
+
+    
+    
+}
+
+.sidebar__stats :hover {
+    cursor: pointer;
+    color:#6B9D6F 
+    
 
 }
 
 
-.sidebar__stat >p {
-    color: grey;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 0px 20px;
+.sidebar__stat >div >p {
+    font-size: 1.2rem;
+    line-height: 0.5;
+
+    
+
 }
+
+.sidebar__stat >div >p :hover {
+    font-size: 1.2rem;
+    line-height: 0.5;
+    
+
+    
+
+}
+
+
+
+
+
 
 .sidebar__statNumber{
     font-weight: bold;
@@ -87,9 +119,9 @@ border: 1px solid lightgray;
 
 .sidebar__bottom {
     text-align: left;
-    padding: 10px 20px;
-    border: 1px solid lightgrey;
-    background-color: white;
+    
+    
+    
     border-radius: 10px;
     margin-top: 10px;
 }
