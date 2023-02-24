@@ -123,7 +123,7 @@ const getUserFollowings = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await UserModel.findById(id).populate("following")
-    if (user) res.status(201).json(user.followers);
+    if (user) res.status(201).json(user.following);
     else res.status(404).send({ status: "ERROR", message: "User not found" });
   } catch (error) {
     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
