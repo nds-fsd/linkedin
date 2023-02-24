@@ -61,28 +61,9 @@ const unfollowUser = async (req, res) => {
 };
 
 
- 
-  // const getFollowers = async (req, res) => {
-  //   try {
-  //     const { id } = req.params;
-  //     const followers = await Follow.findById(id) //TODO.populate("user");
-  //     if (followers) res.status(200).json(followers);
-  //     else res.status(404).send({ status: "ERROR", message: "Post not found" });
-  //   } catch (error) {
-  //     return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
-  //   }
-  // };
-
-  
-
- 
-
-
-
 
 
 module.exports = {
   followUser,
-  unfollowUser,
-  
+  unfollowUser
 }

@@ -1,6 +1,7 @@
 
 const UserModel = require("../database/schemas/user");
 
+
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createUser = async (req, res) => {
   try {
