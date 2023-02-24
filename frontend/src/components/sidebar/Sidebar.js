@@ -60,7 +60,7 @@ const recentItem =(topic) =>(
           }}/>
 
         <h2>{data.nombre ? fullName : "Señor Anónimo"}</h2>
-        <h3>FullCat Developer!</h3>
+        <h3>{data.puesto ? data.puesto : "No tiene Curro"}</h3>
         
         
       {/*<Logout content="LOGOUT" />*/}

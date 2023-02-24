@@ -4,3 +4,13 @@ test_role2@email.com: user (con nombre y foto)
 davidmasbaga3@email.com: con foto, nombre y post
 usermulty@email.com: usuario sin nombre
 
+
+
+USUARIOS (TODOS 123456):
+
+fermin@email.com,
+keko@email.com,
+ana@email.com,
+thuma@email.com,
+rico@email.com,
+pablo@email.com

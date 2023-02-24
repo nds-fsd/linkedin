@@ -11,6 +11,7 @@
 .sidebar h2{
     margin: 1rem 0rem;
     color: black;
+    
 }
 
 .sidebar__avatar {
@@ -32,7 +33,7 @@
 .sidebar__top >h2 {
     
     font-size: 24px;
-    line-height: 0px;
+    line-height: 25px;
 }
 
 
