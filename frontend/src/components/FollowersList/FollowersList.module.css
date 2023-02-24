@@ -2,7 +2,32 @@
     flex:0.6;
     width: 65vw;
     height: 90vh;
-    background-color: rgb(255, 255, 255);
     margin: 0px 15px;
+    background-color: white;
     border-radius: 15px;
+    border:1px solid rgb(208, 208, 208);
+   
+    
+}
+
+.block>h3{
+    background-color: rgb(255, 255, 255);
+    padding: 15px 5px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: center;
+    
+
+}
+
+.cards{
+    display: flex;
+    padding: 0px 15px;
+}
+
+.card{
+   
+    margin:10px 10px;
+    border-radius: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
