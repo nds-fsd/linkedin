@@ -260,7 +260,7 @@ export const ProfileBar = (props) => {
             Trabajo Actual
           </label>
 
-          <section id={styles["content1"]}>
+          <section id={styles["content1"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Institucion</span>
@@ -297,7 +297,7 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
-          <section id={styles["content2"]}>
+          <section id={styles["content2"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Pais</span>
@@ -332,7 +332,7 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
-          <section id={styles["content3"]}>
+          <section id={styles["content3"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Nombre de la Empresa</span>

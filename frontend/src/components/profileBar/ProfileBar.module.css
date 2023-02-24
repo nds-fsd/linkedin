@@ -274,7 +274,7 @@
   margin: 30px 50px 70px 50px;
 }
 
-section {
+.section {
   display: none;
   padding: 20px 0 0;
   border-top: 1px solid #ddd;
