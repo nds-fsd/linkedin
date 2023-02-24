@@ -35,20 +35,21 @@ function FollowSuggest() {
 
         
   async function handleFollow(suggest){
-   await apiWrapper("user/"+suggest._id+"/follows", "POST",{
+   await apiWrapper("user/"+suggest+"/follows", "POST",{
     follower: userId,
-   }) 
+   }) ;
+   
 
   }
 
-
+  
 
 
   return (
     <div className='card-box'>
 
       { suggest.map((e=>
-      e.nombre === undefined  || e._id === userId || data.following.includes(e._id) ? ("") : (<FollowSuggestCard key= {e.nombre+"_"+e.apellido} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} onClick={()=>{handleFollow(e)}}/>) 
+      e.nombre === undefined  || e._id === userId || data.following.includes(e._id) ? ("") : (<FollowSuggestCard key= {e.nombre+"_"+e.apellido} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} onClick={()=>{handleFollow(e._id)}}/> ) 
 
         
   
