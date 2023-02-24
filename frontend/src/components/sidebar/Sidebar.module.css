@@ -5,6 +5,7 @@
     border-radius: 10px;
     text-align: center;
     height: fit-content;
+    width: 50vw;
 }
 
 .sidebar h2{
@@ -60,15 +61,23 @@
     padding:0.5rem 1rem;
     display: flex;
     justify-content: space-around;
-
+    
 }
 
 .sidebar__stat >div >h3 {
     font-size: 1rem;
 
     
+    
+}
+
+.sidebar__stats :hover {
+    cursor: pointer;
+    color:#6B9D6F 
+    
 
 }
+
 
 .sidebar__stat >div >p {
     font-size: 1.2rem;
@@ -77,6 +86,17 @@
     
 
 }
+
+.sidebar__stat >div >p :hover {
+    font-size: 1.2rem;
+    line-height: 0.5;
+    
+
+    
+
+}
+
+
 
 
 
