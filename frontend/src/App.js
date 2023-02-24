@@ -6,6 +6,7 @@ import ErrorPage from "./pages/error";
 import AdminPage from "./pages/admin";
 import HomePage from "./pages/home";
 import Register from "./pages/register/register"
+import FollowersPage from './pages/Followers/followersPage';
 import { Route, Routes } from "react-router-dom";
 import {PrivateRoutesAdmin} from "./routes/privateRoutes/privateRoute"
 
@@ -23,6 +24,7 @@ function App() {
               <HomePage />
             </PrivateRoutesAdmin>} /> 
           <Route path="/profile/:idUser" element={<ProfileUserPage></ProfileUserPage>} />
+          <Route path="/follows/:idUser" element={<FollowersPage></FollowersPage>} />
 
           <Route path="admin" element={
             <PrivateRoutesAdmin >

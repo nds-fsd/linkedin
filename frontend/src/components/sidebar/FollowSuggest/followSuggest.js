@@ -11,7 +11,12 @@ function FollowSuggest() {
   const userId= tokenDecoder()
   const [data,setData] = useState({})
   const sector = data.sector
+  
 
+  
+  
+
+  
   
 
   useEffect(() => {

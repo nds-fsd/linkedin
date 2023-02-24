@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import "./Sidebar.css"
+import styles from "./Sidebar.module.css"
 import { Avatar } from '@mui/material'
 import {apiWrapper} from "../../utils/apiWrapper"
 import FollowSuggest from "./FollowSuggest/followSuggest"
@@ -34,8 +34,8 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
 // console.log(data)    
 
 const recentItem =(topic) =>( 
-    <div className='sidebar__recentItem'>
-        <span className='sidebar__hash'>#</span>
+    <div className={styles.sidebar__recentItem}>
+        <span className={styles.sidebar__hash}>#</span>
         <p>{topic}</p>
     </div>
   );
@@ -44,12 +44,16 @@ const recentItem =(topic) =>(
     navigate(`/profile/${data._id}`);
   };
 
+  const handleFollowersClick = () => {
+    navigate(`/follows/${data._id}`);
+  };
+
   return (
 
-    <div className='sidebar'>
-        <div className='sidebar__top'>
+    <div className={styles.sidebar}>
+        <div className={styles.sidebar__top}>
         <img src={"https://images.pexels.com/photos/6985184/pexels-photo-6985184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="" />
-        <Avatar className='sidebar__avatar' 
+        <Avatar className={styles.sidebar__avatar} 
         img src={data.avatar ? avatar: anonimAvatar }
         onClick={() => {
             handleAvatarClick();
@@ -62,15 +66,15 @@ const recentItem =(topic) =>(
       {/*<Logout content="LOGOUT" />*/}
 
         </div>
-      <div className="sidebar__stats">
+      <div className={styles.sidebar__stats}>
 
-        <div className="sidebar__stat">
+        <div className={styles.sidebar__stat} onClick={()=>{handleFollowersClick()}}>
           
-          <div className='left-side-followers'>
+          <div >
             <h3>Followers</h3>
             <p>{followers}</p>
           </div>
-          <div className='right-side-followers'>
+          <div >
             <h3>Followings</h3>
             <p>{followings}</p>
           </div>
@@ -79,7 +83,7 @@ const recentItem =(topic) =>(
           <p className="sidebar__statNumber">2,344</p> */}
         </div>
       </div>
-      <div className="sidebar__bottom">
+      <div>
         <h3>Suggested Following</h3>
         {/* <p>Recent</p>
         {recentItem("reactjs")}
