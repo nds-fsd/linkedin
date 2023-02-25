@@ -20,6 +20,9 @@ export const ProfileBar = (props) => {
 
   const [data, setData] = useState({});
 
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+
   const [puesto, setPuesto] = useState("");
   const [empresaActual, setEmpresaActual] = useState("");
   const [sector, setSector] = useState("");
@@ -47,6 +50,10 @@ export const ProfileBar = (props) => {
       apiWrapper("user/" + userId).then((response) => {
         //console.log("dentro " + JSON.stringify(response));
         setData(response);
+
+        setNombre(response.nombre);
+        setApellido(response.apellido);
+
         setPuesto(response.puesto);
         setEmpresaActual(response.empresa_actual);
         setSector(response.sector);
@@ -157,6 +164,27 @@ export const ProfileBar = (props) => {
     console.log("mode : " + mode);
   }, [mode]);
   */
+
+  //-------------------------------------------------------------------------------------------
+  //Edicion Nombre y Apellidos ----------------------------------------------------------------
+
+  const [edicionNombreApellidos, setEdicionNombreApellidos] = useState(false);
+
+  const handleClickSaveNameProfile = () => {
+    const body = {
+      nombre: nombre,
+      apellido: apellido,
+    };
+
+    apiWrapper("user/" + userId, "PATCH", body).then((response) => {
+      setActualizar(true);
+      toast.success("Se ha actualizado el Nombre y Apellido del Perfil", {
+        autoClose: 3000,
+      });
+      reloadPage();
+    });
+  };
+
   //-------------------------------------------------------------------------------------------
   //Inicio HTML -------------------------------------------------------------------------------
 
@@ -170,14 +198,62 @@ export const ProfileBar = (props) => {
           alt=""
         />
         <h2>
-          {fullName}
-          <CreateIcon
+          <div
             className={
-              mode === "write"
-                ? styles.iconEditName + " " + styles.element_visible
+              (mode === "write" && !edicionNombreApellidos) || mode !== "write"
+                ? styles.element_visible
                 : styles.element_hidden
             }
-          />
+          >
+            {fullName}
+            <CreateIcon
+              className={
+                styles.iconEditName +
+                " " +
+                (mode === "write" ? styles.element_visible : styles.element_hidden)
+              }
+              onClick={() => {
+                setEdicionNombreApellidos(true);
+              }}
+            />
+          </div>
+
+          <div
+            className={
+              mode === "write" && edicionNombreApellidos
+                ? styles.element_visible
+                : styles.element_hidden
+            }
+          >
+            <input
+              type="text"
+              className={styles.nombreApellidos}
+              placeholder="Nombre ... "
+              value={nombre}
+              onChange={(e) => {
+                handleChange(setNombre, e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              className={styles.nombreApellidos}
+              placeholder="Apellido ... "
+              value={apellido}
+              onChange={(e) => {
+                handleChange(setApellido, e.target.value);
+              }}
+            />
+
+            <button
+              className={styles.BotonGuardarNombreApellido}
+              onClick={() => {
+                setEdicionNombreApellidos(false);
+                handleClickSaveNameProfile();
+              }}
+            >
+              Guardar
+            </button>
+          </div>
         </h2>
       </div>
 

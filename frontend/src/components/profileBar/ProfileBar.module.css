@@ -32,6 +32,10 @@
   align-items: center;
 }
 
+h2> div{
+  position: absolute;
+}
+
 .iconEditName{
 color: gray ;
 padding-left: 25px;
@@ -124,6 +128,15 @@ cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #ccc;
   border-radius: 0;
+}
+
+.nombreApellidos{
+  height: 0.5rem;
+  text-align: left;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin-right: 15px;
 }
 
 .sidebar__statNumber {
@@ -265,6 +278,20 @@ cursor: pointer;
   font-weight: 600;
   font-size: 13px;
 }
+
+.BotonGuardarNombreApellido {
+  background-color: #6b9d6f;
+  gap: 10px;
+  border: 2px solid #6b9d6f;
+  padding: 8px 32px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 0px;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+}
+
 
 .companyAdd_icon {
   width: 1.2rem;
