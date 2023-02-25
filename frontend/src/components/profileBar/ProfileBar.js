@@ -196,6 +196,7 @@ export const ProfileBar = (props) => {
           className={styles.sidebar__avatar}
           src={data.avatar ? avatar : anonimAvatar}
           alt=""
+          onClick={() => console.log('holajumbo')}
         />
         <h2>
           <div
