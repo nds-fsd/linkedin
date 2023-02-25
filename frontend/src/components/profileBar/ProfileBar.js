@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import styles from "./ProfileBar.module.css";
 import { Avatar, Button } from "@mui/material";
 import { apiWrapper } from "../../utils/apiWrapper";
-import Logout from "../logout/Logout";
-import CompanyAdd from "@mui/icons-material/Add";
 import { ToastContainer, toast } from "react-toastify";
+import { tokenDecoder } from "../../utils/tokenDecoder";
 import ProfileAddCompany from "./addCompany/ProfileAddCompany";
+import CompanyAdd from "@mui/icons-material/Add";
+import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
+  const userIdToken = tokenDecoder();
+
+  const [mode, setMode] = useState("read");
+
   const [actualizar, setActualizar] = useState(true);
   const [ownerCompany, setOwnerCompany] = useState({});
 
@@ -18,15 +23,12 @@ export const ProfileBar = (props) => {
   const [puesto, setPuesto] = useState("");
   const [empresaActual, setEmpresaActual] = useState("");
   const [sector, setSector] = useState("");
-
   const [ubicacionPais, setUbicacionPais] = useState("");
   const [ubicacionCodigoPostal, setUbicacionCodigoPostal] = useState("");
   const [ubicacionCiudad, setUbicacionCiudad] = useState("");
-
   const [educacionInstitucion, setEducacionInstitucion] = useState("");
   const [educacionTitulacion, setEducacionTitulacion] = useState("");
   const [educacionDisciplina, setEducacionDisciplina] = useState("");
-
   const [telefono, setTelefono] = useState("");
   const [tipoTelefono, setTipoTelefono] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState();
@@ -34,6 +36,12 @@ export const ProfileBar = (props) => {
 
   const [reload, setReload] = useState(false);
 
+  const reloadPage = () => {
+    setReload(!reload);
+  };
+
+  //-------------------------------------------------------------------------------------------
+  //DATOS DEL PERFIL --------------------------------------------------------------------------
   useEffect(() => {
     if (actualizar) {
       apiWrapper("user/" + userId).then((response) => {
@@ -113,6 +121,8 @@ export const ProfileBar = (props) => {
     setObjectChanged(value);
   };
 
+  //-------------------------------------------------------------------------------------------
+  //DATOS DE LA EMPRESA -----------------------------------------------------------------------
   const [claseAñadirEmpresa, setClaseAñadirEmpresa] = useState(`${styles.sidebar__detail}`);
   const handleClickEmpresa = () => {
     setClaseAñadirEmpresa(`${styles.sidebar__detail_ampliado}`);
@@ -130,21 +140,45 @@ export const ProfileBar = (props) => {
     reloadPage();
   };
 
-  const reloadPage = () => {
-    setReload(!reload);
-  };
+  //-------------------------------------------------------------------------------------------
+  //useEffect Inicio --------------------------------------------------------------------------
+
+  useEffect(() => {
+    //console.log("userId : " + userId);
+    //console.log("userIdToken : " + userIdToken);
+    if (userId === userIdToken) {
+      setMode("write");
+    }
+  }, []);
+
+  //Para comprobar que el MODO ha cambiado
+  /*
+  useEffect(() => {
+    console.log("mode : " + mode);
+  }, [mode]);
+  */
+  //-------------------------------------------------------------------------------------------
+  //Inicio HTML -------------------------------------------------------------------------------
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
-        <img src="./img/pexels-gradienta-6985001.jpg" alt="" />
+        <img src="img/pexels-gradienta-6985001.jpg" alt="" />
         <Avatar
           className={styles.sidebar__avatar}
           src={data.avatar ? avatar : anonimAvatar}
           alt=""
         />
-        <h2>{fullName}</h2>
-        {/*<Logout content="LOGOUT" />*/}
+        <h2>
+          {fullName}
+          <CreateIcon
+            className={
+              mode === "write"
+                ? styles.iconEditName + " " + styles.element_visible
+                : styles.element_hidden
+            }
+          />
+        </h2>
       </div>
 
       <div className={styles.sidebar__stats_dark}>
@@ -164,6 +198,7 @@ export const ProfileBar = (props) => {
           <span>Fecha Nacimiento</span>
           <input
             type="date"
+            disabled={mode === "write" ? null : "disabled"}
             value={fechaNacimiento}
             onChange={(e) => {
               handleChange(setFechaNacimiento, e.target.value);
@@ -174,6 +209,7 @@ export const ProfileBar = (props) => {
           <span>Tipo Telefono</span>
           <select
             value={tipoTelefono}
+            disabled={mode === "write" ? null : "disabled"}
             onChange={(e) => {
               handleChange(setTipoTelefono, e.target.value);
             }}
@@ -185,6 +221,7 @@ export const ProfileBar = (props) => {
           <span>Telefono</span>
           <input
             type="text"
+            disabled={mode === "write" ? null : "disabled"}
             required="required"
             pattern="/[0-9]*"
             maxLength="9"
@@ -198,6 +235,7 @@ export const ProfileBar = (props) => {
           <span>Web</span>
           <input
             type="text"
+            disabled={mode === "write" ? null : "disabled"}
             value={web}
             onChange={(e) => {
               handleChange(setWeb, e.target.value);
@@ -208,6 +246,7 @@ export const ProfileBar = (props) => {
           <span className={styles.espacio}>&nbsp;</span>
         </div>
 
+        {/*TABS -------------------------------------------------------------------------------------------*/}
         <div className={styles.tabs}>
           <input
             className={styles.tab}
@@ -260,12 +299,14 @@ export const ProfileBar = (props) => {
             Trabajo Actual
           </label>
 
+          {/*CONTENT (TAB) 1 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content1"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Institucion</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   placeholder="Universidad, .."
                   value={educacionInstitucion}
                   onChange={(e) => {
@@ -277,6 +318,7 @@ export const ProfileBar = (props) => {
                 <span>Titulacion</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={educacionTitulacion}
                   onChange={(e) => {
                     handleChange(setEducacionTitulacion, e.target.value);
@@ -287,6 +329,7 @@ export const ProfileBar = (props) => {
                 <span>Disciplina</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   placeholder="Empresariales, ..."
                   value={educacionDisciplina}
                   onChange={(e) => {
@@ -297,12 +340,14 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
+          {/*CONTENT (TAB) 2 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content2"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Pais</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionPais}
                   onChange={(e) => {
                     handleChange(setUbicacionPais, e.target.value);
@@ -313,6 +358,7 @@ export const ProfileBar = (props) => {
                 <span>Codigo Postal</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionCodigoPostal}
                   onChange={(e) => {
                     handleChange(setUbicacionCodigoPostal, e.target.value);
@@ -323,6 +369,7 @@ export const ProfileBar = (props) => {
                 <span>Ciudad</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionCiudad}
                   onChange={(e) => {
                     handleChange(setUbicacionCiudad, e.target.value);
@@ -332,12 +379,14 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
+          {/*CONTENT (TAB) 3 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content3"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Nombre de la Empresa</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={empresaActual}
                   onChange={(e) => {
                     handleChange(setEmpresaActual, e.target.value);
@@ -348,6 +397,7 @@ export const ProfileBar = (props) => {
                 <span>Puesto de Trabajo</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={puesto}
                   onChange={(e) => {
                     handleChange(setPuesto, e.target.value);
@@ -358,6 +408,7 @@ export const ProfileBar = (props) => {
                 <span>Sector</span>
                 <select
                   value={sector}
+                  disabled={mode === "write" ? null : "disabled"}
                   onChange={(e) => {
                     handleChange(setSector, e.target.value);
                   }}
@@ -369,15 +420,6 @@ export const ProfileBar = (props) => {
                   <option>Restauracion</option>
                   <option>Artes Escenicas</option>
                 </select>
-
-                {/*}
-                <input
-                  type="text"
-                  value={sector}
-                  onChange={(e) => {
-                    handleChange(setSector, e.target.value);
-                  }}
-                />*/}
               </div>
             </div>
           </section>
@@ -386,6 +428,7 @@ export const ProfileBar = (props) => {
         <div className={styles.values}>
           <span className={styles.espacio}>&nbsp;</span>
           <Button
+            className={mode === "write" ? styles.element_visible : styles.element_hidden}
             onClick={() => {
               handleClick();
             }}
@@ -405,7 +448,11 @@ export const ProfileBar = (props) => {
               className={
                 styles.companyAdd +
                 " " +
-                (ownerCompany.length > 0 ? styles.companyAdd_hidden : styles.companyAdd_visible)
+                (mode === "write"
+                  ? ownerCompany.length > 0
+                    ? styles.element_hidden
+                    : styles.element_visible
+                  : styles.element_hidden)
               }
               onClick={() => {
                 handleClickEmpresa();
@@ -418,7 +465,11 @@ export const ProfileBar = (props) => {
               className={
                 styles.companyAdd_icon +
                 " " +
-                (ownerCompany.length > 0 ? styles.companyAdd_visible : styles.companyAdd_hidden)
+                (mode === "write"
+                  ? ownerCompany.length > 0
+                    ? styles.element_visible
+                    : styles.element_hidden
+                  : styles.element_hidden)
               }
               onClick={() => {
                 handleClickDeleteLinkCompany();
