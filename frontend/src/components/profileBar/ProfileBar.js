@@ -8,6 +8,7 @@ import ProfileAddCompany from "./addCompany/ProfileAddCompany";
 import CompanyAdd from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+//import {Image} from "cloudinary-react";
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
@@ -42,6 +43,43 @@ export const ProfileBar = (props) => {
   const reloadPage = () => {
     setReload(!reload);
   };
+// cloudinary stuff
+
+const [imageSelected, setImageSelected] = useState('');
+
+
+  const updateAvatar = async ( props) => {
+  const formData = new FormData();
+  formData.append('file', imageSelected);
+  formData.append('upload_preset', 'joblinkup');
+
+  try {
+    const uploadResponse = await fetch('https://api.cloudinary.com/v1_1/dkqlgumn7/image/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    const uploadData = await uploadResponse.json();
+    const newAvatarUrl = uploadData.secure_url;
+    console.log(newAvatarUrl)
+  
+    const body = { avatar: newAvatarUrl };
+    apiWrapper("user/" + userId, "PATCH", body);
+
+
+    setAvatarUrl(newAvatarUrl)
+
+    toast.success('Se ha actualizado el Avatar del Perfil', {
+      autoClose: 3000,
+    });
+
+   reloadPage(!reload);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 
   //-------------------------------------------------------------------------------------------
   //DATOS DEL PERFIL --------------------------------------------------------------------------
@@ -187,17 +225,32 @@ export const ProfileBar = (props) => {
 
   //-------------------------------------------------------------------------------------------
   //Inicio HTML -------------------------------------------------------------------------------
-
+const [avatarUrl, setAvatarUrl] = useState(data.avatar ? avatar : anonimAvatar);
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
         <img src="img/pexels-gradienta-6985001.jpg" alt="" />
-        <Avatar
-          className={styles.sidebar__avatar}
-          src={data.avatar ? avatar : anonimAvatar}
-          alt=""
-          onClick={() => console.log('holajumbo')}
-        />
+       <Avatar
+  className={styles.sidebar__avatar}
+  src={data.avatar ? avatar : anonimAvatar}
+  alt=""
+  onClick={() => {
+    // Create a new <input> element
+    const input = document.createElement('input');
+    input.type = 'file';
+
+    // Set up event listener for when user selects a file
+    input.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      setImageSelected(file);
+    });
+
+    // Trigger the file selection dialog box
+    input.click();
+  }}
+/>
+<button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button>
+       
         <h2>
           <div
             className={
