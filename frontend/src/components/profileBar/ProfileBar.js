@@ -38,12 +38,10 @@ export const ProfileBar = (props) => {
   const [tipoTelefono, setTipoTelefono] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [web, setWeb] = useState("");
-
-  const [avatarUrl, setAvatarUrl] = useState("");
-
   const [reload, setReload] = useState(false);
 
   const reloadPage = () => {
+     console.log('reload', reload);
     setReload(!reload);
   };
 // cloudinary stuff
@@ -53,6 +51,7 @@ export const ProfileBar = (props) => {
 
 
 function showUploadWidget () {
+  console.log('showUploadWidget');
   const cloudinary =  window.cloudinary;
   cloudinary.openUploadWidget ({ 
     cloudName: "dkqlgumn7",  
@@ -89,74 +88,36 @@ function showUploadWidget () {
     }
   }, 
   (err, info,result) => {
-    if (!err) {
-
-      console.log("Upload Widget event - ", info.info.secure_url);
+   // console.log("info, err, result, reload", info, err, result, reload);
+    if (!err && info && info.event === "success") {
      
       const newAvatarUrl = info.info.secure_url;
-     // console.log("mongourl", newAvatarUrl);
+   //   console.log("info, err, result, reload", info, err, result, reload);
 
 
       const body = { avatar: newAvatarUrl };
-       apiWrapper("user/" + userId, "PATCH", body)
+      apiWrapper("user/" + userId, "PATCH", body)
+       .then((res) => {
+          console.log("refresh avatar", res);
        
-       .then(res)
-       {
+          setActualizar(!actualizar);
+          reloadPage();
 
-        //setAvatarUrl(newAvatarUrl);
-        reloadPage();
-       }
-
-       
-
+       });
      }
-  
-  if ( err || result.event === 'success' ) {
-    onUpload(err, result);
-    console.log("hey this is", onUpload)
-  }
-  }
- 
-  );
+  });
 }
 
-//   const updateAvatar = async ( props) => {
-//   const formData = new FormData();
-//   formData.append('file', imageSelected);
-//   formData.append('upload_preset', 'joblinkup');
 
-//   try {
-//     const uploadResponse = await fetch('https://api.cloudinary.com/v1_1/dkqlgumn7/image/upload', {
-//       method: 'POST',
-//       body: formData
-//     });
-
-//     const uploadData = await uploadResponse.json();
-//     const newAvatarUrl = uploadData.secure_url;
-//     console.log(newAvatarUrl)
-  
-//     const body = { avatar: newAvatarUrl };
-//     apiWrapper("user/" + userId, "PATCH", body);
-
-
-//     setAvatarUrl(newAvatarUrl)
-
-//     toast.success('Se ha actualizado el Avatar del Perfil', {
-//       autoClose: 3000,
-//     });
-
-//    reloadPage(!reload);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 
 
   //-------------------------------------------------------------------------------------------
   //DATOS DEL PERFIL --------------------------------------------------------------------------
   useEffect(() => {
+    console.log("heyactualizar", actualizar)
     if (actualizar) {
+      console.log("heyactualizar2")
       apiWrapper("user/" + userId).then((response) => {
         //console.log("dentro " + JSON.stringify(response));
         setData(response);
@@ -304,11 +265,11 @@ function showUploadWidget () {
       <div className={styles.sidebar__top}>
         <img src="img/pexels-gradienta-6985001.jpg" alt="" />
        <Avatar
-  className={styles.sidebar__avatar}
-  src= {data.avatar ? avatar : anonimAvatar}
-  alt=""
-  onClick={()=> {showUploadWidget()}}
-/>
+          className={styles.sidebar__avatar}
+          src= {data.avatar ? avatar : anonimAvatar}
+          alt=""
+          onClick={()=> {showUploadWidget()}}
+        />
 {/* <button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button> */}
        
         <h2>
