@@ -10,6 +10,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 //import {Image} from "cloudinary-react";
 
+
 export const ProfileBar = (props) => {
   const userId = props.idUser;
   const userIdToken = tokenDecoder();
@@ -38,6 +39,8 @@ export const ProfileBar = (props) => {
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [web, setWeb] = useState("");
 
+  const [avatarUrl, setAvatarUrl] = useState("");
+
   const [reload, setReload] = useState(false);
 
   const reloadPage = () => {
@@ -45,39 +48,108 @@ export const ProfileBar = (props) => {
   };
 // cloudinary stuff
 
-const [imageSelected, setImageSelected] = useState('');
+//const [imageSelected, setImageSelected] = useState('');
 
 
-  const updateAvatar = async ( props) => {
-  const formData = new FormData();
-  formData.append('file', imageSelected);
-  formData.append('upload_preset', 'joblinkup');
 
-  try {
-    const uploadResponse = await fetch('https://api.cloudinary.com/v1_1/dkqlgumn7/image/upload', {
-      method: 'POST',
-      body: formData
-    });
+function showUploadWidget () {
+  const cloudinary =  window.cloudinary;
+  cloudinary.openUploadWidget ({ 
+    cloudName: "dkqlgumn7",  
+    uploadPreset: "joblinkup", 
+    sources: ["local", "camera"],
+    googleApiKey: "<image_search_google_api_key>",
+    showAdvancedOptions: false,
+    cropping: false,
+    multiple: false,
+    defaultSource: "local",
+    styles: {
+      palette: {
+        window: "#F5F5F5",
+        sourceBg: "#FFFFFF",
+        windowBorder: "#90a0b3",
+        tabIcon: "#0094c7",
+        inactiveTabIcon: "#69778A",
+        menuIcons: "#0094C7",
+        link: "#53ad9d",
+        action: "#8F5DA5",
+        inProgress: "#0194c7",
+        complete: "#53ad9d",
+        error: "#c43737",
+        textDark: "#000000",
+        textLight: "#FFFFFF"
+      },
+      fonts: {
+        default: null,
+        "'Poppins', sans-serif": {
+          url: "https://fonts.googleapis.com/css?family=Poppins",
+          active: true
+        }
+      }
+    }
+  }, 
+  (err, info,result) => {
+    if (!err) {
 
-    const uploadData = await uploadResponse.json();
-    const newAvatarUrl = uploadData.secure_url;
-    console.log(newAvatarUrl)
+      console.log("Upload Widget event - ", info.info.secure_url);
+     
+      const newAvatarUrl = info.info.secure_url;
+     // console.log("mongourl", newAvatarUrl);
+
+
+      const body = { avatar: newAvatarUrl };
+       apiWrapper("user/" + userId, "PATCH", body)
+       
+       .then(res)
+       {
+
+        //setAvatarUrl(newAvatarUrl);
+        reloadPage();
+       }
+
+       
+
+     }
   
-    const body = { avatar: newAvatarUrl };
-    apiWrapper("user/" + userId, "PATCH", body);
-
-
-    setAvatarUrl(newAvatarUrl)
-
-    toast.success('Se ha actualizado el Avatar del Perfil', {
-      autoClose: 3000,
-    });
-
-   reloadPage(!reload);
-  } catch (error) {
-    console.error(error);
+  if ( err || result.event === 'success' ) {
+    onUpload(err, result);
+    console.log("hey this is", onUpload)
   }
-};
+  }
+ 
+  );
+}
+
+//   const updateAvatar = async ( props) => {
+//   const formData = new FormData();
+//   formData.append('file', imageSelected);
+//   formData.append('upload_preset', 'joblinkup');
+
+//   try {
+//     const uploadResponse = await fetch('https://api.cloudinary.com/v1_1/dkqlgumn7/image/upload', {
+//       method: 'POST',
+//       body: formData
+//     });
+
+//     const uploadData = await uploadResponse.json();
+//     const newAvatarUrl = uploadData.secure_url;
+//     console.log(newAvatarUrl)
+  
+//     const body = { avatar: newAvatarUrl };
+//     apiWrapper("user/" + userId, "PATCH", body);
+
+
+//     setAvatarUrl(newAvatarUrl)
+
+//     toast.success('Se ha actualizado el Avatar del Perfil', {
+//       autoClose: 3000,
+//     });
+
+//    reloadPage(!reload);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 
 
@@ -130,6 +202,7 @@ const [imageSelected, setImageSelected] = useState('');
   const avatar = data.avatar;
   const anonimAvatar =
     "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png";
+  //setAvatarUrl(data.avatar ? avatar : anonimAvatar);
 
   const handleClick = () => {
     const body = {
@@ -193,7 +266,8 @@ const [imageSelected, setImageSelected] = useState('');
     //console.log("userIdToken : " + userIdToken);
     if (userId === userIdToken) {
       setMode("write");
-    }
+    } 
+    console.log("hay avatarrr", avatarUrl)
   }, []);
 
   //Para comprobar que el MODO ha cambiado
@@ -225,31 +299,17 @@ const [imageSelected, setImageSelected] = useState('');
 
   //-------------------------------------------------------------------------------------------
   //Inicio HTML -------------------------------------------------------------------------------
-const [avatarUrl, setAvatarUrl] = useState(data.avatar ? avatar : anonimAvatar);
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
         <img src="img/pexels-gradienta-6985001.jpg" alt="" />
        <Avatar
   className={styles.sidebar__avatar}
-  src={data.avatar ? avatar : anonimAvatar}
+  src= {data.avatar ? avatar : anonimAvatar}
   alt=""
-  onClick={() => {
-    // Create a new <input> element
-    const input = document.createElement('input');
-    input.type = 'file';
-
-    // Set up event listener for when user selects a file
-    input.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      setImageSelected(file);
-    });
-
-    // Trigger the file selection dialog box
-    input.click();
-  }}
+  onClick={()=> {showUploadWidget()}}
 />
-<button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button>
+{/* <button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button> */}
        
         <h2>
           <div
