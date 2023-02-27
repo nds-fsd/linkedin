@@ -21,3 +21,62 @@
   width: 80%;
   padding-top: 100px;
 }
+
+.tabs {
+  margin: 30px 50px 70px 50px;
+}
+
+
+
+.section {
+  display: none;
+  padding: 20px 0 0;
+  border-top: 1px solid #ddd;
+}
+
+.tab {
+  display: none;
+}
+
+
+
+.tab:checked + .label {
+  color: #555;
+  font-weight: 700;
+  border: 1px solid #ddd;
+  border-left: 2px solid orange;
+  border-right: 1px solid #fff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2{
+  display: block;
+}
+
+
+
+
+
+.contenido {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 50px;
+}
+.izquierda {
+  margin: 20px 0px;
+  display: flex;
+  
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.derecha {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 200;
+}
