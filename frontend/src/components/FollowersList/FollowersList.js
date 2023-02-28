@@ -9,12 +9,22 @@ import { apiWrapper } from '../../utils/apiWrapper';
 function FollowersList(props) {
     const {idUser} = useParams();
     const [followers, setFollowers] = useState([])
+    const [followings, setFollowings] = useState([])
     
 
     useEffect(() => {
       apiWrapper("user/" + idUser+"/followers").
       then((response) => {
         setFollowers(response)
+                
+    })
+   
+    }, [])
+
+    useEffect(() => {
+      apiWrapper("user/" + idUser+"/followings").
+      then((response) => {
+        setFollowings(response)
                 
     })
    
@@ -39,7 +49,17 @@ function FollowersList(props) {
         )
       })} 
     </div>
-    <h3> Followings </h3>    
+    <h3> Followings </h3>
+    <div className={styles.cards}> 
+
+      {followings.map((e,index)=>{
+        return (
+        <div className={styles.card}>
+        <FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} />
+        </div>
+        )
+      })} 
+    </div>    
     
 
 
