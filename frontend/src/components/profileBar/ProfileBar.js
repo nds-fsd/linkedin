@@ -8,6 +8,8 @@ import ProfileAddCompany from "./addCompany/ProfileAddCompany";
 import CompanyAdd from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+//import {Image} from "cloudinary-react";
+
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
@@ -36,17 +38,86 @@ export const ProfileBar = (props) => {
   const [tipoTelefono, setTipoTelefono] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [web, setWeb] = useState("");
-
   const [reload, setReload] = useState(false);
 
   const reloadPage = () => {
+     console.log('reload', reload);
     setReload(!reload);
   };
+// cloudinary stuff
+
+//const [imageSelected, setImageSelected] = useState('');
+
+
+
+function showUploadWidget () {
+  console.log('showUploadWidget');
+  const cloudinary =  window.cloudinary;
+  cloudinary.openUploadWidget ({ 
+    cloudName: "dkqlgumn7",  
+    uploadPreset: "joblinkup", 
+    sources: ["local", "camera"],
+    googleApiKey: "<image_search_google_api_key>",
+    showAdvancedOptions: false,
+    cropping: false,
+    multiple: false,
+    defaultSource: "local",
+    styles: {
+      palette: {
+        window: "#F5F5F5",
+        sourceBg: "#FFFFFF",
+        windowBorder: "#90a0b3",
+        tabIcon: "#0094c7",
+        inactiveTabIcon: "#69778A",
+        menuIcons: "#0094C7",
+        link: "#53ad9d",
+        action: "#8F5DA5",
+        inProgress: "#0194c7",
+        complete: "#53ad9d",
+        error: "#c43737",
+        textDark: "#000000",
+        textLight: "#FFFFFF"
+      },
+      fonts: {
+        default: null,
+        "'Poppins', sans-serif": {
+          url: "https://fonts.googleapis.com/css?family=Poppins",
+          active: true
+        }
+      }
+    }
+  }, 
+  (err, info,result) => {
+   // console.log("info, err, result, reload", info, err, result, reload);
+    if (!err && info && info.event === "success") {
+     
+      const newAvatarUrl = info.info.secure_url;
+   //   console.log("info, err, result, reload", info, err, result, reload);
+
+
+      const body = { avatar: newAvatarUrl };
+      apiWrapper("user/" + userId, "PATCH", body)
+       .then((res) => {
+          console.log("refresh avatar", res);
+       
+          setActualizar(!actualizar);
+          reloadPage();
+
+       });
+     }
+  });
+}
+
+
+
+
 
   //-------------------------------------------------------------------------------------------
   //DATOS DEL PERFIL --------------------------------------------------------------------------
   useEffect(() => {
+    console.log("heyactualizar", actualizar)
     if (actualizar) {
+      console.log("heyactualizar2")
       apiWrapper("user/" + userId).then((response) => {
         //console.log("dentro " + JSON.stringify(response));
         setData(response);
@@ -92,6 +163,7 @@ export const ProfileBar = (props) => {
   const avatar = data.avatar;
   const anonimAvatar =
     "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png";
+  //setAvatarUrl(data.avatar ? avatar : anonimAvatar);
 
   const handleClick = () => {
     const body = {
@@ -155,7 +227,8 @@ export const ProfileBar = (props) => {
     //console.log("userIdToken : " + userIdToken);
     if (userId === userIdToken) {
       setMode("write");
-    }
+    } 
+    console.log("hay avatarrr", avatarUrl)
   }, []);
 
   //Para comprobar que el MODO ha cambiado
@@ -187,16 +260,18 @@ export const ProfileBar = (props) => {
 
   //-------------------------------------------------------------------------------------------
   //Inicio HTML -------------------------------------------------------------------------------
-
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
         <img src="img/pexels-gradienta-6985001.jpg" alt="" />
-        <Avatar
+       <Avatar
           className={styles.sidebar__avatar}
-          src={data.avatar ? avatar : anonimAvatar}
+          src= {data.avatar ? avatar : anonimAvatar}
           alt=""
+          onClick={()=> {showUploadWidget()}}
         />
+{/* <button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button> */}
+       
         <h2>
           <div
             className={
