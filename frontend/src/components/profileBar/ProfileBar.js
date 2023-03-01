@@ -229,7 +229,7 @@ function showUploadWidget () {
     if (userId === userIdToken) {
       setMode("write");
     } 
-    //console.log("hay avatarrr", avatarUrl)
+    console.log("hay avatarrr", avatarUrl)
   }, []);
 
   //Para comprobar que el MODO ha cambiado
