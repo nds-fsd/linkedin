@@ -42,11 +42,13 @@ const Feed = () => {
 
   async function handlePost(e) {
     e.preventDefault();
+    const photoupping = "https://res.cloudinary.com/dkqlgumn7/image/upload/v1677750234/c6xalck4dvxjj26ga69e.jpg"
     const response = await apiWrapper("post/", "POST", {
       title: input,
       description: input,
       content: input,
       photoUrl: input,
+      postphotoUrl: photoupping,
       userId: userId,
     });
 
