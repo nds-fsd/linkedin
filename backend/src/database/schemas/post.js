@@ -10,7 +10,7 @@ const postSchema = new Schema({
   //dislikes: { type: Boolean },
   //likesCount: { type: Number, default: 0 },
   //dislikesCount: { type: Number, default: 0 },
-  //uploadphotos: { type: Image, ref:'User'},
+  uploadphotos: { type: String},
   //uploadvideos: { type: Image.uploadvideos, ref:'User'},
   //createdevents: { type: Event, ref:'User'},
   createdAt: { type: Date, default: Date.now },
