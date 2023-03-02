@@ -1,13 +1,13 @@
 import React from 'react'
 import "./Post.css"
-import { Avatar } from '@mui/material'
+import { Avatar, AvatarGroup } from '@mui/material'
 import InputOption from '../inputOption/InputOption';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 
-const Post = ({name, date, content, photoUrl} ) => {
+const Post = ({name, date, content, photoUrl, postphotoUrl} ) => {
   return (
     
     <div className='post'>
@@ -21,6 +21,7 @@ const Post = ({name, date, content, photoUrl} ) => {
         <div className='divider'></div>
         <div className='post__body'>
             <p> {content} </p>
+         <Avatar sx={{ width: 200, height: 200 }} src= {postphotoUrl} />
         </div>
         <div className='post_buttons'>
             <InputOption className="post_icon" Icon={ThumbUpIcon} title="Like" color="grey" />

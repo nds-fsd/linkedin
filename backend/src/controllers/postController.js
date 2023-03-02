@@ -10,7 +10,8 @@ const createPost = async (req, res) => {
       description, 
       content, 
       postedBy, 
-      comments, 
+      comments,
+      postphotoUrl, 
       createdAt, 
       updatedAt,
       userId, //Relación Schemas 02
@@ -26,6 +27,7 @@ const user = await User.findById(userId) // Relación Schemas 03
       content,
       postedBy,
       comments,
+      postphotoUrl,
       createdAt,
       updatedAt,
       user: user._id // Relación Schemas 04

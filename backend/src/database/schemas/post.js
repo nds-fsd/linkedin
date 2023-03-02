@@ -1,11 +1,12 @@
 const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema({
-  title: { type: String, required: true  },
+  title: { type: String  },
   description: { type: String },
-  content: { type: String },
+  content: { type: String, required: true },
   //postedBy: { type: Schema.Types.ObjectId, ref: "User" },
   comments: { type: String },
+  postphotoUrl: { type: String},
   //likes: { type: Boolean },
   //dislikes: { type: Boolean },
   //likesCount: { type: Number, default: 0 },
