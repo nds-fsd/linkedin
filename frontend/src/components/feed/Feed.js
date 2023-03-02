@@ -9,9 +9,9 @@ import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import Post from "../post/Post";
 import { tokenDecoder } from "../../utils/tokenDecoder";
 import { apiWrapper } from "../../utils/apiWrapper";
-import { AdvancedImage } from '@cloudinary/react';
-import { Avatar, SvgIcon } from "@mui/material";
-import Image from "@mui/icons-material/Image";
+//import { AdvancedImage } from '@cloudinary/react';
+//import { Avatar, SvgIcon } from "@mui/material";
+//import Image from "@mui/icons-material/Image";
 import Button from '@mui/icons-material/AddPhotoAlternateOutlined';
 
 const Feed = () => {
