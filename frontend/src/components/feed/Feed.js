@@ -9,12 +9,17 @@ import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import Post from "../post/Post";
 import { tokenDecoder } from "../../utils/tokenDecoder";
 import { apiWrapper } from "../../utils/apiWrapper";
+import { AdvancedImage } from '@cloudinary/react';
+import { Avatar, SvgIcon } from "@mui/material";
+import Image from "@mui/icons-material/Image";
+import Button from '@mui/icons-material/AddPhotoAlternateOutlined';
 
 const Feed = () => {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
-  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+ // const [uploadingPhoto, setUploadingPhoto] =useState(false)
+  const [postphotoUrl, setPostphotoUrl] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   const userId = tokenDecoder();
@@ -39,49 +44,119 @@ const Feed = () => {
     fetchData();
   }, [refresh]);
 
+  function showUploadWidget2 () {
+    console.log('showUploadWidget');
+    const cloudinary =  window.cloudinary;
+    cloudinary.openUploadWidget ({ 
+      cloudName: "dkqlgumn7",  
+      uploadPreset: "joblinkup", 
+      sources: ["local", "camera"],
+      googleApiKey: "<image_search_google_api_key>",
+      showAdvancedOptions: false,
+      cropping: false,
+      multiple: false,
+      defaultSource: "local",
+      styles: {
+        palette: {
+          window: "#F5F5F5",
+          sourceBg: "#FFFFFF",
+          windowBorder: "#90a0b3",
+          tabIcon: "#0094c7",
+          inactiveTabIcon: "#69778A",
+          menuIcons: "#0094C7",
+          link: "#53ad9d",
+          action: "#8F5DA5",
+          inProgress: "#0194c7",
+          complete: "#53ad9d",
+          error: "#c43737",
+          textDark: "#000000",
+          textLight: "#FFFFFF"
+        },
+        fonts: {
+          default: null,
+          "'Poppins', sans-serif": {
+            url: "https://fonts.googleapis.com/css?family=Poppins",
+            active: true
+          }
+        }
+      }
+    }, 
+    (err, info,result) => {
+     // console.log("info, err, result, reload", info, err, result, reload);
+      if (!err && info && info.event === "success") {
+       
+        const phototoup = info.info.secure_url;
+        setPostphotoUrl(phototoup)
+        console.log(setPostphotoUrl)
+        console.log(phototoup)
+
+
+     //   console.log("info, err, result, reload", info, err, result, reload);
+  
+  
+        //const body = { avatar: newAvatarUrl };
+       // apiWrapper("user/" + userId, "PATCH", body)
+       //  .then((res) => {
+       //     console.log("refresh avatar", res);
+               // });
+       }
+       setRefresh(!refresh);
+    });
+  }
+
 
   async function handlePost(e) {
     e.preventDefault();
-    const photoupping = "https://res.cloudinary.com/dkqlgumn7/image/upload/v1677750234/c6xalck4dvxjj26ga69e.jpg"
+  //  setUploadingPhoto(true);
+    const photoupping = postphotoUrl
     const response = await apiWrapper("post/", "POST", {
-      title: input,
-      description: input,
+     // title: input,
+     // description: input,
       content: input,
       photoUrl: input,
       postphotoUrl: photoupping,
       userId: userId,
     });
-
     // const data = await response.json();
     // console.log(data);
     setInput("");
+    setPostphotoUrl("");
     setRefresh(!refresh);
   }
 
   return (
     <div className="feed">
       <div className="feed_inputContainer">
-        <div className="feed__input">
-          <CreateIcon />
-          <form onSubmit={handlePost}>
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              type="text"
-              placeholder="Start a post"
-            />
-
-            <button
-              className="submitButton"
-              onClick={() => console.log("hey")}
-              type="submit"
-            >
-              Send
-            </button>
-          </form>
-        </div>
+      <form onSubmit={handlePost} className="feed__form">
+  <div className="feed__input">
+    <CreateIcon />
+    <input
+      type="text"
+      placeholder={`What's on your mind, ${user.nombre}?`}
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+    />
+  </div>
+  <div className="feed__photo">
+   
+  </div>
+  <div className="feed__options">
+    <button type="submit">Post</button>
+  </div>
+  <div>
+   
+  </div>
+</form>
         <div className="feed__inputOptions">
-          <InputOption Icon={ImageIcon} title="Photo" color="#70b5f9" />
+        <Button
+      variant="contained"
+      startIcon={<ImageIcon fontSize="large" />}
+      sx={{ bgcolor: '#70b5f9' }}
+      onClick={() => showUploadWidget2()}
+    >
+      Photo
+    </Button>
+   
           <InputOption Icon={YouTubeIcon} title="Video" color="#e7a33e" />
           <InputOption Icon={EventNoteIcon} title="Event" color="#c0cbcd" />
           <InputOption
@@ -99,9 +174,9 @@ const Feed = () => {
               photoUrl={user.avatar}
               name={user.nombre + " " + user.apellido}
               content={e.content}
-              postphotoUrl={e.postphotoUrl}
+              postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
               date={e.createdAt}
-              // uploadphotos = {photouploaded}
+             
             />
           ) : (
             ""
