@@ -136,12 +136,13 @@ const Feed = () => {
       value={input}
       onChange={(e) => setInput(e.target.value)}
     />
+     <button className="submitButton" type="submit">Post</button>
   </div>
   <div className="feed__photo">
    
   </div>
   <div className="feed__options">
-    <button type="submit">Post</button>
+   
   </div>
   <div>
    
