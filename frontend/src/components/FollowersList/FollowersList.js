@@ -14,8 +14,7 @@ function FollowersList(props) {
     const [followingIds, setFollowingIds] = useState([])
     
     
-//TODO Condicional es seguido? hacer unfollow, no es seguido, hacer follow
-    
+   
         async function handleFollow(suggest){
         await apiWrapper("user/"+suggest+"/follows", "POST",{
         follower: idUser,
