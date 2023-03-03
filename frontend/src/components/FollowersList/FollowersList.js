@@ -69,6 +69,7 @@ function FollowersList(props) {
   return (
     <div className={styles.block}>
     <h3> Followers </h3>
+    <div className={styles.divider}/>
     <div className={styles.cards}> 
 
       {followers.map((e,index)=>{
@@ -80,7 +81,10 @@ function FollowersList(props) {
         )
       })} 
     </div>
+
+    
     <h3> Followings </h3>
+    <div className={styles.divider}/>
     <div className={styles.cards}> 
 
       {followings.map((e,index)=>{
