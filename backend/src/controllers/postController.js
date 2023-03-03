@@ -14,6 +14,7 @@ const createPost = async (req, res) => {
       postphotoUrl, 
       createdAt, 
       updatedAt,
+      likes,
       userId, //Relación Schemas 02
     } = body;
 
@@ -30,6 +31,7 @@ const user = await User.findById(userId) // Relación Schemas 03
       postphotoUrl,
       createdAt,
       updatedAt,
+      likes,
       user: user._id // Relación Schemas 04
     };
     const newPost = new PostModel(data);

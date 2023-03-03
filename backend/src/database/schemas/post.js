@@ -7,7 +7,7 @@ const postSchema = new Schema({
   //postedBy: { type: Schema.Types.ObjectId, ref: "User" },
   comments: { type: String },
   postphotoUrl: { type: String},
-  //likes: { type: Boolean },
+  likes: { type: [Schema.ObjectId], ref: "user" },
   //dislikes: { type: Boolean },
   //likesCount: { type: Number, default: 0 },
   //dislikesCount: { type: Number, default: 0 },
