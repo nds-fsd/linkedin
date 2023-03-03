@@ -22,7 +22,9 @@ const Post = ({name, date, content, photoUrl, postphotoUrl} ) => {
         <div className='divider'></div>
         <div className='post__body'>
             <p> {content} </p>
+           {postphotoUrl!== null &&  
          <img  width="200" height="200"  src= {postphotoUrl} alt="" />
+        }
         </div>
         <div className='post_buttons'>
             <InputOption className="post_icon" Icon={ThumbUpIcon} title="Like" color="grey" />
