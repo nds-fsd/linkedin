@@ -19,6 +19,7 @@ const ListJobs = (props) => {
   });
 
   const [jobs, setJobs] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const [valueText, setValueText] = React.useState("");
   const handleChangeText = (event, newValue) => {
@@ -31,14 +32,19 @@ const ListJobs = (props) => {
   };
 
   const handleClickBusqueda = () => {
-    alert(`click -> text : ${valueText} range : ${valueRange[0]}-${valueRange[1]}`);
+    //alert(`text : ${valueText} \rrange : ${valueRange[0]}-${valueRange[1]}`);
+    setReload(!reload);
   };
 
   useEffect(() => {
-    apiWrapper("job", "GET").then((res) => {
-      setJobs(res);
+        apiWrapper("job", "GET").then((res) => {
+      const resAux = res.filter(
+        (element) => ((element.salary >= valueRange[0] && element.salary <= valueRange[1]) && element.jobPosition.toLowerCase().indexOf(valueText.toLowerCase())!=-1 )
+      );
+
+      setJobs(resAux);
     });
-  }, []);
+  }, [reload]);
 
   return (
     <>
@@ -65,14 +71,14 @@ const ListJobs = (props) => {
         </div>
         <div>
           <ThemeProvider theme={theme}>
-            <InputLabel style={{ backgroundColor: "transparent" }}>Salario</InputLabel>
+            <InputLabel style={{ backgroundColor: "transparent" }}>Salario Anual €</InputLabel>
             <Box sx={{ width: 300 }}>
               <Slider
-                getAriaLabel={() => "Salario €"}
+                getAriaLabel={() => "Salario Anual €"}
                 value={valueRange}
                 min={0}
                 step={1}
-                max={200000}
+                max={100000}
                 onChange={handleChangeRange}
                 valueLabelDisplay="auto"
               />
@@ -93,7 +99,10 @@ const ListJobs = (props) => {
       </div>
       <div className={styles.separador}>&nbsp;</div>
       <div className={styles.container}>
-        {jobs && jobs.map((e, index) => <ItemJob key={e._id} element={e} index={index} />)}
+        {jobs &&
+          jobs.map((e, index) => (
+            <ItemJob key={e._id} element={e} index={index + 1} userId={props.userId} />
+          ))}
       </div>
     </>
   );

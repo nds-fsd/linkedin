@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./itemJob.module.css";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
-import LinkOffIcon from '@mui/icons-material/LinkOff';
-import LinkIcon from '@mui/icons-material/Link';
+import LinkOffIcon from "@mui/icons-material/LinkOff";
+import LinkIcon from "@mui/icons-material/Link";
+import { apiWrapper } from "../../../../utils/apiWrapper";
 
 const ItemJob = (props) => {
-  const [checkStar, setCheckStar] = useState(false);
+  const [isLinked, setIsLinked] = useState(false);
 
-  const handleClickCheckStar = (value)=>{
-    setCheckStar(value);
-  }
+  const handleClickIsLinked = (value) => {
+    setIsLinked(value);
+
+    //llamada API para guardar/Borrar el Link
+    const body = {
+      jobId: props.element._id,
+      userId: props.userId,
+    };
+
+    apiWrapper(`job/${value === true ? "link" : "unlink"}/`, "POST", body)
+      .then((data) =>{
+        console.log(data);
+        props.reloadPage();
+      } )
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    apiWrapper(`job/${props.element._id}`, "GET")
+      .then((data) => {
+        console.log(data);
+        if (data.user.includes(props.userId)) setIsLinked(true);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <>
       <div className={styles.item}>
@@ -19,18 +41,19 @@ const ItemJob = (props) => {
           <div className={styles.Cabecera}>
             <div className={styles.Titulo}>{props.element.jobPosition}</div>
             <div className={styles.Star}>
-              {checkStar ? (
-                <LinkIcon
+              {isLinked ? (
+                <LinkOffIcon
+                
                   className={styles.icono}
                   onClick={() => {
-                    handleClickCheckStar(false);
+                    handleClickIsLinked(false);
                   }}
                 />
               ) : (
-                <LinkOffIcon
+                <LinkIcon
                   className={styles.icono}
                   onClick={() => {
-                    handleClickCheckStar(true);
+                    handleClickIsLinked(true);
                   }}
                 />
               )}

@@ -18,16 +18,16 @@ const createJob = async (req, res) => {
     } = body;
 
     const data = {
-      companyName:companyName,
-      jobPosition:jobPosition,
-      countryLocation:countryLocation,
-      workLocation:workLocation,
-      workday:workday,
-      jobDescription:jobDescription,
-      company_logo_url:company_logo_url,
-      company_size:company_size,
-      salary:salary,
-      experience:experience,
+      companyName: companyName,
+      jobPosition: jobPosition,
+      countryLocation: countryLocation,
+      workLocation: workLocation,
+      workday: workday,
+      jobDescription: jobDescription,
+      company_logo_url: company_logo_url,
+      company_size: company_size,
+      salary: salary,
+      experience: experience,
     };
     const newJob = new JobModel(data);
     await newJob.save();
@@ -64,6 +64,7 @@ const getJobById = async (req, res) => {
 //Endpoint Update -------------------------------------------------------------(U)
 const updateJob = async (req, res) => {
   try {
+    console.log();
     const { id } = req.params;
     const job = await JobModel.findByIdAndUpdate(id, req.body);
     if (job) res.status(200).json(job);
@@ -85,10 +86,52 @@ const deleteJob = async (req, res) => {
   }
 };
 
+const linkUser = async (req, res) => {
+  try {
+    const { jobId, userId } = req.body;
+
+    const job = await JobModel.findById(jobId);
+    if (job) {
+      console.log(job);
+
+      if (!job.user.includes(userId)) {
+        job.user.push(userId);
+        await job.save();
+        res.json(job);
+      } else res.status(200).json({ msg: "Usuario ya incuido" });
+    }
+    else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(console.log("error del servidor"));
+  }
+};
+
+const unLinkUser = async (req, res) => {
+  try {
+    const { jobId, userId } = req.body;
+
+    const job = await JobModel.findById(jobId);
+    if (job) {
+      if (job.user.includes(userId)) {
+        job.user.pull(userId);
+        await job.save();
+        res.json(job);
+      } else res.status(200).json({ msg: "El usuario no existe en este Job" });
+    }
+    else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(console.log("error del servidor"));
+  }
+};
+
 module.exports = {
   createJob,
   getJobList,
   getJobById,
   updateJob,
   deleteJob,
+  linkUser,
+  unLinkUser,
 };
