@@ -8,7 +8,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 
-const Post = ({name, date, content, photoUrl, postphotoUrl} ) => {
+const Post = ({name, date, content, photoUrl, postphotoUrl, likes} ) => {
   return (
     
     <div className='post'>
