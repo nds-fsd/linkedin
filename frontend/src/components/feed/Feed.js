@@ -179,6 +179,8 @@ const Feed = () => {
               postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
               date={e.createdAt}
               likes={e.likes}
+              
+              
              
             />
           ) : (
