@@ -39,7 +39,7 @@ const ListJobs = (props) => {
   useEffect(() => {
         apiWrapper("job", "GET").then((res) => {
       const resAux = res.filter(
-        (element) => ((element.salary >= valueRange[0] && element.salary <= valueRange[1]) && element.jobPosition.toLowerCase().indexOf(valueText.toLowerCase())!=-1 )
+        (element) => ((element.salary >= valueRange[0] && element.salary <= valueRange[1]) && element.jobPosition.toLowerCase().indexOf(valueText.toLowerCase())!==-1 )
       );
 
       setJobs(resAux);
