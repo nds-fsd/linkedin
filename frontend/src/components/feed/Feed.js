@@ -22,11 +22,30 @@ const Feed = () => {
   const [postphotoUrl, setPostphotoUrl] = useState("");
   const [refresh, setRefresh] = useState(false);
 
+const [allposts,setAllPosts] = useState([])
+const [followings,setFollowings] =useState([])
+const [filteredPost, setFilteredPost] = useState([])
+
+
   const userId = tokenDecoder();
 
   // console.log(userId);
 
-  //TODO Cambiar fetchData por api Wrapper
+
+
+
+  useEffect(() => {
+    apiWrapper("post")
+    .then ((res)=>{setAllPosts(res)})
+       
+  }, [refresh])
+
+ 
+
+
+
+  
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -40,9 +59,32 @@ const Feed = () => {
     async function fetchData() {
       const data = await apiWrapper("user/" + userId);
       setUser(data);
+      setFollowings(data.following)
     }
     fetchData();
   }, [refresh]);
+
+
+
+//TODO cambiar por allposts
+
+  useEffect(() => {
+    
+    const filtered = allposts.filter(
+      (post) =>
+      post?.user[0]?._id === userId || followings.includes(post?.user[0]?._id)
+      
+        
+    );
+    setFilteredPost(filtered);
+  }, [allposts, userId, followings]);
+
+  
+  console.log(filteredPost)
+ 
+ 
+  
+
 
   function showUploadWidget2 () {
     console.log('showUploadWidget');
@@ -169,19 +211,17 @@ const Feed = () => {
       </div>
 
       <div className="postmap">
-        {posts.map((e) =>
-          e.user[0] === userId ? (
+        {filteredPost.map((e) =>
+           (
             <Post
-              photoUrl={user.avatar}
-              name={user.nombre + " " + user.apellido}
+              photoUrl={e.user[0].avatar}
+              name={e.user[0].nombre + " " + e.user[0].apellido}
               content={e.content}
               postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
               date={e.createdAt}
              
             />
-          ) : (
-            ""
-          )
+          ) 
         )}
       </div>
     </div>
