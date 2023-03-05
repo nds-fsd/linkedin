@@ -1,0 +1,73 @@
+.basee {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 30px;
+}
+
+.generador {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.fila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filaBoton {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.elemento {
+  color: #6b9d6f;
+  background: transparent;
+  flex-grow: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.elementoLabel {
+  color: #6b9d6f;
+  background: transparent;
+  flex-grow: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+
+  margin-bottom: 10px;
+}
+
+.elementoSelect {
+  color: #6b9d6f;
+  background: transparent;
+  flex-grow: 2;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.elementoCheckBox {
+  color: #6b9d6f;
+  background: transparent;
+  flex-grow: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #6b9d6f;
+}
+
+.elementoCheck {
+  color: #6b9d6f;
+  background: transparent;
+  padding-left: 10px;
+}
