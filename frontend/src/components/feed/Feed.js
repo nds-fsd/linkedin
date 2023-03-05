@@ -80,14 +80,14 @@ const [filteredPost, setFilteredPost] = useState([])
   }, [allposts, userId, followings]);
 
   
-  console.log(filteredPost)
+ 
  
  
   
 
 
   function showUploadWidget2 () {
-    console.log('showUploadWidget');
+    // console.log('showUploadWidget');
     const cloudinary =  window.cloudinary;
     cloudinary.openUploadWidget ({ 
       cloudName: "dkqlgumn7",  
@@ -129,8 +129,8 @@ const [filteredPost, setFilteredPost] = useState([])
        
         const phototoup = info.info.secure_url;
         setPostphotoUrl(phototoup)
-        console.log(setPostphotoUrl)
-        console.log(phototoup)
+        // console.log(setPostphotoUrl)
+        // console.log(phototoup)
 
 
      //   console.log("info, err, result, reload", info, err, result, reload);
