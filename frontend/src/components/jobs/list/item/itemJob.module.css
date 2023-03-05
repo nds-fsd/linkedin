@@ -60,6 +60,8 @@ margin-top: 5px;
 .Titulo{
 font-weight: 800;
 font-size: large;
+display: flex;
+align-items: center;
 
 }
 .Star{
@@ -70,6 +72,13 @@ font-size: large;
   cursor:pointer;
   color: rgb(240, 240, 0);
 }
+
+.iconoDelete{
+  cursor:pointer;
+  color: rgb(220, 0, 0);
+  margin-right: 10px;
+}
+
 
 .Descripcion{
   display: flex;

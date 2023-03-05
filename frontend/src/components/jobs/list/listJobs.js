@@ -26,7 +26,7 @@ const ListJobs = (props) => {
     setValueText(event.target.value);
   };
 
-  const [valueRange, setValueRange] = React.useState([20000, 60000]);
+  const [valueRange, setValueRange] = React.useState([0, 100000]);
   const handleChangeRange = (event, newValue) => {
     setValueRange(newValue);
   };
@@ -37,9 +37,12 @@ const ListJobs = (props) => {
   };
 
   useEffect(() => {
-        apiWrapper("job", "GET").then((res) => {
+    apiWrapper("job", "GET").then((res) => {
       const resAux = res.filter(
-        (element) => ((element.salary >= valueRange[0] && element.salary <= valueRange[1]) && element.jobPosition.toLowerCase().indexOf(valueText.toLowerCase())!==-1 )
+        (element) =>
+          element.salary >= valueRange[0] &&
+          element.salary <= valueRange[1] &&
+          element.jobPosition.toLowerCase().indexOf(valueText.toLowerCase()) !== -1
       );
 
       setJobs(resAux);
@@ -101,7 +104,14 @@ const ListJobs = (props) => {
       <div className={styles.container}>
         {jobs &&
           jobs.map((e, index) => (
-            <ItemJob key={e._id} element={e} index={index + 1} userId={props.userId} />
+            <ItemJob
+              key={e._id}
+              element={e}
+              index={index + 1}
+              userId={props.userId}
+              companyOwner={props.companyOwner}
+              reloadPage={handleClickBusqueda}
+            />
           ))}
       </div>
     </>

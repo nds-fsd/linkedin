@@ -19,7 +19,8 @@
 .izquierda {
   flex-grow: 1;
   background-color: rgb(231, 231, 231);
-  height: 90vh;
+  min-height: 90vh;
+  min-width: 350px;
 }
 
 .opciones {
@@ -110,7 +111,7 @@
   position: relative;
   margin: 10px;
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   border: 8px solid rgb(231, 231, 231);
   border-radius: 20px;
   padding: 0px;

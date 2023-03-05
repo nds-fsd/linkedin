@@ -68,10 +68,10 @@ const JobsPage = (props) => {
             </div>
             <div className={styles.derecha}>
               <div className={styles.contenedor}>
-                {selectOptions === 1 && <ListJobs userId={idUser} />}
+                {selectOptions === 1 && <ListJobs userId={idUser} companyOwner={companyOwner} />}
                 {selectOptions === 2 && <LinkJobs userId={idUser} />}
                 {companyOwner.length > 0 && selectOptions === 3 && (
-                  <GeneratorJobs userId={idUser} />
+                  <GeneratorJobs userId={idUser} companyOwner={companyOwner} />
                 )}
               </div>
             </div>

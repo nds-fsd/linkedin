@@ -15,6 +15,7 @@ const createJob = async (req, res) => {
       company_size,
       salary,
       experience,
+      company,
     } = body;
 
     const data = {
@@ -28,7 +29,9 @@ const createJob = async (req, res) => {
       company_size: company_size,
       salary: salary,
       experience: experience,
+      company: company,
     };
+
     const newJob = new JobModel(data);
     await newJob.save();
     res.status(201).json(newJob);
@@ -99,8 +102,7 @@ const linkUser = async (req, res) => {
         await job.save();
         res.json(job);
       } else res.status(200).json({ msg: "Usuario ya incuido" });
-    }
-    else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
+    } else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send(console.log("error del servidor"));
@@ -118,8 +120,7 @@ const unLinkUser = async (req, res) => {
         await job.save();
         res.json(job);
       } else res.status(200).json({ msg: "El usuario no existe en este Job" });
-    }
-    else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
+    } else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send(console.log("error del servidor"));
