@@ -158,6 +158,7 @@ const [filteredPost, setFilteredPost] = useState([])
       photoUrl: input,
       postphotoUrl: photoupping,
       userId: userId,
+      likes:[]
     });
     // const data = await response.json();
     // console.log(data);
@@ -219,6 +220,9 @@ const [filteredPost, setFilteredPost] = useState([])
               content={e.content}
               postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
               date={e.createdAt}
+              likes={e.likes}
+              
+              
              
             />
           ) 
