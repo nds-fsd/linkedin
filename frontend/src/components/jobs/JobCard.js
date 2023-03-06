@@ -20,7 +20,7 @@ const JobCard = (
         <p>{jobDescription}</p>
         <p className="job_heading">Salary:</p>
         <h2>{salary} €</h2>
-        <img src={company_logo_url} alt={`${companyName} logo`} />
+        <img  className="logo_img" src={company_logo_url} alt={`${companyName} logo`}  />
       </div>
       </>
 
