@@ -20,14 +20,32 @@ const addLike = async (postId, userId) => {
   }
 };
 
+const removeLike = async (postId, userId) => {
+  //console.log(idPost)
+  const update = { $pull: { likes: userId } };
+  try {
+    const response = await apiWrapper(`post/${postId}`, 'PATCH', update);
+    console.log('got a like?', response);
+  } catch (error) {
+    console.error('Error adding like:', error);
+  }
+};
+
+
 
 const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId }) => {
   console.log('props:', content, likes,"user:",userId, "post:",postId );
   const [likeCount, setLikeCount] = useState(likes.length);
     const handleLikeClick = () => {
+    if(likes.includes(userId)){
+      removeLike(postId, userId)
+      setLikeCount(likeCount - 1);
+    }
+    else{ 
+
     addLike(postId, userId);
     setLikeCount(likeCount + 1);
-  };
+  }};
 
     useEffect(() => {
     setLikeCount(likes.length);
