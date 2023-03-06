@@ -1,0 +1,121 @@
+.home {
+  background-color: #f3f2ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*min-height: 100vh;*/
+}
+
+.home__body {
+  width: 100%;
+}
+
+.contenido {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  width: 100%;
+}
+.izquierda {
+  flex-grow: 1;
+  background-color: rgb(231, 231, 231);
+  min-height: 90vh;
+  min-width: 350px;
+}
+
+.opciones {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px 10px 10px 20px;
+  flex-wrap: wrap;
+
+  filter: grayscale(1);
+  border-radius: 10px;
+  transition: 0.5s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+  transform: scale(0.8);
+
+  background-color: #ddd;
+  border: 1px solid var(--green);
+}
+
+.opcionSelected {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px 10px 10px 20px;
+  flex-wrap: wrap;
+
+  border-radius: 10px;
+  transition: 0.5s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+  transform: scale(0.8);
+
+  background-color: var(--green);
+  color: #ddd;
+  border: 1px solid var(--green);
+}
+
+.iconos {
+  margin-right: 10px;
+}
+
+.opciones h2,
+.iconos {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.opcionSelected h2,
+.opcionSelected .iconos {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.opcionSelected:hover h2 {
+  color: var(--white);
+}
+
+.opciones:hover {
+  cursor: pointer;
+  filter: grayscale(0);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  background-color: #eee;
+}
+.opcionSelected:hover {
+  cursor: pointer;
+  filter: grayscale(0);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  background-color: var(--green);
+}
+
+.derecha {
+  display: flex;
+  justify-content: center;
+  flex-grow: 200;
+  background-color: rgb(231, 231, 231);
+}
+
+.derecha .contenedor {
+  position: relative;
+  margin: 10px;
+  width: 100%;
+  min-height: 80vh;
+  border: 8px solid rgb(231, 231, 231);
+  border-radius: 20px;
+  padding: 0px;
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.35),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1), inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+
+}
