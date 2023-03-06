@@ -221,8 +221,8 @@ const [filteredPost, setFilteredPost] = useState([])
               postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
               date={e.createdAt}
               likes={e.likes}
-              
-              
+              userId = {userId}
+              postId ={e._id}
              
             />
           ) 

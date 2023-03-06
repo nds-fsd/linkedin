@@ -9,11 +9,11 @@ import SendIcon from '@mui/icons-material/Send';
 //import Box from '@mui/material/Box';
 import { apiWrapper } from '../../utils/apiWrapper';
 
-const addLike = async (idPost, idUser) => {
+const addLike = async (postId, userId) => {
   //console.log(idPost)
-  const update = { $addToSet: { likes: idUser } };
+  const update = { $addToSet: { likes: userId } };
   try {
-    const response = await apiWrapper(`post/${idPost}`, 'PATCH', update);
+    const response = await apiWrapper(`post/${postId}`, 'PATCH', update);
     console.log('got a like?', response);
   } catch (error) {
     console.error('Error adding like:', error);
@@ -21,11 +21,11 @@ const addLike = async (idPost, idUser) => {
 };
 
 
-const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, idPost, userId }) => {
-  console.log('props:', content, likes, userId );
+const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId }) => {
+  console.log('props:', content, likes,"user:",userId, "post:",postId );
   const [likeCount, setLikeCount] = useState(likes.length);
     const handleLikeClick = () => {
-    addLike(idPost, userId);
+    addLike(postId, userId);
     setLikeCount(likeCount + 1);
   };
 
