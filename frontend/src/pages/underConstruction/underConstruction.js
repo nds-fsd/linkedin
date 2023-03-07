@@ -14,7 +14,7 @@ const UnderConstructionPage = (props) => {
 
     const timer = setTimeout(() => {
       handleTimeOut();
-    }, 7000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
