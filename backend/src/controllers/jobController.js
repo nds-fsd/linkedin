@@ -36,7 +36,9 @@ const createJob = async (req, res) => {
     await newJob.save();
     res.status(201).json(newJob);
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH CREATE", message: error });
   }
 };
 
@@ -48,7 +50,9 @@ const getJobList = async (req, res) => {
     if (job) res.status(200).json(job);
     else res.status(404).send({ status: "ERROR", message: "Jobs not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH List", message: error });
   }
 };
 
@@ -60,7 +64,9 @@ const getJobById = async (req, res) => {
     if (job) res.status(200).json(job);
     else res.status(404).send({ status: "ERROR", message: "Job not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH ById", message: error });
   }
 };
 
@@ -71,9 +77,14 @@ const updateJob = async (req, res) => {
     const { id } = req.params;
     const job = await JobModel.findByIdAndUpdate(id, req.body);
     if (job) res.status(200).json(job);
-    else res.status(404).send({ status: "ERROR", message: "Job not Found. Not Updated" });
+    else
+      res
+        .status(404)
+        .send({ status: "ERROR", message: "Job not Found. Not Updated" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH UPDATE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH UPDATE", message: error });
   }
 };
 
@@ -83,9 +94,14 @@ const deleteJob = async (req, res) => {
     const job = await JobModel.findByIdAndDelete(req.params.id);
     if (job) {
       res.status(200).json(job);
-    } else res.status(404).send({ status: "ERROR", message: "Job not Found. Not Deleted." });
+    } else
+      res
+        .status(404)
+        .send({ status: "ERROR", message: "Job not Found. Not Deleted." });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH DELETE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH DELETE", message: error });
   }
 };
 
@@ -99,7 +115,7 @@ const linkUser = async (req, res) => {
 
       if (!job.user.includes(userId)) {
         job.user.push(userId);
-        await job.save();
+        await job.updateOne({ $push: { user: userId } });
         res.json(job);
       } else res.status(200).json({ msg: "Usuario ya incuido" });
     } else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
@@ -112,12 +128,11 @@ const linkUser = async (req, res) => {
 const unLinkUser = async (req, res) => {
   try {
     const { jobId, userId } = req.body;
-
     const job = await JobModel.findById(jobId);
     if (job) {
       if (job.user.includes(userId)) {
         job.user.pull(userId);
-        await job.save();
+        await job.updateOne({ $pull: { user: userId } });
         res.json(job);
       } else res.status(200).json({ msg: "El usuario no existe en este Job" });
     } else res.status(200).json({ msg: "No se ha localizado el Job indicado" });
