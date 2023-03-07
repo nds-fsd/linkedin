@@ -75,7 +75,7 @@ function FollowersList(props) {
       {followers.map((e,index)=>{
         return (
         <div className={styles.card}>
-        {e.isFollowing === true ? (<FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} isFollowing={e.isFollowing} onClick={()=>{handleUnfollow(e._id)}} />) : (<FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} isFollowing={e.isFollowing}  onClick={()=>{handleFollow(e._id)}} />) }  
+        {e.isFollowing === true ? (<FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} id={e._id} isFollowing={e.isFollowing} onClick={()=>{handleUnfollow(e._id)}} />) : (<FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} id={e._id} isFollowing={e.isFollowing}  onClick={()=>{handleFollow(e._id)}} />) }  
     
         </div>
         )
@@ -90,7 +90,7 @@ function FollowersList(props) {
       {followings.map((e,index)=>{
         return (
         <div className={styles.card}>
-        <FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} isFollowing={true} onClick={()=>{handleUnfollow(e._id)}}/>
+        <FollowSuggestCard key={index} avatar={e.avatar} name={e.nombre+" "+e.apellido} job={e.puesto} id={e._id} isFollowing={true} onClick={()=>{handleUnfollow(e._id)}}/>
         </div>
         )
       })} 
