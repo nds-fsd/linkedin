@@ -8,6 +8,7 @@ import { tokenDecoder } from "../../utils/tokenDecoder";
 export const HeaderOption = ({ avatar, Icon, title }) => {
   const navigate = useNavigate();
   const [stylesFlotante, setStylesFlotante] = useState("flotante_LogOut_Off");
+  
 
   const userIdToken = tokenDecoder();
 
@@ -16,6 +17,11 @@ export const HeaderOption = ({ avatar, Icon, title }) => {
       case "Home":
         navigate("/home");
         break;
+
+      case "My Network":
+      navigate(`/follows/${userIdToken}`);
+      break;
+
       case "Jobs":
         navigate(`/jobs/${userIdToken}`);
         break;
