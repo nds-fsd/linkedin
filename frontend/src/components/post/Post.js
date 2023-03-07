@@ -8,6 +8,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 //import Box from '@mui/material/Box';
 import { apiWrapper } from '../../utils/apiWrapper';
+import {useNavigate} from "react-router-dom";
 
 const addLike = async (postId, userId) => {
   //console.log(idPost)
@@ -33,7 +34,12 @@ const removeLike = async (postId, userId) => {
 
 
 
-const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId }) => {
+const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId,user }) => {
+  const  navigate =useNavigate();
+  const handleAvatarClick= ()=>{
+  navigate(`/profile/${user._id}`);
+  };
+
   console.log('props:', content, likes,"user:",userId, "post:",postId );
   const [likeCount, setLikeCount] = useState(likes.length);
     const handleLikeClick = () => {
@@ -55,7 +61,7 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar sx={{ width: 75, height: 75 }} src={photoUrl} />
+        <Avatar sx={{ width: 75, height: 75 }} src={photoUrl}  onClick={()=>{handleAvatarClick();}}/>
         <div className="post__info">
           <h2 className="post_heading">{name} </h2>
           <p className="post_parraf">{date} </p>

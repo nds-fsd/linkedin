@@ -221,6 +221,7 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
               likes={e.likes}
               userId = {userId}
               postId ={e._id}
+              user={e.user[0]}
              
             />
           ) 
