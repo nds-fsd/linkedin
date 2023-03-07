@@ -8,6 +8,9 @@
     border: 1px solid lightgray;
     padding: 10px 15px 30px 15px;
     margin-bottom: 10px;
+    max-width: 400px;
+    
+    
 }
 
 
@@ -30,6 +33,7 @@
 }
 
 
+
 .header__post > img {
   
     object-fit: contain;
@@ -48,7 +52,7 @@
     justify-content: space-evenly;
 }
 .container__post >p {
-    line-height: 5px;
+    line-height: 20px;
     font-weight: 400;
     color:rgb(74, 74, 74);
     padding-bottom: 20px
@@ -59,4 +63,9 @@
     font-weight: 700;
     color:#6B9D6F;
     padding-bottom: 5px
+}
+
+.logo_img{
+    width: 100px;
+    height: 100px;
 }

@@ -1,6 +1,6 @@
 
 
-.suggest-card{
+.suggest_card{
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -16,7 +16,7 @@
     
 }
 
-.left-side{
+.left_side{
     display: flex;
     
     
@@ -48,11 +48,56 @@
     line-height: 15px;
 }
 
-.right-side button{
+
+
+.button_right_follow{
     font-size: 10px;
     border:none;
     background-color: #6B9D6F;
     padding: 5px 15px;
     border-radius: 5px;
     color: white;
+
+}
+
+.button_right_follow{
+    font-size: 10px;
+    border:none;
+    background-color: #6B9D6F;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: white;
+
+}
+
+.button_right_follow:hover{
+    font-size: 10px;
+    border:none;
+    background-color: #B0E2B8;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+
+.button_right_unfollow{
+    font-size: 10px;
+    border:none;
+    background-color: #878787;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+
+}
+.button_right_unfollow:hover{
+    
+    background-color: #b52b2b;
+    transition: 0.3s;
+    
+    cursor: pointer;
+
 }

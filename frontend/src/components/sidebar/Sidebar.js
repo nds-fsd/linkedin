@@ -15,7 +15,7 @@ export const Sidebar = () => {
     const navigate = useNavigate()  
     const userId= tokenDecoder()
     const [data,setData] = useState({})
-    const [refresh, setRefresh] = useState(false);
+    // const [reload, setReload] = useState(false);
 
     const followers = data?.followers?.length
     const followings = data?.following?.length

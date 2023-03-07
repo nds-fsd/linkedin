@@ -2,43 +2,130 @@ import React, { useState, useEffect } from "react";
 import styles from "./ProfileBar.module.css";
 import { Avatar, Button } from "@mui/material";
 import { apiWrapper } from "../../utils/apiWrapper";
-import Logout from "../logout/Logout";
-import CompanyAdd from "@mui/icons-material/Add";
 import { ToastContainer, toast } from "react-toastify";
+import { tokenDecoder } from "../../utils/tokenDecoder";
 import ProfileAddCompany from "./addCompany/ProfileAddCompany";
+import CompanyAdd from "@mui/icons-material/Add";
+import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+//import {Image} from "cloudinary-react";
+
 
 export const ProfileBar = (props) => {
   const userId = props.idUser;
+  const userIdToken = tokenDecoder();
+
+  const [mode, setMode] = useState("read");
+
   const [actualizar, setActualizar] = useState(true);
   const [ownerCompany, setOwnerCompany] = useState({});
 
   const [data, setData] = useState({});
 
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+
   const [puesto, setPuesto] = useState("");
   const [empresaActual, setEmpresaActual] = useState("");
   const [sector, setSector] = useState("");
-
   const [ubicacionPais, setUbicacionPais] = useState("");
   const [ubicacionCodigoPostal, setUbicacionCodigoPostal] = useState("");
   const [ubicacionCiudad, setUbicacionCiudad] = useState("");
-
   const [educacionInstitucion, setEducacionInstitucion] = useState("");
   const [educacionTitulacion, setEducacionTitulacion] = useState("");
   const [educacionDisciplina, setEducacionDisciplina] = useState("");
-
   const [telefono, setTelefono] = useState("");
   const [tipoTelefono, setTipoTelefono] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState();
   const [web, setWeb] = useState("");
-
   const [reload, setReload] = useState(false);
 
+  const reloadPage = () => {
+     console.log('reload', reload);
+    setReload(!reload);
+  };
+// cloudinary stuff
+
+//const [imageSelected, setImageSelected] = useState('');
+
+
+
+function showUploadWidget () {
+  console.log('showUploadWidget');
+  const cloudinary =  window.cloudinary;
+  cloudinary.openUploadWidget ({ 
+    cloudName: "dkqlgumn7",  
+    uploadPreset: "joblinkup", 
+    sources: ["local", "camera"],
+    googleApiKey: "<image_search_google_api_key>",
+    showAdvancedOptions: false,
+    cropping: false,
+    multiple: false,
+    defaultSource: "local",
+    styles: {
+      palette: {
+        window: "#F5F5F5",
+        sourceBg: "#FFFFFF",
+        windowBorder: "#90a0b3",
+        tabIcon: "#0094c7",
+        inactiveTabIcon: "#69778A",
+        menuIcons: "#0094C7",
+        link: "#53ad9d",
+        action: "#8F5DA5",
+        inProgress: "#0194c7",
+        complete: "#53ad9d",
+        error: "#c43737",
+        textDark: "#000000",
+        textLight: "#FFFFFF"
+      },
+      fonts: {
+        default: null,
+        "'Poppins', sans-serif": {
+          url: "https://fonts.googleapis.com/css?family=Poppins",
+          active: true
+        }
+      }
+    }
+  }, 
+  (err, info,result) => {
+   // console.log("info, err, result, reload", info, err, result, reload);
+    if (!err && info && info.event === "success") {
+     
+      const newAvatarUrl = info.info.secure_url;
+   //   console.log("info, err, result, reload", info, err, result, reload);
+
+
+      const body = { avatar: newAvatarUrl };
+      apiWrapper("user/" + userId, "PATCH", body)
+       .then((res) => {
+          console.log("refresh avatar", res);
+       
+          setActualizar(!actualizar);
+          reloadPage();
+
+       });
+     }
+  });
+}
+
+
+
+
+
+  //-------------------------------------------------------------------------------------------
+  //DATOS DEL PERFIL --------------------------------------------------------------------------
+  
   useEffect(() => {
+    console.log("heyactualizar", actualizar)
     if (actualizar) {
+      console.log("heyactualizar2")
       apiWrapper("user/" + userId).then((response) => {
         //console.log("dentro " + JSON.stringify(response));
         setData(response);
+
+        setNombre(response.nombre);
+        setApellido(response.apellido);
+
         setPuesto(response.puesto);
         setEmpresaActual(response.empresa_actual);
         setSector(response.sector);
@@ -77,6 +164,7 @@ export const ProfileBar = (props) => {
   const avatar = data.avatar;
   const anonimAvatar =
     "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png";
+  //setAvatarUrl(data.avatar ? avatar : anonimAvatar);
 
   const handleClick = () => {
     const body = {
@@ -113,6 +201,8 @@ export const ProfileBar = (props) => {
     setObjectChanged(value);
   };
 
+  //-------------------------------------------------------------------------------------------
+  //DATOS DE LA EMPRESA -----------------------------------------------------------------------
   const [claseAñadirEmpresa, setClaseAñadirEmpresa] = useState(`${styles.sidebar__detail}`);
   const handleClickEmpresa = () => {
     setClaseAñadirEmpresa(`${styles.sidebar__detail_ampliado}`);
@@ -130,21 +220,117 @@ export const ProfileBar = (props) => {
     reloadPage();
   };
 
-  const reloadPage = () => {
-    setReload(!reload);
+  //-------------------------------------------------------------------------------------------
+  //useEffect Inicio --------------------------------------------------------------------------
+
+  useEffect(() => {
+    //console.log("userId : " + userId);
+    //console.log("userIdToken : " + userIdToken);
+    if (userId === userIdToken) {
+      setMode("write");
+    } 
+    //console.log("hay avatarrr", avatarUrl)
+  }, []);
+
+  //Para comprobar que el MODO ha cambiado
+  /*
+  useEffect(() => {
+    console.log("mode : " + mode);
+  }, [mode]);
+  */
+
+  //-------------------------------------------------------------------------------------------
+  //Edicion Nombre y Apellidos ----------------------------------------------------------------
+
+  const [edicionNombreApellidos, setEdicionNombreApellidos] = useState(false);
+
+  const handleClickSaveNameProfile = () => {
+    const body = {
+      nombre: nombre,
+      apellido: apellido,
+    };
+
+    apiWrapper("user/" + userId, "PATCH", body).then((response) => {
+      setActualizar(true);
+      toast.success("Se ha actualizado el Nombre y Apellido del Perfil", {
+        autoClose: 3000,
+      });
+      reloadPage();
+    });
   };
 
+  //-------------------------------------------------------------------------------------------
+  //Inicio HTML -------------------------------------------------------------------------------
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
-        <img src="./img/pexels-gradienta-6985001.jpg" alt="" />
-        <Avatar
+        <img src="img/pexels-gradienta-6985001.jpg" alt="" />
+       <Avatar
           className={styles.sidebar__avatar}
-          src={data.avatar ? avatar : anonimAvatar}
+          src= {data.avatar ? avatar : anonimAvatar}
           alt=""
+          onClick={()=> {showUploadWidget()}}
         />
-        <h2>{fullName}</h2>
-        {/*<Logout content="LOGOUT" />*/}
+{/* <button onClick={() => updateAvatar(data.id, imageSelected)}>Updateimg</button> */}
+       
+        <h2>
+          <div
+            className={
+              (mode === "write" && !edicionNombreApellidos) || mode !== "write"
+                ? styles.element_visible
+                : styles.element_hidden
+            }
+          >
+            {fullName}
+            <CreateIcon
+              className={
+                styles.iconEditName +
+                " " +
+                (mode === "write" ? styles.element_visible : styles.element_hidden)
+              }
+              onClick={() => {
+                setEdicionNombreApellidos(true);
+              }}
+            />
+          </div>
+
+          <div
+            className={
+              mode === "write" && edicionNombreApellidos
+                ? styles.element_visible
+                : styles.element_hidden
+            }
+          >
+            <input
+              type="text"
+              className={styles.nombreApellidos}
+              placeholder="Nombre ... "
+              value={nombre}
+              onChange={(e) => {
+                handleChange(setNombre, e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              className={styles.nombreApellidos}
+              placeholder="Apellido ... "
+              value={apellido}
+              onChange={(e) => {
+                handleChange(setApellido, e.target.value);
+              }}
+            />
+
+            <button
+              className={styles.BotonGuardarNombreApellido}
+              onClick={() => {
+                setEdicionNombreApellidos(false);
+                handleClickSaveNameProfile();
+              }}
+            >
+              Guardar
+            </button>
+          </div>
+        </h2>
       </div>
 
       <div className={styles.sidebar__stats_dark}>
@@ -164,6 +350,7 @@ export const ProfileBar = (props) => {
           <span>Fecha Nacimiento</span>
           <input
             type="date"
+            disabled={mode === "write" ? null : "disabled"}
             value={fechaNacimiento}
             onChange={(e) => {
               handleChange(setFechaNacimiento, e.target.value);
@@ -174,6 +361,7 @@ export const ProfileBar = (props) => {
           <span>Tipo Telefono</span>
           <select
             value={tipoTelefono}
+            disabled={mode === "write" ? null : "disabled"}
             onChange={(e) => {
               handleChange(setTipoTelefono, e.target.value);
             }}
@@ -185,6 +373,7 @@ export const ProfileBar = (props) => {
           <span>Telefono</span>
           <input
             type="text"
+            disabled={mode === "write" ? null : "disabled"}
             required="required"
             pattern="/[0-9]*"
             maxLength="9"
@@ -198,6 +387,7 @@ export const ProfileBar = (props) => {
           <span>Web</span>
           <input
             type="text"
+            disabled={mode === "write" ? null : "disabled"}
             value={web}
             onChange={(e) => {
               handleChange(setWeb, e.target.value);
@@ -208,6 +398,7 @@ export const ProfileBar = (props) => {
           <span className={styles.espacio}>&nbsp;</span>
         </div>
 
+        {/*TABS -------------------------------------------------------------------------------------------*/}
         <div className={styles.tabs}>
           <input
             className={styles.tab}
@@ -260,12 +451,14 @@ export const ProfileBar = (props) => {
             Trabajo Actual
           </label>
 
+          {/*CONTENT (TAB) 1 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content1"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Institucion</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   placeholder="Universidad, .."
                   value={educacionInstitucion}
                   onChange={(e) => {
@@ -277,6 +470,7 @@ export const ProfileBar = (props) => {
                 <span>Titulacion</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={educacionTitulacion}
                   onChange={(e) => {
                     handleChange(setEducacionTitulacion, e.target.value);
@@ -287,6 +481,7 @@ export const ProfileBar = (props) => {
                 <span>Disciplina</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   placeholder="Empresariales, ..."
                   value={educacionDisciplina}
                   onChange={(e) => {
@@ -297,12 +492,14 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
+          {/*CONTENT (TAB) 2 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content2"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Pais</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionPais}
                   onChange={(e) => {
                     handleChange(setUbicacionPais, e.target.value);
@@ -313,6 +510,7 @@ export const ProfileBar = (props) => {
                 <span>Codigo Postal</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionCodigoPostal}
                   onChange={(e) => {
                     handleChange(setUbicacionCodigoPostal, e.target.value);
@@ -323,6 +521,7 @@ export const ProfileBar = (props) => {
                 <span>Ciudad</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={ubicacionCiudad}
                   onChange={(e) => {
                     handleChange(setUbicacionCiudad, e.target.value);
@@ -332,12 +531,14 @@ export const ProfileBar = (props) => {
             </div>
           </section>
 
+          {/*CONTENT (TAB) 3 -------------------------------------------------------------------------------------------*/}
           <section id={styles["content3"]} className={styles.section}>
             <div>
               <div className={styles.values}>
                 <span>Nombre de la Empresa</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={empresaActual}
                   onChange={(e) => {
                     handleChange(setEmpresaActual, e.target.value);
@@ -348,6 +549,7 @@ export const ProfileBar = (props) => {
                 <span>Puesto de Trabajo</span>
                 <input
                   type="text"
+                  disabled={mode === "write" ? null : "disabled"}
                   value={puesto}
                   onChange={(e) => {
                     handleChange(setPuesto, e.target.value);
@@ -358,6 +560,7 @@ export const ProfileBar = (props) => {
                 <span>Sector</span>
                 <select
                   value={sector}
+                  disabled={mode === "write" ? null : "disabled"}
                   onChange={(e) => {
                     handleChange(setSector, e.target.value);
                   }}
@@ -369,15 +572,6 @@ export const ProfileBar = (props) => {
                   <option>Restauracion</option>
                   <option>Artes Escenicas</option>
                 </select>
-
-                {/*}
-                <input
-                  type="text"
-                  value={sector}
-                  onChange={(e) => {
-                    handleChange(setSector, e.target.value);
-                  }}
-                />*/}
               </div>
             </div>
           </section>
@@ -386,6 +580,7 @@ export const ProfileBar = (props) => {
         <div className={styles.values}>
           <span className={styles.espacio}>&nbsp;</span>
           <Button
+            className={mode === "write" ? styles.element_visible : styles.element_hidden}
             onClick={() => {
               handleClick();
             }}
@@ -405,7 +600,11 @@ export const ProfileBar = (props) => {
               className={
                 styles.companyAdd +
                 " " +
-                (ownerCompany.length > 0 ? styles.companyAdd_hidden : styles.companyAdd_visible)
+                (mode === "write"
+                  ? ownerCompany.length > 0
+                    ? styles.element_hidden
+                    : styles.element_visible
+                  : styles.element_hidden)
               }
               onClick={() => {
                 handleClickEmpresa();
@@ -418,7 +617,11 @@ export const ProfileBar = (props) => {
               className={
                 styles.companyAdd_icon +
                 " " +
-                (ownerCompany.length > 0 ? styles.companyAdd_visible : styles.companyAdd_hidden)
+                (mode === "write"
+                  ? ownerCompany.length > 0
+                    ? styles.element_visible
+                    : styles.element_hidden
+                  : styles.element_hidden)
               }
               onClick={() => {
                 handleClickDeleteLinkCompany();

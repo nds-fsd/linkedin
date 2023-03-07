@@ -3,10 +3,14 @@ import "./Header_Option.css";
 import { Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Logout from "../logout/Logout";
+import { tokenDecoder } from "../../utils/tokenDecoder";
 
 export const HeaderOption = ({ avatar, Icon, title }) => {
   const navigate = useNavigate();
   const [stylesFlotante, setStylesFlotante] = useState("flotante_LogOut_Off");
+  
+
+  const userIdToken = tokenDecoder();
 
   const handleClick = () => {
     switch (title) {
@@ -14,6 +18,13 @@ export const HeaderOption = ({ avatar, Icon, title }) => {
         navigate("/home");
         break;
 
+      case "My Network":
+      navigate(`/follows/${userIdToken}`);
+      break;
+
+      case "Jobs":
+        navigate(`/jobs/${userIdToken}`);
+        break;
       case "me":
         setStylesFlotante("flotante_LogOut_On");
 
@@ -23,6 +34,7 @@ export const HeaderOption = ({ avatar, Icon, title }) => {
 
         break;
       default:
+        navigate("/underConstruction");
         break;
     }
   };
