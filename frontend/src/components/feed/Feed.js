@@ -16,6 +16,8 @@ import { apiWrapper } from "../../utils/apiWrapper";
 import Button from '@mui/icons-material/AddPhotoAlternateOutlined';
 
 const Feed = () => {
+
+
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
@@ -27,7 +29,7 @@ const [allposts,setAllPosts] = useState([])
 const [followings,setFollowings] =useState([])
 const [filteredPost, setFilteredPost] = useState([])
 
-
+const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019494/Avatars%20Joblink/AvatarMaker_5_eaymit.png" 
   const userId = tokenDecoder();
 
   // console.log(userId);
@@ -166,6 +168,8 @@ const [filteredPost, setFilteredPost] = useState([])
     setInput("");
     setPostphotoUrl("");
     setRefresh(!refresh);
+
+    
   }
 
   return (
@@ -209,7 +213,7 @@ const [filteredPost, setFilteredPost] = useState([])
         {filteredPost.map((e) =>
            (
             <Post
-              photoUrl={e.user[0].avatar}
+              photoUrl={e.user[0].avatar ? (e.user[0].avatar) : (anonimAvatar)}
               name={e.user[0].nombre + " " + e.user[0].apellido}
               content={e.content}
               postphotoUrl={e.postphotoUrl ? e.postphotoUrl : null}
