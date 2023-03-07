@@ -39,9 +39,10 @@ const ItemJob = (props) => {
       .then((data) => {
         //console.log(data);
         if (data.user.includes(props.userId)) setIsLinked(true);
-        console.log(props.companyOwner)
-        if (props.companyOwner) {
-          if (data.company === props.companyOwner[0]._id) {
+        
+        //console.log("props.company",props.companyOwner );
+        if (JSON.stringify(props?.companyOwner) !== "{}" && props?.companyOwner!== undefined) {
+          if (props.companyOwner.length>0 &&  data.company === props.companyOwner[0]._id) {
             setIsOwnerCompany(true);
           } else {
             setIsOwnerCompany(false);
@@ -87,9 +88,13 @@ const ItemJob = (props) => {
               )}
             </div>
           </div>
-          <div className={styles.Descripcion}>{props.element.jobDescription}</div>
+          <div className={styles.Descripcion}>
+            {props.element.jobDescription}
+          </div>
           <div className={styles.Pie}>
-            <div className={styles.Salario}>Salario : {props.element.salary} €</div>
+            <div className={styles.Salario}>
+              Salario : {props.element.salary} €
+            </div>
             <div className={styles.Pais}>{props.element.countryLocation}</div>
           </div>
         </div>

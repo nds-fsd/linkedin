@@ -26,7 +26,7 @@ const GeneratorJobs = (props) => {
   const [posicion, setPosicion] = React.useState("");
   const [descripcion, setDescripcion] = React.useState("");
   const [tamaño, setTamaño] = React.useState("");
-  const [salario, setSalario] = React.useState();
+  const [salario, setSalario] = React.useState("");
   const [experiencia, setExperiencia] = React.useState("");
 
   const handleChangeText = (event, newValue) => {
@@ -166,9 +166,9 @@ const GeneratorJobs = (props) => {
               value={pais}
               label="pais"
               className={styles.elementoSelect}
-              InputProps={{ className: styles.elementoSelect }}
-              InputLabelProps={{ className: styles.elementoSelect }}
-              SelectProps={{ className: styles.elementoSelect }}
+              //InputProps={{ className: styles.elementoSelect }}
+              //InputLabelProps={{ className: styles.elementoSelect }}
+              //SelectProps={{ className: styles.elementoSelect }}
               onChange={handleChangeSelectPais}
             >
               <MenuItem value={"Canada"}>Canada</MenuItem>
@@ -201,9 +201,9 @@ const GeneratorJobs = (props) => {
             <FormControl
               component="fieldset"
               className={styles.elementoCheckBox}
-              InputProps={{ className: styles.elementoCheckBox }}
-              InputLabelProps={{ className: styles.elementoCheckBox }}
-              SelectProps={{ className: styles.elementoCheckBox }}
+              //InputProps={{ className: styles.elementoCheckBox }}
+              //InputLabelProps={{ className: styles.elementoCheckBox }}
+              //SelectProps={{ className: styles.elementoCheckBox }}
             >
               <FormLabel component="legend" className={styles.elementoCheck}>
                 Dias
