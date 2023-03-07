@@ -71,3 +71,33 @@
     
 }
 
+.btn_image{
+
+    cursor: pointer;
+    color:#6B9D6F;
+
+}
+
+.btn_image:hover{
+    margin-top: 3px;
+    cursor: pointer;
+    color:#B0E2B8;
+    
+}
+
+
+.submitButton{
+    margin-top: 3px;
+    cursor: pointer;
+    color:#6B9D6F;
+    
+}
+
+
+.submitButton:hover{
+    margin-top: 3px;
+    cursor: pointer;
+    color:#B0E2B8;
+    
+}
+

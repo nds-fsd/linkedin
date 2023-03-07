@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Feed.css";
 import CreateIcon from "@mui/icons-material/Create";
+import SendIcon from '@mui/icons-material/Send';
 import InputOption from "../inputOption/InputOption";
 import ImageIcon from "@mui/icons-material/Image";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -179,7 +180,17 @@ const [filteredPost, setFilteredPost] = useState([])
       value={input}
       onChange={(e) => setInput(e.target.value)}
     />
-     <button className="submitButton" type="submit">Post</button>
+      <Button
+      className="btn_image"
+      variant="contained"
+      startIcon={<ImageIcon fontSize="large" />}
+      onClick={() => showUploadWidget2()}
+    >
+      Photo
+    </Button>
+     <button className="submitButton" type="submit"><SendIcon/></button>
+     
+     
   </div>
   <div className="feed__photo">
    
@@ -191,24 +202,7 @@ const [filteredPost, setFilteredPost] = useState([])
    
   </div>
 </form>
-        <div className="feed__inputOptions">
-        <Button
-      variant="contained"
-      startIcon={<ImageIcon fontSize="large" />}
-      sx={{ bgcolor: '#70b5f9' }}
-      onClick={() => showUploadWidget2()}
-    >
-      Photo
-    </Button>
-   
-          <InputOption Icon={YouTubeIcon} title="Video" color="#e7a33e" />
-          <InputOption Icon={EventNoteIcon} title="Event" color="#c0cbcd" />
-          <InputOption
-            Icon={CalendarViewDayIcon}
-            title="Write article"
-            color="#7fc15e"
-          />
-        </div>
+       
       </div>
 
       <div className="postmap">
