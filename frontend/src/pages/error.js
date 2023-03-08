@@ -14,14 +14,14 @@ const localStorage = window.localStorage["user-session"]
 
         <div className={styles.header}>
           <h3>404</h3>
-          <h1>Sorry, the page you're looking for doesn't exist</h1>
+          <h1>Lo sentimos, la página que buscas no existe</h1>
           
         </div>
         <div className={styles.body}>
           <div className ={styles.body__1}>
             <div className ={styles.bulma}>
              
-              {localStorage  ? (<button className={styles.bhome} onClick={() => navigate("/home")}> back to home </button>):(<button className={styles.bhome} onClick={() => navigate("/")}> back to home </button>)}
+              {localStorage  ? (<button className={styles.bhome} onClick={() => navigate("/home")}> Volver a inicio </button>):(<button className={styles.bhome} onClick={() => navigate("/")}> back to home </button>)}
               {/* <button className={styles.bhome} onClick={() => navigate("/home")}> back to home </button> */}
             </div>
             <img  className ={styles.barrs} src="./img/barras.svg" alt="logo"/>

@@ -38,10 +38,8 @@
     flex-direction: column;
     justify-content: end;
     padding: 0 0 4% 4%;
-    /* background-color: #6b9d6f; */
-    
-    
 }
+
 .body__2{
     width: 40%;
     height: 100%;
@@ -57,13 +55,26 @@
 }
 .barrs{
     width: 10%;
+   
+    
     
 
 }
 .bulma{
-    background-color: red;
+    margin-bottom: 2%;
+    
     
 }
 .bhome{
     background-color: #6b9d6f;
+    padding: 10px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: white;
+    transition: box-shadow .3s;
+   
+
 }
+.bhome:hover {
+    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75); 
+  }
