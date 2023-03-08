@@ -79,15 +79,14 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
         )}
       </div>
       <div className="post_buttons">
-        <InputOption
+                <div>{likeCount ? likeCount : null}</div>
+        <button onClick={handleLikeClick}>    <InputOption
           className="post_icon"
           Icon={ThumbUpIcon}
           title="Like"
           color="grey"
           onClick={handleLikeClick}
-        />
-        <div>{likeCount ? likeCount : null}</div>
-        <button onClick={handleLikeClick}> likes here</button>
+        /></button>
         <InputOption
           className="post_icon"
           Icon={CommentIcon}
