@@ -45,8 +45,9 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
 
   console.log('props:', content, likes,"user:",userId, "post:",postId );
   const [likeCount, setLikeCount] = useState(likes.length);
-  
+  const [isLiked, setIsLiked] = useState(false);
   const handleLikeClick = async () => {
+    setIsLiked(true);
     if (likes.includes(userId)) {
       removeLike(postId, userId)
       const newLikes = likes.filter((like) => like !== userId);
@@ -80,11 +81,11 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
       </div>
       <div className="post_buttons">
                 <div>{likeCount ? likeCount : null}</div>
-        <button onClick={handleLikeClick}>    <InputOption
-          className="post_icon"
+        <button className="likebtn" onClick={handleLikeClick}>    <InputOption
+          className="post_icony"
           Icon={ThumbUpIcon}
           title="Like"
-          color="grey"
+          color={isLiked ? "green" : "grey"}
           onClick={handleLikeClick}
         /></button>
         <InputOption

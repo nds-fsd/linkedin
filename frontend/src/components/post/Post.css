@@ -64,3 +64,26 @@
     
 }
 
+.likebtn {
+    background-color:white;
+    border: none;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.likebtn:active{
+    background-color:#6B9D6F;;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.likebtn{
+    background-color:none;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
