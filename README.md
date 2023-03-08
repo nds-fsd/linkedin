@@ -39,7 +39,7 @@ Fragmented EndpPoint to show just the followers/followings users
 
 # Team
 Oscar,
-Dabide,
+Davide,
 David,
 Lucian,
 Gonzalo,

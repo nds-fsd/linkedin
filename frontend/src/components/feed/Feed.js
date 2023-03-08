@@ -160,7 +160,7 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
     setPostLikes(newLikes, () => {
       setRefresh(!refresh);
     });
-    
+    setRefresh(!refresh);
   }
  const [postLikes, setPostLikes] = useState([]);
 const updateLikes = (newLikes) => {
