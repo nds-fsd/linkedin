@@ -1,5 +1,5 @@
-.logout{
-    background-color:#6B9D6F ;
+.admin{
+    background-color:#9d6b6b ;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -15,8 +15,8 @@
     
 }
 
-.logout:hover{
-    background-color:#B0E2B8 ;
+.admin:hover{
+    background-color:#e2b0b0 ;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -32,7 +32,7 @@
     
 }
 
-.logout-icon{
+.admin_icon{
     width: 1.2rem;
 
 }

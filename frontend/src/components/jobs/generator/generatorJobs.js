@@ -73,7 +73,8 @@ const GeneratorJobs = (props) => {
     sabado: false,
     domingo: false,
   });
-  const { lunes, martes, miercoles, jueves, viernes, sabado, domingo } = checkedDias;
+  const { lunes, martes, miercoles, jueves, viernes, sabado, domingo } =
+    checkedDias;
 
   const handleCheckDias = (event) => {
     //Modificamos el Check del Componente
@@ -184,7 +185,9 @@ const GeneratorJobs = (props) => {
         </div>
         <div className={styles.fila}>
           <ThemeProvider theme={theme}>
-            <InputLabel className={styles.elementoLabel}>Lugar de trabajo</InputLabel>
+            <InputLabel className={styles.elementoLabel}>
+              Lugar de trabajo
+            </InputLabel>
             <Select
               value={lugar}
               label="Lugar de Trabajo"
