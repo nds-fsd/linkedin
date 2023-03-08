@@ -59,8 +59,12 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
     }
   };
     useEffect(() => {
-    setLikeCount(likes.length);
+    setLikeCount(likes.length) ;   
   }, [likes]);
+
+  useEffect(() => { 
+    setIsLiked(likes.includes(userId));
+  },[]);
 
   
   return (
@@ -80,14 +84,21 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
         )}
       </div>
       <div className="post_buttons">
-                <div>{likeCount ? likeCount : null}</div>
+                {/* <div></div> */}
         <button className="likebtn" onClick={handleLikeClick}>    <InputOption
           className="post_icony"
           Icon={ThumbUpIcon}
           title="Like"
           color={isLiked ? "green" : "grey"}
           onClick={handleLikeClick}
-        /></button>
+        />
+        
+        {likeCount > 0 && <span className='like'>{likeCount ? likeCount : null}</span>}
+        
+        
+        
+        
+        </button>
         <InputOption
           className="post_icon"
           Icon={CommentIcon}
