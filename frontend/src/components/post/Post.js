@@ -89,7 +89,7 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
           className="post_icony"
           Icon={ThumbUpIcon}
           title="Like"
-          color={isLiked ? "green" : "grey"}
+          color={likeCount > 0 ? "green" : "grey"}
           onClick={handleLikeClick}
         />
         
