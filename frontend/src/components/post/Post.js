@@ -10,12 +10,14 @@ import SendIcon from '@mui/icons-material/Send';
 import { apiWrapper } from '../../utils/apiWrapper';
 import {useNavigate} from "react-router-dom";
 
+
 const addLike = async (postId, userId) => {
   //console.log(idPost)
   const update = { $addToSet: { likes: userId } };
   try {
     const response = await apiWrapper(`post/${postId}`, 'PATCH', update);
     console.log('got a like?', response);
+    return response.likes
   } catch (error) {
     console.error('Error adding like:', error);
   }
@@ -27,6 +29,7 @@ const removeLike = async (postId, userId) => {
   try {
     const response = await apiWrapper(`post/${postId}`, 'PATCH', update);
     console.log('got a like?', response);
+    return response.likes
   } catch (error) {
     console.error('Error adding like:', error);
   }
@@ -34,7 +37,7 @@ const removeLike = async (postId, userId) => {
 
 
 
-const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId,user }) => {
+const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, userId,user, updateLikes }) => {
   const  navigate =useNavigate();
   const handleAvatarClick= ()=>{
   navigate(`/profile/${user._id}`);
@@ -42,20 +45,21 @@ const Post = ({ name, date, content, photoUrl, postphotoUrl, likes, postId, user
 
   console.log('props:', content, likes,"user:",userId, "post:",postId );
   const [likeCount, setLikeCount] = useState(likes.length);
-    const handleLikeClick = () => {
-    if(likes.includes(userId)){
+  
+  const handleLikeClick = async () => {
+    if (likes.includes(userId)) {
       removeLike(postId, userId)
-      setLikeCount(likeCount - 1);
+      const newLikes = likes.filter((like) => like !== userId);
+      updateLikes(newLikes);
+    } else {
+      addLike(postId, userId);
+      const newLikes = [...likes, userId];
+      updateLikes(newLikes);
     }
-    else{ 
-
-    addLike(postId, userId);
-    setLikeCount(likeCount + 1);
-  }};
-
+  };
     useEffect(() => {
     setLikeCount(likes.length);
-  }, []);
+  }, [likes]);
 
   
   return (

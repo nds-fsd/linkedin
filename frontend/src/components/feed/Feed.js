@@ -4,9 +4,9 @@ import CreateIcon from "@mui/icons-material/Create";
 import SendIcon from '@mui/icons-material/Send';
 import InputOption from "../inputOption/InputOption";
 import ImageIcon from "@mui/icons-material/Image";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
+//import YouTubeIcon from "@mui/icons-material/YouTube";
+//import EventNoteIcon from "@mui/icons-material/EventNote";
+//import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import Post from "../post/Post";
 import { tokenDecoder } from "../../utils/tokenDecoder";
 import { apiWrapper } from "../../utils/apiWrapper";
@@ -17,7 +17,7 @@ import Button from '@mui/icons-material/AddPhotoAlternateOutlined';
 
 const Feed = () => {
 
-
+  
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
@@ -34,7 +34,7 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
 
   // console.log(userId);
 
-
+  
 
 
   useEffect(() => {
@@ -42,13 +42,6 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
     .then ((res)=>{setAllPosts(res)})
        
   }, [refresh])
-
- 
-
-
-
-  
-  
 
   useEffect(() => {
     async function fetchData() {
@@ -67,8 +60,6 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
     fetchData();
   }, [refresh]);
 
-
-
 //TODO cambiar por allposts
 
   useEffect(() => {
@@ -84,9 +75,6 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
 
   
  
- 
- 
-  
 
 
   function showUploadWidget2 () {
@@ -146,10 +134,11 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
                // });
        }
        setRefresh(!refresh);
+   
     });
   }
-
-
+  
+ 
   async function handlePost(e) {
     e.preventDefault();
   //  setUploadingPhoto(true);
@@ -167,10 +156,18 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
     // console.log(data);
     setInput("");
     setPostphotoUrl("");
-    setRefresh(!refresh);
-
+    const newLikes = response?.likes ? response.likes : [];
+    setPostLikes(newLikes, () => {
+      setRefresh(!refresh);
+    });
     
   }
+ const [postLikes, setPostLikes] = useState([]);
+const updateLikes = (newLikes) => {
+  const updatedLikes = newLikes || [];
+  setPostLikes(updatedLikes);
+  setRefresh(!refresh);
+};
 
   return (
     <div className="feed">
@@ -211,8 +208,9 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
 
       <div className="postmap">
         {filteredPost.map((e) =>
-           (
-            <Post
+              
+              (
+            <Post 
               photoUrl={e.user[0].avatar ? (e.user[0].avatar) : (anonimAvatar)}
               name={e.user[0].nombre + " " + e.user[0].apellido}
               content={e.content}
@@ -222,6 +220,9 @@ const anonimAvatar = "https://res.cloudinary.com/dkxlwv844/image/upload/v1676019
               userId = {userId}
               postId ={e._id}
               user={e.user[0]}
+              updateLikes ={updateLikes}
+
+             
              
             />
           ) 
