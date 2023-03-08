@@ -11,6 +11,11 @@ export const ProfileAddCompany = (props) => {
     setCompanySelected(company);
   };
 
+  const [companyName, setCompanyName] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [companyType, setCompanyType] = useState("");
+  const [companySize, setCompanySize] = useState("");
+
   const [search, setSearch] = useState("");
   const [companys, setCompanys] = useState();
   const [companySelected, setCompanySelected] = useState({});
@@ -43,8 +48,27 @@ export const ProfileAddCompany = (props) => {
 
   const handleClickLinkCompany = () => {
     console.log("zz " + companySelected._id);
-    const res = apiWrapper("company/" + companySelected._id, "PATCH", { owner: props.userId });
+    const res = apiWrapper("company/" + companySelected._id, "PATCH", {
+      owner: props.userId,
+    });
     props.reloadPage();
+  };
+
+  const handleClickNuevoCompany = () => {
+    console.log("Creacion Nueva Compañia ");
+
+    const body = {
+      name: companyName,
+      company_size: companySize,
+      company_type: companyType,
+      website: companyWebsite,    
+    };
+
+    const res = apiWrapper("company/", "POST", body);
+    console.log("CREATE comany frontend POST");
+    //setCompanySelected(body);
+    //props.reloadPage();
+    handleClickSearch("$.$"); 
   };
 
   return (
@@ -79,7 +103,11 @@ export const ProfileAddCompany = (props) => {
                     id={styles["tabCompany" + index]}
                     type="radio"
                     name="tabsCompany"
-                    checked={checkTabCompany === "tabCompany" + index ? "checked" : null}
+                    checked={
+                      checkTabCompany === "tabCompany" + index
+                        ? "checked"
+                        : null
+                    }
                   />
                   <label
                     className={styles.labelCompany}
@@ -88,7 +116,7 @@ export const ProfileAddCompany = (props) => {
                       handleClickCheckTabCompany(`tabCompany${index}`, element);
                     }}
                   >
-                    {`${element.name} ( ${element._id} )`}
+                    {`${element.name}`}
                   </label>
                 </>
               ))
@@ -102,24 +130,51 @@ export const ProfileAddCompany = (props) => {
           >
             <div className={styles.tablaValues}>
               <label className={styles.tablaLabel}>Nombre : </label>
-              <input className={styles.tablaInput} type="text" value={companySelected.name} />
+              <input
+                className={styles.tablaInput}
+                type="text"
+                value={companySelected.name}
+                onChange={(e) => {
+                  setCompanyName(e.target.value);
+                }}
+              />
               <label className={styles.tablaLabel}>Sitio Web : </label>
-              <input className={styles.tablaInput} type="text" value={companySelected.website} />
+              <input
+                className={styles.tablaInput}
+                type="text"
+                value={companySelected.website}
+                onChange={(e) => {
+                  setCompanyWebsite(e.target.value);
+                }}
+              />
               <label className={styles.tablaLabel}>Tipo de Compañia : </label>
               <input
                 className={styles.tablaInput}
                 type="text"
                 value={companySelected.company_type}
+                onChange={(e) => {
+                  setCompanyType(e.target.value);
+                }}
               />
-              <label className={styles.tablaLabel}>Tamaño de la Compañia : </label>
+              <label className={styles.tablaLabel}>
+                Tamaño de la Compañia :{" "}
+              </label>
               <input
                 className={styles.tablaInput}
                 type="text"
                 value={companySelected.company_size}
+                onChange={(e) => {
+                  setCompanySize(e.target.value);
+                }}
               />
             </div>
             <div className={styles.tablaButtons}>
-              {/*<button className={styles.tablaButtonNuevo}>NUEVO</button>*/}
+              <button
+                className={styles.tablaButtonNuevo}
+                onClick={() => handleClickNuevoCompany()}
+              >
+                NUEVO
+              </button>
               <button
                 className={styles.tablaButtonVincular}
                 onClick={() => handleClickLinkCompany()}

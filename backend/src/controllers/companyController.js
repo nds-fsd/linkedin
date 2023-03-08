@@ -1,43 +1,46 @@
 const CompanyModel = require("../database/schemas/company");
-const User = require("../database/schemas/user")
+const User = require("../database/schemas/user");
 
 //Endpoint CREATE -------------------------------------------------------------(C)
 const createCompany = async (req, res) => {
   try {
+    console.log("CREATE COMPANY");
     const body = req.body;
     const {
       name,
       website,
-      sector,
-      company_logo_url,
+      //sector,
+      //company_logo_url,
       company_size,
       company_type,
-      company_description,
-      userId
+      //company_description,
+      //userId,
     } = body;
 
-    const user = await User.findById(userId)
 
     const data = {
       name: name,
       website: website,
-      sector: sector,
-      company_logo_url: company_logo_url,
+      //sector: sector,
+      //company_logo_url: company_logo_url,
       company_size: company_size,
       company_type: company_type,
-      company_description: company_description,
-      user: user._id,
-
+      //company_description: company_description,
+      //user: userId, //user._id,
     };
+
     const newCompany = new CompanyModel(data);
     await newCompany.save();
-    user.relationCompany = user.relationCompany.concat(newCompany._id)
-    await user.save()
-
+    /*
+    user.relationCompany = user.relationCompany.concat(newCompany._id);
+    await user.save();
+    */
 
     res.status(201).json(newCompany);
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH CREATE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH CREATE", message: error });
   }
 };
 
@@ -47,9 +50,12 @@ const getCompanyList = async (req, res) => {
     const company = await CompanyModel.find().populate("user");
 
     if (company) res.status(200).json(company);
-    else res.status(404).send({ status: "ERROR", message: "Companys not found" });
+    else
+      res.status(404).send({ status: "ERROR", message: "Companys not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH List", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH List", message: error });
   }
 };
 
@@ -61,9 +67,12 @@ const getCompanyById = async (req, res) => {
       .populate("relationJob")
       .populate("relationPost");
     if (company) res.status(200).json(company);
-    else res.status(404).send({ status: "ERROR", message: "Company not found" });
+    else
+      res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH ById", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH ById", message: error });
   }
 };
 
@@ -74,7 +83,7 @@ const getCompanyByName = async (req, res) => {
     console.log("name= " + name);
 
     const company =
-      name === "$.$"//"AllValues"
+      name === "$.$" //"AllValues"
         ? await CompanyModel.find()
             .populate("relationJob")
             .populate("relationPost")
@@ -83,9 +92,12 @@ const getCompanyByName = async (req, res) => {
             .populate("relationPost");
 
     if (company) res.status(200).json(company);
-    else res.status(404).send({ status: "ERROR", message: "Company not found" });
+    else
+      res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH ByName", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH ByName", message: error });
   }
 };
 
@@ -96,9 +108,12 @@ const getCompanyByOwner = async (req, res) => {
     console.log("id Owner= " + id);
     const company = await CompanyModel.find({ owner: id });
     if (company) res.status(200).json(company);
-    else res.status(404).send({ status: "ERROR", message: "Company not found" });
+    else
+      res.status(404).send({ status: "ERROR", message: "Company not found" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH ByOwner", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH ByOwner", message: error });
   }
 };
 
@@ -109,9 +124,14 @@ const updateCompany = async (req, res) => {
     console.log(req.body);
     const company = await CompanyModel.findByIdAndUpdate(id, req.body);
     if (company) res.status(200).json(company);
-    else res.status(404).send({ status: "ERROR", message: "Company not Found. Not Updated" });
+    else
+      res
+        .status(404)
+        .send({ status: "ERROR", message: "Company not Found. Not Updated" });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH UPDATE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH UPDATE", message: error });
   }
 };
 
@@ -121,9 +141,14 @@ const deleteCompany = async (req, res) => {
     const company = await CompanyModel.findByIdAndDelete(req.params.id);
     if (company) {
       res.status(200).json(company);
-    } else res.status(404).send({ status: "ERROR", message: "Company not Found. Not Deleted." });
+    } else
+      res
+        .status(404)
+        .send({ status: "ERROR", message: "Company not Found. Not Deleted." });
   } catch (error) {
-    return res.status(500).send({ status: "ERROR TRYCATCH DELETE", message: error });
+    return res
+      .status(500)
+      .send({ status: "ERROR TRYCATCH DELETE", message: error });
   }
 };
 
