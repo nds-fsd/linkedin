@@ -51,3 +51,20 @@
   display: flex;
   margin-right: 40px;
 }
+
+
+@media (max-width: 790px) {
+  .header__search {
+    display: none;
+  }
+
+  .header__left img{
+    display: none;
+  }
+
+  .header{
+    position: fixed;
+    
+  }
+  
+}

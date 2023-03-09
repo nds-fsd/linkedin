@@ -23,3 +23,13 @@
     padding-top: 50px;
 }
 
+@media (max-width: 790px) {
+    .home__body {
+      display: block;
+      margin: 0px;
+      padding: 0px;
+      width:100vw;
+    }
+   
+    
+  }

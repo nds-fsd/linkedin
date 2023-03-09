@@ -18,7 +18,7 @@ const HomePage = (props) => {
       <Header />
      <div className={styles.home__body}>     
        <Sidebar />
-       <Feed />
+       <Feed className={styles.feed}/>
        {/* <Widget /> */}
        <Jobsmap />
        {/* <JobCard /> */}

@@ -101,3 +101,11 @@
     
 }
 
+@media (max-width: 790px) {
+    .feed {
+      padding: 0px;
+      margin: 0px;
+      margin-top: 80px;
+    }
+  }
+

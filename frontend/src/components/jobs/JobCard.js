@@ -13,7 +13,7 @@ const JobCard = (
             <h1> New Job Offers:</h1>
             </div> */}
         <p className="job_heading"> Company:</p>
-        <h2 className="companyName">{companyName}</h2>
+        <h2>{companyName}</h2>
         <p className="job_heading">Job Position:</p>
         <h2>{jobPosition}</h2>
         <p className="job_heading">Job Description:</p>
