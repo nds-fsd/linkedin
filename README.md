@@ -9,7 +9,10 @@ Home Page
 ![home](https://user-images.githubusercontent.com/79333401/224272970-42ba158a-6037-4af7-81cd-f7702e4275e3.png)
 
 Admin Page
-![admin](https://user-images.githubusercontent.com/79333401/224272984-2e05432a-9d8a-40df-9a5c-dab44adc48c8.png)![jobs](https://user-images.githubusercontent.com/79333401/224272999-acda7528-53fe-4966-b3a9-731d11163d5f.png)
+![admin](https://user-images.githubusercontent.com/79333401/224272984-2e05432a-9d8a-40df-9a5c-dab44adc48c8.png)
+
+Jobs Page
+![jobs](https://user-images.githubusercontent.com/79333401/224272999-acda7528-53fe-4966-b3a9-731d11163d5f.png)
 
 Profile Page
 ![profile](https://user-images.githubusercontent.com/79333401/224273006-bfb9c451-eb11-4362-87ce-500288f49b95.png)
