@@ -42,7 +42,7 @@ BACKEND
 
 # DataBase
 
-![Imagen 2](https://user-images.githubusercontent.com/79333401/223687875-6dee81c5-6007-4211-b853-01af9f2c31b3.png)
+![image](https://user-images.githubusercontent.com/79333401/224320590-cdcd2a34-af43-4a87-82c8-c14e5016c1cb.png)
 
 
 # Components 
